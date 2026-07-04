@@ -1,0 +1,68 @@
+import { Menu, ShoppingBag, User, Phone } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+
+export function Navbar() {
+  const navLinks = [
+    { name: "Home", href: "/" },
+    { name: "Browse Cars", href: "/cars" },
+    { name: "About Us", href: "/about" },
+    { name: "Contact Us", href: "/contact" },
+  ];
+
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-white/5 transition-all">
+      <div className="container mx-auto px-6 lg:px-12 h-24 flex items-center justify-between">
+        {/* Left - Mobile Menu & Desktop Links */}
+        <div className="flex items-center gap-6 flex-1">
+          <button
+            type="button"
+            className="lg:hidden text-primary hover:text-accent transition-colors cursor-pointer"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
+          <div className="hidden lg:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href as any}
+                className="text-sm font-medium text-muted hover:text-primary transition-colors"
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Center - Logo */}
+        <div className="flex-1 flex justify-center">
+          <Link href="/">
+            <Image
+              src="/icons/Logo_Stacked_White_SVG.svg"
+              alt="Logo"
+              width={90}
+              height={45}
+              className="object-contain"
+            />
+          </Link>
+        </div>
+
+        {/* Right - Actions */}
+        <div className="flex items-center justify-end gap-6 flex-1">
+          <div className="hidden xl:flex items-center gap-2 mr-2">
+            <div className="bg-white/10 p-2 rounded-full">
+              <Phone className="w-4 h-4 text-accent" />
+            </div>
+            <a href="tel:+971501234567" className="text-white font-medium hover:text-accent transition-colors">
+              +971 50 123 4567
+            </a>
+          </div>
+          <Button className="bg-accent text-background font-heading font-bold px-6 h-10 rounded-lg hover:bg-accent/90 transition-all shadow-[0_0_15px_rgba(212,175,55,0.2)] hidden sm:flex">
+            Sell Your Car
+          </Button>
+        </div>
+      </div>
+    </nav>
+  );
+}
