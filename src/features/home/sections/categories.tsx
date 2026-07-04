@@ -6,8 +6,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 
 const bodyTypes = [
@@ -66,10 +64,6 @@ export function CategoriesSection() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="hidden lg:block">
-            <CarouselPrevious className="absolute -left-12 top-1/2 -translate-y-1/2 border-white/20 bg-background text-white hover:bg-white hover:text-black transition-colors" />
-            <CarouselNext className="absolute -right-12 top-1/2 -translate-y-1/2 border-white/20 bg-background text-white hover:bg-white hover:text-black transition-colors" />
-          </div>
         </Carousel>
       </div>
     </section>

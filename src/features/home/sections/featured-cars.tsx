@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 const featuredCars = [
   {
     id: 1,
+    slug: "mercedes-benz-gle",
     name: "Mercedes-Benz GLE",
     specs: "3.0L | Automatic | 15,000 km",
     price: "AED 139,900",
@@ -13,6 +14,7 @@ const featuredCars = [
   },
   {
     id: 2,
+    slug: "porsche-911-gt3-rs",
     name: "Porsche 911 GT3 RS",
     specs: "4.0L | Automatic | 5,000 km",
     price: "AED 223,800",
@@ -20,6 +22,7 @@ const featuredCars = [
   },
   {
     id: 3,
+    slug: "bmw-i4-m50",
     name: "BMW i4 M50",
     specs: "Electric | Automatic | 12,000 km",
     price: "AED 211,000",
@@ -27,6 +30,7 @@ const featuredCars = [
   },
   {
     id: 4,
+    slug: "audi-a7-sportback",
     name: "Audi A7 Sportback",
     specs: "3.0L | Automatic | 20,000 km",
     price: "AED 147,100",
@@ -43,9 +47,7 @@ export function FeaturedCarsSection() {
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-2">
               Featured Inventory
             </h2>
-            <p className="text-muted-foreground text-sm md:text-base">
-              Discover our handpicked selection of premium vehicles.
-            </p>
+
           </div>
           <Link href={"/cars" as any}>
             <Button variant="outline" className="hidden md:flex gap-2 group border-white/10 hover:bg-white/5 text-white">
@@ -59,7 +61,7 @@ export function FeaturedCarsSection() {
           {featuredCars.map((car) => (
             <Link
               key={car.id}
-              href={"/cars" as any}
+              href={`/cars/${car.slug}` as any}
               className="flex flex-col group w-full rounded-lg overflow-hidden cursor-pointer border border-white/10 bg-[#18181b]"
             >
               {/* Full Width Image Block */}
