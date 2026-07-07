@@ -19,14 +19,14 @@ const bodyTypes = [
 
 export function CategoriesSection() {
   return (
-    <section className="w-full py-8 md:py-12 bg-[#09090b]">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-white uppercase tracking-wider">
-            BROWSE BY BODY TYPE
+    <section className="w-full py-8 md:py-12 lg:py-16 bg-background">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="flex items-center justify-between mb-8 md:mb-12">
+          <h2 className="text-[10px] sm:text-xs font-semibold text-muted tracking-widest">
+            Catagories
           </h2>
-          <Link href="/cars" className="text-accent hover:text-accent/80 font-medium flex items-center gap-1 transition-colors">
-            View All <span className="text-lg">›</span>
+          <Link href="/cars" className="text-[10px] sm:text-xs font-semibold tracking-widest text-muted hover:text-primary transition-colors uppercase">
+            VIEW ALL
           </Link>
         </div>
 
@@ -41,24 +41,24 @@ export function CategoriesSection() {
               <CarouselItem key={type.name} className="pl-4 md:pl-6 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5">
                 <Link
                   href={type.href as any}
-                  className="flex flex-col bg-[#18181b] group hover:bg-[#202024] transition-colors relative h-[300px] md:h-[350px] w-full rounded-lg border border-white/5 cursor-pointer"
+                  className="flex flex-col bg-surface hover:bg-surface/80 transition-colors relative h-[300px] md:h-[350px] w-full rounded-2xl cursor-pointer group border border-primary/5"
                 >
                   {/* Floating Image */}
-                  <div className="relative h-28 md:h-36 w-full mt-8 flex-1 flex items-center justify-center">
-                    <div className="relative w-full h-full transform group-hover:scale-105 transition-transform duration-500">
+                  <div className="relative h-28 md:h-36 w-full mt-8 md:mt-12 flex-1 flex items-center justify-center px-4">
+                    <div className="relative w-full h-full transform group-hover:scale-110 transition-transform duration-700 ease-out">
                       <Image
                         src={type.image}
                         alt={type.name}
                         fill
-                        className="object-contain drop-shadow-2xl"
+                        className="object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.4)]"
                       />
                     </div>
                   </div>
                   
                   {/* Bottom Text */}
-                  <div className="flex flex-col items-center justify-center mt-auto pb-6 gap-1">
-                    <h3 className="text-lg md:text-xl font-bold text-white leading-tight">{type.name}</h3>
-                    <p className="text-sm text-muted-foreground">({type.count})</p>
+                  <div className="flex flex-col items-start justify-end mt-auto p-6 md:p-8">
+                    <h3 className="text-xl md:text-2xl font-heading font-normal text-primary leading-tight mb-1">{type.name}</h3>
+                    <p className="text-xs font-mono text-muted">{type.count} Vehicles Available</p>
                   </div>
                 </Link>
               </CarouselItem>

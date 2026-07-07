@@ -58,7 +58,7 @@ export function Navbar() {
               +971 50 123 4567
             </a>
           </div>
-          <Button className="bg-accent text-background font-heading font-bold px-6 h-10 rounded-lg hover:bg-accent/90 transition-all shadow-[0_0_15px_rgba(212,175,55,0.2)] hidden sm:flex">
+          <Button className="hidden sm:flex px-6 h-10 rounded-lg">
             Sell Your Car
           </Button>
         </div>
