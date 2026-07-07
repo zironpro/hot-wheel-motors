@@ -20,10 +20,10 @@ export function TestimonialsSection() {
   ];
 
   return (
-    <section className="w-full py-8 md:py-12 lg:py-16 bg-background">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+    <section className="w-full py-12 md:py-16 lg:py-20 bg-background">
+      <div className="container">
         <div className="flex flex-col items-center justify-center mb-12 md:mb-16 text-center">
-          <h2 className="text-[10px] sm:text-xs font-semibold text-muted uppercase tracking-widest mb-4">
+          <h2 className="text-[10px] sm:text-xs font-light text-muted uppercase tracking-widest mb-4">
             CLIENT EXPERIENCES
           </h2>
           <p className="text-3xl md:text-5xl font-heading font-normal text-primary leading-tight max-w-2xl">
@@ -31,7 +31,7 @@ export function TestimonialsSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           {testimonials.map((item, index) => (
             <div 
               key={index} 
@@ -46,7 +46,7 @@ export function TestimonialsSection() {
                 "{item.content}"
               </p>
               <div className="flex flex-col">
-                <span className="font-heading font-bold text-primary tracking-wide">{item.name}</span>
+                <span className="font-heading font-light text-primary tracking-wide">{item.name}</span>
                 <span className="text-xs font-mono text-muted mt-1">{item.role}</span>
               </div>
             </div>

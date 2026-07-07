@@ -40,18 +40,18 @@ const featuredCars = [
 
 export function FeaturedCarsSection() {
   return (
-    <section className="w-full py-8 md:py-12 lg:py-16 bg-background">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+    <section className="w-full py-12 md:py-16 lg:py-20 bg-background">
+      <div className="container">
         <div className="flex items-center justify-between mb-8 md:mb-12">
-          <h2 className="text-[10px] sm:text-xs font-semibold text-muted uppercase tracking-widest">
+          <h2 className="text-[10px] sm:text-xs font-light text-muted uppercase tracking-widest">
             FEATURED INVENTORY
           </h2>
-          <Link href={"/cars" as any} className="text-[10px] sm:text-xs font-semibold tracking-widest text-muted hover:text-primary transition-colors uppercase">
+          <Link href={"/cars" as any} className="text-[10px] sm:text-xs font-light tracking-widest text-muted hover:text-primary transition-colors uppercase">
             VIEW ALL
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
           {featuredCars.map((car) => (
             <Link
               key={car.id}
@@ -79,7 +79,7 @@ export function FeaturedCarsSection() {
 
                 {/* Bottom Details */}
                 <div className="mt-auto flex items-end justify-between">
-                  <p className="text-lg font-bold text-accent">{car.price}</p>
+                  <p className="text-lg font-light text-accent">{car.price}</p>
                   <ArrowRight className="w-5 h-5 text-muted group-hover:text-primary transition-colors group-hover:translate-x-1" strokeWidth={1.5} />
                 </div>
               </div>

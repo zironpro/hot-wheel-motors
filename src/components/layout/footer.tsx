@@ -41,7 +41,7 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-primary font-semibold uppercase tracking-widest text-sm mb-6">Quick Links</h4>
+            <h4 className="text-primary font-light uppercase tracking-widest text-sm mb-6">Quick Links</h4>
             <ul className="flex flex-col gap-4">
               <li>
                 <Link href={"/cars" as any} className="text-muted hover:text-primary transition-colors text-sm">
@@ -73,7 +73,7 @@ export function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-primary font-semibold uppercase tracking-widest text-sm mb-6">Contact Us</h4>
+            <h4 className="text-primary font-light uppercase tracking-widest text-sm mb-6">Contact Us</h4>
             <ul className="flex flex-col gap-5">
               <li className="flex items-start gap-4">
                 <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
@@ -100,7 +100,7 @@ export function Footer() {
 
           {/* Opening Hours */}
           <div>
-            <h4 className="text-primary font-semibold uppercase tracking-widest text-sm mb-6">Opening Hours</h4>
+            <h4 className="text-primary font-light uppercase tracking-widest text-sm mb-6">Opening Hours</h4>
             <ul className="flex flex-col gap-4 text-sm text-muted">
               <li className="flex justify-between border-b border-primary/10 pb-2">
                 <span>Monday - Saturday</span>

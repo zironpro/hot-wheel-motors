@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 
 export function NewsletterSection() {
   return (
-    <section className="w-full pb-8 md:pb-12 lg:pb-16 bg-background">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+    <section className="w-full py-12 md:py-16 lg:py-20 bg-background">
+      <div className="container">
         <div className="relative w-full rounded-2xl overflow-hidden bg-carbon flex flex-col lg:flex-row items-center justify-between py-10 px-6 md:px-12 border border-primary/10 shadow-2xl gap-8 lg:gap-12">
           
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left flex-1">

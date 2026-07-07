@@ -19,13 +19,13 @@ const bodyTypes = [
 
 export function CategoriesSection() {
   return (
-    <section className="w-full py-8 md:py-12 lg:py-16 bg-background">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+    <section className="w-full py-12 md:py-16 lg:py-20 bg-background">
+      <div className="container">
         <div className="flex items-center justify-between mb-8 md:mb-12">
-          <h2 className="text-[10px] sm:text-xs font-semibold text-muted tracking-widest">
+          <h2 className="text-[10px] sm:text-xs font-light text-muted tracking-widest">
             Catagories
           </h2>
-          <Link href="/cars" className="text-[10px] sm:text-xs font-semibold tracking-widest text-muted hover:text-primary transition-colors uppercase">
+          <Link href="/cars" className="text-[10px] sm:text-xs font-light tracking-widest text-muted hover:text-primary transition-colors uppercase">
             VIEW ALL
           </Link>
         </div>
