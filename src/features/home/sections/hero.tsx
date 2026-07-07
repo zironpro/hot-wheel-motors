@@ -18,28 +18,28 @@ const slides = [
     title: "Luxury Cars.\nWorldwide Delivered.",
     description:
       "Curated collection of the world's finest pre-owned vehicles. Quality assured. Transparently priced. Seamless international delivery.",
-    image: "/images/hero-1.png",
+    image: "/images/hero-aston.jpeg",
   },
   {
     tagline: "EXCEPTIONAL PERFORMANCE",
     title: "Premium SUVs.\nReady for Adventure.",
     description:
       "Discover luxury SUVs perfect for family, off-road, and city driving.",
-    image: "/images/hero-2.png",
+    image: "/images/hero-ranger.png",
   },
   {
     tagline: "UNCOMPROMISING LUXURY",
     title: "Exotic Sports Cars.\nUnleash the Power.",
     description:
       "Experience the thrill of exclusive and powerful sports cars.",
-    image: "/images/hero-3.png",
+    image: "/images/hero-porsche.jpeg",
   },
   {
     tagline: "GLOBAL EXPORT",
     title: "Seamless Export.\nDelivered to You.",
     description:
       "We handle sourcing and shipping to deliver your dream car anywhere worldwide.",
-    image: "/images/hero-4.png",
+    image: "/images/hero-bmw.png",
   },
 ];
 
@@ -153,7 +153,7 @@ export function HeroSection() {
               {/* Text Content inside Container */}
               <div className="container relative z-10 flex flex-col justify-center h-full w-full pt-24 lg:pt-28 pb-12">
                 <div className="flex flex-col items-start text-left w-full lg:w-1/2 space-y-4 md:space-y-6 lg:pr-8">
-                  <span className="text-white/80 text-[10px] sm:text-xs font-light uppercase tracking-widest drop-shadow-md">
+                  <span className="text-white/80 text-sm sm:text-base font-light uppercase tracking-widest drop-shadow-md">
                     {slide.tagline}
                   </span>
                   <h1 className="text-3xl sm:text-4xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-heading font-normal leading-tight md:leading-[1.1] tracking-tight text-white drop-shadow-lg whitespace-pre-line">

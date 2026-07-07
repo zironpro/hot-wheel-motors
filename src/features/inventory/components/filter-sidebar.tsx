@@ -30,89 +30,91 @@ const FILTER_DATA = {
 
 export function FilterSidebar() {
   return (
-    <div className="w-full bg-[#09090b] border border-white/10 rounded-lg p-6 sticky top-28">
-      <div className="flex items-center justify-between mb-6">
+    <div className="w-full bg-[#09090b] border border-white/10 rounded-lg p-6 sticky top-28 max-h-[calc(100vh-8rem)] flex flex-col">
+      <div className="flex items-center justify-between mb-6 shrink-0">
         <h2 className="text-xl font-bold text-white">Filters</h2>
         <Button variant="link" className="text-muted-foreground hover:text-white px-0 h-auto">
           Reset All
         </Button>
       </div>
 
-      <Accordion type="multiple" defaultValue={["make", "price", "body"]} className="w-full">
-        <AccordionItem value="make" className="border-white/10">
-          <AccordionTrigger className="text-white hover:no-underline hover:text-accent transition-colors">
-            Make
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="space-y-3 pt-2">
-              {FILTER_DATA.makes.map((make) => (
-                <div key={make.id} className="flex items-center justify-between group">
-                  <div className="flex items-center space-x-2">
-                    <Checkbox id={`make-${make.id}`} className="border-white/20 data-[state=checked]:bg-accent data-[state=checked]:text-black" />
-                    <Label
-                      htmlFor={`make-${make.id}`}
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-muted-foreground group-hover:text-white cursor-pointer transition-colors"
-                    >
-                      {make.label}
-                    </Label>
+      <div className="flex-1 overflow-y-auto pr-2 hide-scrollbar">
+        <Accordion type="multiple" defaultValue={["make", "price", "body"]} className="w-full">
+          <AccordionItem value="make" className="border-white/10">
+            <AccordionTrigger className="text-white hover:no-underline hover:text-accent transition-colors">
+              Make
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className="space-y-3 pt-2">
+                {FILTER_DATA.makes.map((make) => (
+                  <div key={make.id} className="flex items-center justify-between group">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id={`make-${make.id}`} className="border-white/20 data-[state=checked]:bg-accent data-[state=checked]:text-black" />
+                      <Label
+                        htmlFor={`make-${make.id}`}
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-muted-foreground group-hover:text-white cursor-pointer transition-colors"
+                      >
+                        {make.label}
+                      </Label>
+                    </div>
+                    <span className="text-xs text-muted-foreground">({make.count})</span>
                   </div>
-                  <span className="text-xs text-muted-foreground">({make.count})</span>
-                </div>
-              ))}
-            </div>
-          </AccordionContent>
-        </AccordionItem>
+                ))}
+              </div>
+            </AccordionContent>
+          </AccordionItem>
 
-        <AccordionItem value="price" className="border-white/10">
-          <AccordionTrigger className="text-white hover:no-underline hover:text-accent transition-colors">
-            Price Range
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="space-y-3 pt-2">
-              {FILTER_DATA.priceRanges.map((range) => (
-                <div key={range.id} className="flex items-center justify-between group">
-                  <div className="flex items-center space-x-2">
-                    <Checkbox id={`price-${range.id}`} className="border-white/20 data-[state=checked]:bg-accent data-[state=checked]:text-black" />
-                    <Label
-                      htmlFor={`price-${range.id}`}
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-muted-foreground group-hover:text-white cursor-pointer transition-colors"
-                    >
-                      {range.label}
-                    </Label>
+          <AccordionItem value="price" className="border-white/10">
+            <AccordionTrigger className="text-white hover:no-underline hover:text-accent transition-colors">
+              Price Range
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className="space-y-3 pt-2">
+                {FILTER_DATA.priceRanges.map((range) => (
+                  <div key={range.id} className="flex items-center justify-between group">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id={`price-${range.id}`} className="border-white/20 data-[state=checked]:bg-accent data-[state=checked]:text-black" />
+                      <Label
+                        htmlFor={`price-${range.id}`}
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-muted-foreground group-hover:text-white cursor-pointer transition-colors"
+                      >
+                        {range.label}
+                      </Label>
+                    </div>
+                    <span className="text-xs text-muted-foreground">({range.count})</span>
                   </div>
-                  <span className="text-xs text-muted-foreground">({range.count})</span>
-                </div>
-              ))}
-            </div>
-          </AccordionContent>
-        </AccordionItem>
+                ))}
+              </div>
+            </AccordionContent>
+          </AccordionItem>
 
-        <AccordionItem value="body" className="border-white/10 border-b-0">
-          <AccordionTrigger className="text-white hover:no-underline hover:text-accent transition-colors">
-            Body Type
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="space-y-3 pt-2">
-              {FILTER_DATA.bodyTypes.map((body) => (
-                <div key={body.id} className="flex items-center justify-between group">
-                  <div className="flex items-center space-x-2">
-                    <Checkbox id={`body-${body.id}`} className="border-white/20 data-[state=checked]:bg-accent data-[state=checked]:text-black" />
-                    <Label
-                      htmlFor={`body-${body.id}`}
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-muted-foreground group-hover:text-white cursor-pointer transition-colors"
-                    >
-                      {body.label}
-                    </Label>
+          <AccordionItem value="body" className="border-white/10 border-b-0">
+            <AccordionTrigger className="text-white hover:no-underline hover:text-accent transition-colors">
+              Body Type
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className="space-y-3 pt-2">
+                {FILTER_DATA.bodyTypes.map((body) => (
+                  <div key={body.id} className="flex items-center justify-between group">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id={`body-${body.id}`} className="border-white/20 data-[state=checked]:bg-accent data-[state=checked]:text-black" />
+                      <Label
+                        htmlFor={`body-${body.id}`}
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-muted-foreground group-hover:text-white cursor-pointer transition-colors"
+                      >
+                        {body.label}
+                      </Label>
+                    </div>
+                    <span className="text-xs text-muted-foreground">({body.count})</span>
                   </div>
-                  <span className="text-xs text-muted-foreground">({body.count})</span>
-                </div>
-              ))}
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+                ))}
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </div>
       
-      <div className="mt-8">
+      <div className="mt-6 shrink-0">
          <Button className="w-full bg-accent text-background font-bold hover:bg-accent/90 transition-all shadow-[0_0_15px_rgba(212,175,55,0.2)]">
             Apply Filters
          </Button>

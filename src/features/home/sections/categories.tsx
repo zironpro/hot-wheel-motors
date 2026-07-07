@@ -19,13 +19,13 @@ const bodyTypes = [
 
 export function CategoriesSection() {
   return (
-    <section className="w-full py-12 md:py-16 lg:py-20 bg-background">
+    <section className="w-full pt-4 md:pt-6 lg:pt-8 pb-12 md:pb-16 lg:pb-20 bg-background">
       <div className="container">
         <div className="flex items-center justify-between mb-8 md:mb-12">
-          <h2 className="text-[10px] sm:text-xs font-light text-muted tracking-widest">
+          <h2 className="text-sm sm:text-base font-light text-muted tracking-widest">
             Catagories
           </h2>
-          <Link href="/cars" className="text-[10px] sm:text-xs font-light tracking-widest text-muted hover:text-primary transition-colors uppercase">
+          <Link href="/cars" className="text-sm sm:text-base font-light tracking-widest text-muted hover:text-primary transition-colors uppercase">
             VIEW ALL
           </Link>
         </div>
@@ -41,10 +41,10 @@ export function CategoriesSection() {
               <CarouselItem key={type.name} className="pl-4 md:pl-6 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5">
                 <Link
                   href={type.href as any}
-                  className="flex flex-col bg-surface hover:bg-surface/80 transition-colors relative h-[300px] md:h-[350px] w-full rounded-2xl cursor-pointer group border border-primary/5"
+                  className="flex flex-col bg-surface hover:bg-surface/80 transition-colors relative h-[220px] md:h-[260px] w-full rounded-lg cursor-pointer group border border-primary/5"
                 >
                   {/* Floating Image */}
-                  <div className="relative h-28 md:h-36 w-full mt-8 md:mt-12 flex-1 flex items-center justify-center px-4">
+                  <div className="relative h-20 md:h-28 w-full mt-6 md:mt-8 flex-1 flex items-center justify-center px-4">
                     <div className="relative w-full h-full transform group-hover:scale-110 transition-transform duration-700 ease-out">
                       <Image
                         src={type.image}
@@ -56,8 +56,8 @@ export function CategoriesSection() {
                   </div>
                   
                   {/* Bottom Text */}
-                  <div className="flex flex-col items-start justify-end mt-auto p-6 md:p-8">
-                    <h3 className="text-xl md:text-2xl font-heading font-normal text-primary leading-tight mb-1">{type.name}</h3>
+                  <div className="flex flex-col items-start justify-end mt-auto p-4 md:p-6">
+                    <h3 className="text-lg md:text-xl font-heading font-normal text-primary leading-tight mb-1">{type.name}</h3>
                     <p className="text-xs font-mono text-muted">{type.count} Vehicles Available</p>
                   </div>
                 </Link>

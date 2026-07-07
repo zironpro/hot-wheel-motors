@@ -54,7 +54,7 @@ export function WhyUsSection() {
           {/* Full Background Image */}
           <div className="absolute inset-0 w-full h-full z-0">
             <Image
-              src="/images/sell-promo.png" 
+              src="/images/hero-3.png" 
               alt="Promo Car"
               fill
               className="object-cover object-center"

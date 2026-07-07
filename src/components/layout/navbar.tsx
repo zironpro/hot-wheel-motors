@@ -1,18 +1,36 @@
+"use client";
+
 import { Menu, ShoppingBag, User, Phone } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { useState, useEffect } from "react";
 
 export function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "Browse Cars", href: "/cars" },
+    { name: "Inventory", href: "/cars" },
     { name: "About Us", href: "/about" },
     { name: "Contact Us", href: "/contact" },
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-white/5 transition-all">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${isScrolled ? "bg-background/90 backdrop-blur-md border-b border-white/5 shadow-lg py-0" : "bg-transparent border-b border-transparent py-2 md:py-4"}`}>
       <div className="container h-16 md:h-20 flex items-center justify-between">
         {/* Left - Mobile Menu & Desktop Links */}
         <div className="flex items-center gap-6 flex-1">

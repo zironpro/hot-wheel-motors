@@ -6,7 +6,7 @@
   --surface: #262626; /* Lighter surface for cards */
   --primary: #F5F5F5;
   --muted: #A3A3A3;
-  --accent: #D4AF37; /* Luxury Gold Aesthetic */
+  --accent: #FFFFFF; /* Changed from Gold to White to remove yellow */
 }
 
 @theme inline {

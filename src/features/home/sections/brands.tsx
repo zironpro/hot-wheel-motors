@@ -15,6 +15,7 @@ export function BrandsSection() {
     { name: "Porsche", image: "/car-logo/Porsche_Symbol_1.png" },
     { name: "Ferrari", image: "/car-logo/Ferrari_Logo_1.png" },
     { name: "Lamborghini", image: "/car-logo/Lamborghini_Logo_1.png" },
+    { name: "Aston Martin", image: "/car-logo/Aston_Martin_idZRHILK54_1.png" },
     { name: "Car Logo", image: "/car-logo/idqpH-6Nid_1783428227071.png" },
   ];
 
@@ -23,7 +24,7 @@ export function BrandsSection() {
   );
 
   return (
-    <section className="w-full py-12 md:py-16 lg:py-20 bg-surface border-y border-primary/5">
+    <section className="w-full py-6 md:py-8 lg:py-10 bg-surface border-y border-primary/5">
       <div className="container flex flex-col items-center">
         
         <Carousel

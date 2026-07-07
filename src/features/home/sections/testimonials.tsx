@@ -23,7 +23,7 @@ export function TestimonialsSection() {
     <section className="w-full py-12 md:py-16 lg:py-20 bg-background">
       <div className="container">
         <div className="flex flex-col items-center justify-center mb-12 md:mb-16 text-center">
-          <h2 className="text-[10px] sm:text-xs font-light text-muted uppercase tracking-widest mb-4">
+          <h2 className="text-sm sm:text-base font-light text-muted uppercase tracking-widest mb-4">
             CLIENT EXPERIENCES
           </h2>
           <p className="text-3xl md:text-5xl font-heading font-normal text-primary leading-tight max-w-2xl">

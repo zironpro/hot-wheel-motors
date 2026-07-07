@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export function ShippingSection() {
   return (
-    <section className="w-full py-12 md:py-16 lg:py-20 bg-background">
+    <section className="w-full pt-4 md:pt-6 lg:pt-8 pb-4 md:pb-6 lg:pb-8 bg-background">
       <div className="container">
         <Link href={"/services" as any} className="relative overflow-hidden flex flex-col md:flex-row items-center rounded-2xl border border-primary/5 group hover:border-primary/20 transition-colors min-h-[140px] md:min-h-[180px]">
           

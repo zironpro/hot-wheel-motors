@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+import { Search } from "lucide-react";
 import { Car, CarCard } from "./car-card";
 
 const INVENTORY: Car[] = [
@@ -46,22 +50,46 @@ const INVENTORY: Car[] = [
 ];
 
 export function CarGrid() {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredInventory = INVENTORY.filter((car) =>
+    car.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    car.specs.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="w-full">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl md:text-2xl font-bold text-white">Showing 6 Vehicles</h2>
-        <select className="bg-[#09090b] border border-white/10 text-white text-sm rounded-md px-3 py-2 outline-none focus:border-accent transition-colors">
-          <option>Sort by: Recommended</option>
-          <option>Price: Low to High</option>
-          <option>Price: High to Low</option>
-          <option>Mileage: Low to High</option>
-        </select>
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-4">
+        <h2 className="text-xl md:text-2xl font-bold text-white">Showing {filteredInventory.length} Vehicles</h2>
+        <div className="flex items-center gap-4 w-full md:w-auto">
+          <div className="relative w-full md:w-64">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <input
+              type="text"
+              placeholder="Search vehicles..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full bg-[#09090b] border border-white/10 text-white text-sm rounded-md pl-9 pr-3 py-2 outline-none focus:border-accent transition-colors placeholder:text-muted-foreground"
+            />
+          </div>
+          <select className="bg-[#09090b] border border-white/10 text-white text-sm rounded-md px-3 py-2 outline-none focus:border-accent transition-colors shrink-0">
+            <option>Sort by: Recommended</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+            <option>Mileage: Low to High</option>
+          </select>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
-        {INVENTORY.map((car) => (
+        {filteredInventory.map((car) => (
           <CarCard key={car.id} car={car} />
         ))}
+        {filteredInventory.length === 0 && (
+          <div className="col-span-full py-12 text-center text-muted-foreground">
+            No vehicles found matching your search.
+          </div>
+        )}
       </div>
     </div>
   );

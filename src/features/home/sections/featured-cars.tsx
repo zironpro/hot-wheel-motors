@@ -10,7 +10,7 @@ const featuredCars = [
     name: "Mercedes-Benz GLE",
     specs: "3.0L | Automatic | 15,000 km",
     price: "AED 139,900",
-    image: "/inventory/benz.webp",
+    image: "/inventory/Audi-RS6-2024-Gray.png",
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ const featuredCars = [
     name: "Porsche 911 GT3 RS",
     specs: "4.0L | Automatic | 5,000 km",
     price: "AED 223,800",
-    image: "/inventory/porsche.webp",
+    image: "/inventory/BMW-M4-2022-Blue.png",
   },
   {
     id: 3,
@@ -26,7 +26,7 @@ const featuredCars = [
     name: "BMW i4 M50",
     specs: "Electric | Automatic | 12,000 km",
     price: "AED 211,000",
-    image: "/inventory/bmw.webp",
+    image: "/inventory/Cadillac-Escalade-Sport-Platinum-2026-Red.png",
   },
   {
     id: 4,
@@ -34,19 +34,19 @@ const featuredCars = [
     name: "Audi A7 Sportback",
     specs: "3.0L | Automatic | 20,000 km",
     price: "AED 147,100",
-    image: "/inventory/audi.webp",
+    image: "/inventory/Lamborghini-Urus-Performante-2024-Gray.png",
   }
 ];
 
 export function FeaturedCarsSection() {
   return (
-    <section className="w-full py-12 md:py-16 lg:py-20 bg-background">
+    <section className="w-full pt-12 md:pt-16 lg:pt-20 pb-4 md:pb-6 lg:pb-8 bg-background">
       <div className="container">
         <div className="flex items-center justify-between mb-8 md:mb-12">
-          <h2 className="text-[10px] sm:text-xs font-light text-muted uppercase tracking-widest">
+          <h2 className="text-sm sm:text-base font-light text-muted uppercase tracking-widest">
             FEATURED INVENTORY
           </h2>
-          <Link href={"/cars" as any} className="text-[10px] sm:text-xs font-light tracking-widest text-muted hover:text-primary transition-colors uppercase">
+          <Link href={"/cars" as any} className="text-sm sm:text-base font-light tracking-widest text-muted hover:text-primary transition-colors uppercase">
             VIEW ALL
           </Link>
         </div>
@@ -56,7 +56,7 @@ export function FeaturedCarsSection() {
             <Link
               key={car.id}
               href={`/cars/${car.slug}` as any}
-              className="flex flex-col group w-full rounded-2xl overflow-hidden cursor-pointer border border-primary/5 bg-surface hover:bg-surface/80 transition-colors"
+              className="flex flex-col group w-full rounded-lg overflow-hidden cursor-pointer border border-primary/5 bg-surface hover:bg-surface/80 transition-colors"
             >
               {/* Full Width Image Block */}
               <div className="relative w-full aspect-[16/10] overflow-hidden">
