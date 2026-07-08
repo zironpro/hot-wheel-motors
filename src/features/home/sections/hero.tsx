@@ -170,7 +170,7 @@ export function HeroSection() {
                   <h1 className="text-3xl sm:text-4xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-heading font-normal leading-tight md:leading-[1.1] tracking-tight text-white drop-shadow-lg whitespace-pre-line">
                     {slide.title}
                   </h1>
-                  <p className="text-gray-300 text-sm sm:text-base max-w-md leading-relaxed drop-shadow-md">
+                  <p className="text-gray-300 text-sm sm:text-base max-w-md leading-relaxed drop-shadow-md whitespace-normal md:whitespace-pre-line">
                     {slide.description}
                   </p>
                 </div>
