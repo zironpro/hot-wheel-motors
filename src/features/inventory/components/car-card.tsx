@@ -4,9 +4,12 @@ import { ArrowRight } from "lucide-react";
 
 export type Car = {
   id: string | number;
+  slug: string;
   name: string;
+  subtitle?: string;
+  description?: string;
   specs: string;
-  price: string;
+  price?: string;
   image: string;
 };
 
@@ -17,7 +20,7 @@ interface CarCardProps {
 export function CarCard({ car }: CarCardProps) {
   return (
     <Link
-      href={`/cars/${car.id}` as any}
+      href={`/cars/${car.slug}` as any}
       className="flex flex-col group w-full rounded-lg overflow-hidden cursor-pointer border border-white/10 bg-[#18181b]"
     >
       {/* Full Width Image Block */}

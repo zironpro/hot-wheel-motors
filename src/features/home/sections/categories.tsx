@@ -29,7 +29,7 @@ const brandTypes = [
 ];
 
 export function CategoriesSection() {
-  const [activeTab, setActiveTab] = useState<"body" | "brand">("body");
+  const [activeTab, setActiveTab] = useState<"body" | "brand">("brand");
   const currentData = activeTab === "body" ? bodyTypes : brandTypes;
 
   return (
@@ -37,7 +37,7 @@ export function CategoriesSection() {
       <div className="container">
         <div className="flex items-center justify-between mb-8 md:mb-12 border-b border-primary/10 pb-4">
           <div className="flex items-center gap-6 md:gap-10">
-            <button 
+            {/* <button 
               onClick={() => setActiveTab("body")}
               className={cn(
                 "text-sm sm:text-base font-light tracking-widest uppercase transition-all relative",
@@ -48,7 +48,7 @@ export function CategoriesSection() {
               {activeTab === "body" && (
                 <span className="absolute -bottom-[17px] left-0 w-full h-[1px] bg-accent" />
               )}
-            </button>
+            </button> */}
             <button 
               onClick={() => setActiveTab("brand")}
               className={cn(

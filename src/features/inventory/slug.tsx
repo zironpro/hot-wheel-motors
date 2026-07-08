@@ -26,22 +26,46 @@ const INVENTORY = [
   },
   {
     id: 2,
-    slug: "porsche-911-gt3-rs",
-    name: "Porsche 911 GT3 RS",
-    specs: "4.0L | Automatic | 5,000 km",
-    price: "AED 223,800",
-    image: "/inventory/porsche.webp",
-    gallery: ["/inventory/porsche.webp", "/inventory/suv.webp", "/inventory/sedan.webp", "/inventory/benz.webp"]
+    slug: "bmw-m4",
+    name: "BMW M4",
+    specs: "Blue | 3.5 S | Automatic",
+    price: "AED 340,000",
+    image: "/slug/bmw-m4/front-view.png",
+    gallery: [
+      "/slug/bmw-m4/front-view.png",
+      "/slug/bmw-m4/side-view.png",
+      "/slug/bmw-m4/back-view.png",
+      "/slug/bmw-m4/interior.png",
+    ]
   },
   {
     id: 3,
-    slug: "bmw-i4-m50",
-    name: "BMW i4 M50",
-    specs: "Electric | Automatic | 12,000 km",
-    price: "AED 211,000",
-    image: "/inventory/bmw.webp",
-    gallery: ["/inventory/bmw.webp", "/inventory/suv.webp", "/inventory/sedan.webp", "/inventory/benz.webp"]
+    slug: "cadillac-escalade-sport-platinum",
+    name: "Cadillac Escalade",
+    specs: "Red | 5.9 S | Automatic",
+    price: "AED 490,000",
+    image: "/slug/cadillac/front-view.png",
+    gallery: [
+      "/slug/cadillac/front-view.png",
+      "/slug/cadillac/side-view.png",
+      "/slug/cadillac/back-view.png",
+      "/slug/cadillac/interior.png",
+    ]
   },
+  {
+    id: 4,
+    slug: "lamborghini-urus-performante",
+    name: "Lamborghini Urus",
+    specs: "Gray | 3.3 S | Automatic",
+    price: "AED 1,150,000",
+    image: "/slug/Lamborghini/front-view.png",
+    gallery: [
+      "/slug/Lamborghini/front-view.png",
+      "/slug/Lamborghini/side-view.png",
+      "/slug/Lamborghini/back-view.png",
+      "/slug/Lamborghini/interior.png",
+    ]
+  }
 ];
 
 interface CarSlugPageProps {
