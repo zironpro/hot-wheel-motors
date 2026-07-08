@@ -11,7 +11,7 @@ export function HomePage() {
   return (
     <div className="flex flex-col w-full">
       <HeroSection />
-      <BrandsSection />
+      {/* <BrandsSection /> */}
       <FeaturedCarsSection />
       <ShippingSection />
       <CategoriesSection />

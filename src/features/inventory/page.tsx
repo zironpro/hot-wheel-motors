@@ -9,11 +9,8 @@ export function InventoryPage() {
         {/* Header */}
         <div className="mb-10">
           <h1 className="text-4xl md:text-5xl font-heading font-extrabold text-white tracking-tight mb-4">
-            Browse Our Inventory
+            Explore Our Collections
           </h1>
-          <p className="text-muted-foreground text-lg max-w-2xl">
-            Find the perfect premium pre-owned vehicle that matches your lifestyle. Use our filters to narrow down your search.
-          </p>
         </div>
 
         {/* Layout */}

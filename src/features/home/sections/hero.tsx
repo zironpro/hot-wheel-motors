@@ -176,7 +176,7 @@ export function HeroSection() {
           {/* Static Action Buttons */}
           <div className="flex flex-wrap items-center gap-4 sm:gap-6 pointer-events-auto">
             <Button className="px-6 md:px-8 h-10 md:h-12 text-xs md:text-sm rounded-lg uppercase">
-              EXPLORE INVENTORY
+              EXPLORE COLLECTIONS
             </Button>
             <Button
               variant="ghost"

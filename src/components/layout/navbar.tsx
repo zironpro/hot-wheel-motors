@@ -24,7 +24,7 @@ export function Navbar() {
 
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "Inventory", href: "/cars" },
+    { name: "Collections", href: "/cars" },
     { name: "About Us", href: "/about" },
     { name: "Contact Us", href: "/contact" },
   ];
@@ -77,7 +77,7 @@ export function Navbar() {
             </a>
           </div>
           <Button className="hidden sm:flex px-6 h-10 rounded-lg">
-            Sell Your Car
+            Enquire Now
           </Button>
         </div>
       </div>

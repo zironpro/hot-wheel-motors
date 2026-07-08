@@ -45,7 +45,7 @@ export function Footer() {
             <ul className="flex flex-col gap-4">
               <li>
                 <Link href={"/cars" as any} className="text-muted hover:text-primary transition-colors text-sm">
-                  Inventory
+                  Collections
                 </Link>
               </li>
               <li>
