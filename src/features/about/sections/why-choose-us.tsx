@@ -8,7 +8,7 @@ export function WhyChooseUsSection() {
           <h2 className="text-xs sm:text-sm font-light text-muted uppercase tracking-widest mb-6">
             WHY CHOOSE US
           </h2>
-          <h3 className="text-3xl md:text-4xl lg:text-5xl font-heading font-medium text-white leading-tight">
+          <h3 className="text-3xl md:text-4xl lg:text-5xl font-heading font-normal text-white leading-tight">
             Excellence in Every Detail.
           </h3>
         </div>
@@ -17,19 +17,19 @@ export function WhyChooseUsSection() {
           {/* Grid Content */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-12">
             <div className="flex flex-col gap-3">
-              <h4 className="text-sm font-medium text-white tracking-wide">Transparent Pricing</h4>
+              <h4 className="text-sm font-normal text-white tracking-wide">Transparent Pricing</h4>
               <p className="text-xs text-muted-foreground leading-relaxed">No hidden fees. What you see is what you pay.</p>
             </div>
             <div className="flex flex-col gap-3">
-              <h4 className="text-sm font-medium text-white tracking-wide">Premium Condition</h4>
+              <h4 className="text-sm font-normal text-white tracking-wide">Premium Condition</h4>
               <p className="text-xs text-muted-foreground leading-relaxed">Every car is carefully inspected and meticulously prepared.</p>
             </div>
             <div className="flex flex-col gap-3">
-              <h4 className="text-sm font-medium text-white tracking-wide">Personalised Service</h4>
+              <h4 className="text-sm font-normal text-white tracking-wide">Personalised Service</h4>
               <p className="text-xs text-muted-foreground leading-relaxed">Dedicated support throughout your journey.</p>
             </div>
             <div className="flex flex-col gap-3">
-              <h4 className="text-sm font-medium text-white tracking-wide">After-Sales Support</h4>
+              <h4 className="text-sm font-normal text-white tracking-wide">After-Sales Support</h4>
               <p className="text-xs text-muted-foreground leading-relaxed">We're here even after you drive away.</p>
             </div>
           </div>

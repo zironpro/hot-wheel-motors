@@ -137,14 +137,14 @@ export function CarSlugPage({ id }: CarSlugPageProps) {
         {/* Main Info Card */}
         <div className="w-full bg-[#111111] border border-white/5 rounded-lg p-6 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center shadow-2xl mb-8 md:mb-12">
           <div className="flex flex-col gap-2">
-            <h1 className="text-3xl md:text-4xl font-heading font-medium text-white tracking-wide">
+            <h1 className="text-3xl md:text-4xl font-heading font-normal text-white tracking-wide">
               {car.name}
             </h1>
             
             {/* Specs Pills */}
             <div className="flex flex-wrap gap-2 mt-1">
               {car.specs.split(' | ').map((spec, i) => (
-                <span key={i} className="bg-white/10 text-white/90 text-[11px] font-medium px-3 py-1 rounded-full flex items-center shadow-sm">
+                <span key={i} className="bg-white/10 text-white/90 text-[11px] font-normal px-3 py-1 rounded-full flex items-center shadow-sm">
                   <span className="w-1 h-1 rounded-full bg-white/50 mr-1.5" />
                   {spec}
                 </span>
@@ -153,10 +153,10 @@ export function CarSlugPage({ id }: CarSlugPageProps) {
           </div>
 
           <div className="flex flex-col items-start md:items-end mt-6 md:mt-0 w-full md:w-auto">
-            <p className="text-3xl md:text-4xl font-heading font-semibold text-white mb-4">
+            <p className="text-3xl md:text-4xl font-heading font-normal text-gray-300 mb-4">
               {car.price}
             </p>
-            <Button className="w-full md:w-auto bg-accent text-background px-8 rounded-lg h-12 hover:bg-accent/90 transition-all text-sm uppercase tracking-widest shadow-[0_4px_14px_rgba(212,175,55,0.3)]">
+            <Button className="w-full md:w-auto px-8 rounded-lg h-12 text-sm uppercase tracking-widest">
               Enquire Now <ArrowUpRight className="ml-2 w-4 h-4" />
             </Button>
           </div>
@@ -168,12 +168,12 @@ export function CarSlugPage({ id }: CarSlugPageProps) {
           {/* Left Column: Specs */}
           <div className="lg:col-span-1 flex flex-col gap-6">
             <div className="bg-[#111111] border border-white/5 rounded-lg p-6 md:p-8">
-              <h2 className="text-xl font-heading font-medium text-white mb-6">Key Specifications</h2>
+              <h2 className="text-xl font-heading font-normal text-white mb-6">Key Specifications</h2>
               <div className="flex flex-col gap-6">
                 <div className="flex items-start gap-4">
                   <Fuel className="text-muted-foreground w-5 h-5 mt-0.5" strokeWidth={1.5} />
                   <div className="flex flex-col">
-                    <p className="text-white font-medium text-sm">Engine</p>
+                    <p className="text-white font-normal text-sm">Engine</p>
                     <p className="text-sm text-muted-foreground mt-1">{car.specs.split(' | ')[0] || 'N/A'}</p>
                   </div>
                 </div>
@@ -181,7 +181,7 @@ export function CarSlugPage({ id }: CarSlugPageProps) {
                 <div className="flex items-start gap-4">
                   <CheckCircle2 className="text-muted-foreground w-5 h-5 mt-0.5" strokeWidth={1.5} />
                   <div className="flex flex-col">
-                    <p className="text-white font-medium text-sm">Transmission</p>
+                    <p className="text-white font-normal text-sm">Transmission</p>
                     <p className="text-sm text-muted-foreground mt-1">{car.specs.split(' | ')[1] || 'N/A'}</p>
                   </div>
                 </div>
@@ -189,7 +189,7 @@ export function CarSlugPage({ id }: CarSlugPageProps) {
                 <div className="flex items-start gap-4">
                   <Gauge className="text-muted-foreground w-5 h-5 mt-0.5" strokeWidth={1.5} />
                   <div className="flex flex-col">
-                    <p className="text-white font-medium text-sm">Mileage</p>
+                    <p className="text-white font-normal text-sm">Mileage</p>
                     <p className="text-sm text-muted-foreground mt-1">{car.specs.split(' | ')[2] || 'N/A'}</p>
                   </div>
                 </div>
@@ -197,7 +197,7 @@ export function CarSlugPage({ id }: CarSlugPageProps) {
                 <div className="flex items-start gap-4">
                   <Calendar className="text-muted-foreground w-5 h-5 mt-0.5" strokeWidth={1.5} />
                   <div className="flex flex-col">
-                    <p className="text-white font-medium text-sm">Year</p>
+                    <p className="text-white font-normal text-sm">Year</p>
                     <p className="text-sm text-muted-foreground mt-1">2024</p>
                   </div>
                 </div>
@@ -208,7 +208,7 @@ export function CarSlugPage({ id }: CarSlugPageProps) {
           {/* Right Column: Overview & Features */}
           <div className="lg:col-span-2 flex flex-col gap-6">
             <div className="bg-[#111111] border border-white/5 rounded-lg p-6 md:p-8">
-              <h2 className="text-xl font-heading font-medium text-white mb-6">Vehicle Overview</h2>
+              <h2 className="text-xl font-heading font-normal text-white mb-6">Vehicle Overview</h2>
               <div className="prose prose-invert max-w-none">
                 <p className="text-muted-foreground leading-relaxed text-sm md:text-base mb-6">
                   Experience luxury and performance combined in this pristine {car.name}. This vehicle has been meticulously inspected and maintained to ensure the highest quality standards. Featuring advanced technology, premium comfort, and exceptional driving dynamics, it stands out as a prime choice for discerning drivers.
@@ -220,7 +220,7 @@ export function CarSlugPage({ id }: CarSlugPageProps) {
             </div>
 
             <div className="bg-[#111111] border border-white/5 rounded-lg p-6 md:p-8">
-              <h2 className="text-xl font-heading font-medium text-white mb-6">Key Features</h2>
+              <h2 className="text-xl font-heading font-normal text-white mb-6">Key Features</h2>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {['Premium Leather Interior', 'Panoramic Sunroof', 'Advanced Driver Assistance', 'Premium Audio System', '360° Camera System', 'Apple CarPlay & Android Auto'].map((feature, idx) => (
                   <li key={idx} className="flex items-start text-muted-foreground text-sm">
@@ -236,8 +236,8 @@ export function CarSlugPage({ id }: CarSlugPageProps) {
         {/* Related Vehicles */}
         <div>
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl md:text-3xl font-heading font-bold text-white">Related Vehicles</h2>
-            <Link href="/cars" className="text-accent hover:text-white transition-colors text-sm font-medium hidden md:block">
+            <h2 className="text-2xl md:text-3xl font-heading font-normal text-white">Related Vehicles</h2>
+            <Link href="/cars" className="text-accent hover:text-white transition-colors text-sm font-normal hidden md:block">
               View All Collections →
             </Link>
           </div>

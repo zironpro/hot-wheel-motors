@@ -12,7 +12,7 @@ export function StorySection() {
             <h2 className="text-xs sm:text-sm font-light text-muted uppercase tracking-widest mb-6">
               OUR STORY
             </h2>
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-heading font-medium text-white leading-tight mb-8">
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-heading font-normal text-white leading-tight mb-8">
               Driven by Passion.<br />Defined by Trust.
             </h3>
             
@@ -29,17 +29,17 @@ export function StorySection() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
               <div className="flex flex-col gap-3">
                 <Car className="w-6 h-6 text-accent" strokeWidth={1.5} />
-                <h4 className="text-sm font-medium text-white tracking-wide uppercase">DUBAI SOURCED</h4>
+                <h4 className="text-sm font-normal text-white tracking-wide uppercase">DUBAI SOURCED</h4>
                 <p className="text-xs text-muted-foreground">Handpicked cars from trusted networks.</p>
               </div>
               <div className="flex flex-col gap-3">
                 <ShieldCheck className="w-6 h-6 text-accent" strokeWidth={1.5} />
-                <h4 className="text-sm font-medium text-white tracking-wide uppercase">QUALITY ASSURED</h4>
+                <h4 className="text-sm font-normal text-white tracking-wide uppercase">QUALITY ASSURED</h4>
                 <p className="text-xs text-muted-foreground">Multi-point inspection & certified mileage.</p>
               </div>
               <div className="flex flex-col gap-3">
                 <Globe className="w-6 h-6 text-accent" strokeWidth={1.5} />
-                <h4 className="text-sm font-medium text-white tracking-wide uppercase">GLOBAL DELIVERY</h4>
+                <h4 className="text-sm font-normal text-white tracking-wide uppercase">GLOBAL DELIVERY</h4>
                 <p className="text-xs text-muted-foreground">Seamless shipping to 100+ countries.</p>
               </div>
             </div>

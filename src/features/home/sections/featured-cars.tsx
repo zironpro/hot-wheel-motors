@@ -80,7 +80,7 @@ export function FeaturedCarsSection() {
                 {/* Specs Pills */}
                 <div className="flex flex-wrap gap-2 mb-4 mt-2">
                   {car.specs.split(' | ').map((spec, i) => (
-                    <span key={i} className="bg-white/10 text-white/90 text-[10px] font-medium px-2.5 py-1 rounded-full flex items-center shadow-sm">
+                    <span key={i} className="bg-white/10 text-white/90 text-[10px] font-normal px-2.5 py-1 rounded-full flex items-center shadow-sm">
                       <span className="w-1 h-1 rounded-full bg-white/50 mr-1.5" />
                       {spec}
                     </span>
@@ -88,10 +88,10 @@ export function FeaturedCarsSection() {
                 </div>
 
                 {/* Title and Subtitle */}
-                <h3 className="text-2xl font-bold text-white leading-tight mb-1 tracking-tight">
+                <h3 className="text-2xl font-normal text-white leading-tight mb-1 tracking-tight">
                   {car.name}
                 </h3>
-                <p className="text-base font-medium text-muted-foreground uppercase tracking-wide mb-4">
+                <p className="text-base font-normal text-muted-foreground uppercase tracking-wide mb-4">
                   {car.subtitle}
                 </p>
 

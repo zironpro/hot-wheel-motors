@@ -98,10 +98,10 @@ export function CategoriesSection() {
                     {/* Overlaid Text & Button */}
                     <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between z-20">
                       <div className="flex flex-col">
-                        <h3 className="text-white text-lg font-semibold drop-shadow-md">{type.name}</h3>
+                        <h3 className="text-white text-lg font-normal drop-shadow-md">{type.name}</h3>
                         <p className="text-white/70 text-xs mt-0.5 drop-shadow-md">{activeTab === "body" ? "Body Type" : "Premium Brand"}</p>
                       </div>
-                      <div className="bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/10 text-white text-xs font-medium px-4 py-2 rounded-lg transition-colors">
+                      <div className="bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/10 text-white text-xs font-normal px-4 py-2 rounded-lg transition-colors">
                         Explore
                       </div>
                     </div>
@@ -112,11 +112,11 @@ export function CategoriesSection() {
                     {/* Top Info row */}
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex flex-col">
-                        <h4 className="text-white/90 font-medium text-sm tracking-wide">Premium Selection</h4>
+                        <h4 className="text-white/90 font-normal text-sm tracking-wide">Premium Selection</h4>
                         <p className="text-muted-foreground text-xs mt-1">Discover our top-tier collection</p>
                       </div>
                       <div className="w-10 h-10 bg-[#1a1a1a] rounded-lg flex items-center justify-center border border-white/5 shadow-inner">
-                        <span className="text-accent text-sm font-semibold">{type.count}</span>
+                        <span className="text-accent text-sm font-normal">{type.count}</span>
                       </div>
                     </div>
                     
@@ -126,15 +126,15 @@ export function CategoriesSection() {
                     {/* Bottom Stats Row */}
                     <div className="grid grid-cols-3 gap-2 mt-auto pt-2">
                       <div className="flex flex-col">
-                        <span className="text-white font-medium text-sm">{type.count}</span>
+                        <span className="text-white font-normal text-sm">{type.count}</span>
                         <span className="text-muted-foreground text-[9px] uppercase tracking-wider mt-0.5">Vehicles</span>
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-white font-medium text-sm">2024</span>
+                        <span className="text-white font-normal text-sm">2024</span>
                         <span className="text-muted-foreground text-[9px] uppercase tracking-wider mt-0.5">Models</span>
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-white font-medium text-sm">AED</span>
+                        <span className="text-white font-normal text-sm">AED</span>
                         <span className="text-muted-foreground text-[9px] uppercase tracking-wider mt-0.5">Starting</span>
                       </div>
                     </div>

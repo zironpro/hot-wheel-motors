@@ -45,7 +45,7 @@ export function Navbar() {
               <Link
                 key={link.name}
                 href={link.href as any}
-                className="text-sm font-medium text-muted hover:text-primary transition-colors whitespace-nowrap"
+                className="text-sm font-normal text-muted hover:text-primary transition-colors whitespace-nowrap"
               >
                 {link.name}
               </Link>
@@ -72,7 +72,7 @@ export function Navbar() {
             <div className="bg-white/10 p-2 rounded-full shrink-0">
               <Phone className="w-4 h-4 text-accent" />
             </div>
-            <a href="tel:+971501234567" className="text-white font-medium hover:text-accent transition-colors whitespace-nowrap">
+            <a href="tel:+971501234567" className="text-white font-normal hover:text-accent transition-colors whitespace-nowrap">
               +971 50 123 4567
             </a>
           </div>

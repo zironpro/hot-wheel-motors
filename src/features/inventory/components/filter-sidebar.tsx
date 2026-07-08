@@ -32,7 +32,7 @@ export function FilterSidebar() {
   return (
     <div className="w-full bg-[#09090b] border border-white/10 rounded-lg p-6 sticky top-28 max-h-[calc(100vh-8rem)] flex flex-col">
       <div className="flex items-center justify-between mb-6 shrink-0">
-        <h2 className="text-xl font-bold text-white">Filters</h2>
+        <h2 className="text-xl font-normal text-white">Filters</h2>
         <Button variant="link" className="text-muted-foreground hover:text-white px-0 h-auto">
           Reset All
         </Button>
@@ -52,7 +52,7 @@ export function FilterSidebar() {
                       <Checkbox id={`make-${make.id}`} className="border-white/20 data-[state=checked]:bg-accent data-[state=checked]:text-black" />
                       <Label
                         htmlFor={`make-${make.id}`}
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-muted-foreground group-hover:text-white cursor-pointer transition-colors"
+                        className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-muted-foreground group-hover:text-white cursor-pointer transition-colors"
                       >
                         {make.label}
                       </Label>
@@ -76,7 +76,7 @@ export function FilterSidebar() {
                       <Checkbox id={`price-${range.id}`} className="border-white/20 data-[state=checked]:bg-accent data-[state=checked]:text-black" />
                       <Label
                         htmlFor={`price-${range.id}`}
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-muted-foreground group-hover:text-white cursor-pointer transition-colors"
+                        className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-muted-foreground group-hover:text-white cursor-pointer transition-colors"
                       >
                         {range.label}
                       </Label>
@@ -100,7 +100,7 @@ export function FilterSidebar() {
                       <Checkbox id={`body-${body.id}`} className="border-white/20 data-[state=checked]:bg-accent data-[state=checked]:text-black" />
                       <Label
                         htmlFor={`body-${body.id}`}
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-muted-foreground group-hover:text-white cursor-pointer transition-colors"
+                        className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-muted-foreground group-hover:text-white cursor-pointer transition-colors"
                       >
                         {body.label}
                       </Label>
@@ -115,7 +115,7 @@ export function FilterSidebar() {
       </div>
       
       <div className="mt-6 shrink-0">
-         <Button className="w-full bg-accent text-background font-bold hover:bg-accent/90 transition-all shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+         <Button className="w-full font-normal">
             Apply Filters
          </Button>
       </div>
