@@ -1,49 +1,70 @@
 import Image from "next/image";
 
+const features = [
+  {
+    title: "Immaculate Standards",
+    description: "Every vehicle is showroom ready.",
+    image: "/images/about-us-card1.png",
+  },
+  {
+    title: "Transparent Pricing",
+    description: "Clear pricing with no hidden fees.",
+    image: "/images/about-us-card2.png",
+  },
+  {
+    title: "Personal Service",
+    description: "Tailored support from inquiry to delivery.",
+    image: "/images/about-us-card3.png",
+  },
+  {
+    title: "After-Sales Care",
+    description: "Premium support beyond every purchase.",
+    image: "/images/about-us-card4.png",
+  },
+];
+
 export function WhyChooseUsSection() {
   return (
-    <section className="w-full py-12 md:py-20 bg-[#111111]">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="flex flex-col mb-12 md:mb-16">
-          <h2 className="text-xs sm:text-sm font-light text-muted uppercase tracking-widest mb-6">
-            WHY CHOOSE US
-          </h2>
-          <h3 className="text-3xl md:text-4xl lg:text-5xl font-heading font-normal text-white leading-tight">
+    <section className="w-full py-20 md:py-28 bg-background">
+      <div className="container mx-auto max-w-7xl">
+        {/* Header */}
+        <div className="text-center mb-14">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-light text-white">
             Excellence in Every Detail.
-          </h3>
+          </h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-          {/* Grid Content */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-12">
-            <div className="flex flex-col gap-3">
-              <h4 className="text-sm font-normal text-white tracking-wide">Transparent Pricing</h4>
-              <p className="text-xs text-muted-foreground leading-relaxed">No hidden fees. What you see is what you pay.</p>
-            </div>
-            <div className="flex flex-col gap-3">
-              <h4 className="text-sm font-normal text-white tracking-wide">Premium Condition</h4>
-              <p className="text-xs text-muted-foreground leading-relaxed">Every car is carefully inspected and meticulously prepared.</p>
-            </div>
-            <div className="flex flex-col gap-3">
-              <h4 className="text-sm font-normal text-white tracking-wide">Personalised Service</h4>
-              <p className="text-xs text-muted-foreground leading-relaxed">Dedicated support throughout your journey.</p>
-            </div>
-            <div className="flex flex-col gap-3">
-              <h4 className="text-sm font-normal text-white tracking-wide">After-Sales Support</h4>
-              <p className="text-xs text-muted-foreground leading-relaxed">We're here even after you drive away.</p>
-            </div>
-          </div>
+        {/* Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+          {features.map((feature, index) => (
+            <div
+              key={index}
+              className="group relative h-[320px] overflow-hidden rounded-lg border border-white/5 bg-[#111111] shadow-2xl"
+            >
+              {/* Image */}
+              <Image
+                src={feature.image}
+                alt={feature.title}
+                fill
+                className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                priority={index < 2}
+              />
 
-          {/* Right Side Image (Car Profile) */}
-          <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px]">
-            {/* The image is a car peeking from the side */}
-            <Image 
-              src="/images/car.png" 
-              alt="Luxury Car Detail" 
-              fill
-              className="object-contain object-right"
-            />
-          </div>
+              {/* Dark Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+
+              {/* Content */}
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <h3 className="text-xl lg:text-2xl font-light text-white mb-2">
+                  {feature.title}
+                </h3>
+
+                <p className="text-sm text-white/70 leading-relaxed">
+                  {feature.description}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
