@@ -17,8 +17,9 @@ const slides = [
     tagline: "DUBAI'S PREMIER BOUTIQUE",
     title: "Luxury Cars.\nWorldwide Delivered.",
     description:
-      "Curated collection of the world's finest pre-owned vehicles. Quality assured. Transparently priced. Seamless international delivery.",
+      "Explore our curated collection of the finest pre-owned luxury vehicles.",
     image: "/images/hero-aston.jpeg",
+    mobileImage: "/images/hero-phone-aston.png",
   },
   {
     tagline: "EXCEPTIONAL PERFORMANCE",
@@ -143,7 +144,14 @@ export function HeroSection() {
                   src={slide.image}
                   alt="Hero Background"
                   fill
-                  className="object-cover object-center"
+                  className="hidden md:block object-cover object-center"
+                  priority={index === 0}
+                />
+                <Image
+                  src={slide.mobileImage || slide.image}
+                  alt="Hero Background Mobile"
+                  fill
+                  className="block md:hidden object-cover object-center"
                   priority={index === 0}
                 />
                 {/* Gradient Overlay for Text Readability */}
@@ -151,11 +159,11 @@ export function HeroSection() {
               </div>
 
               {/* Text Content inside Container */}
-              <div className="container relative z-10 flex flex-col justify-center h-full w-full pt-24 lg:pt-28 pb-12">
+              <div className="container relative z-10 flex flex-col justify-start md:justify-center h-full w-full pt-32 md:pt-24 lg:pt-28 pb-12">
                 <div className="flex flex-col items-start text-left w-full lg:w-1/2 space-y-4 md:space-y-6 lg:pr-8">
-                  <span className="text-white/80 text-sm sm:text-base font-light uppercase tracking-widest drop-shadow-md">
+                  {/* <span className="text-white/80 text-sm sm:text-base font-light uppercase tracking-widest drop-shadow-md">
                     {slide.tagline}
-                  </span>
+                  </span> */}
                   <h1 className="text-3xl sm:text-4xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-heading font-normal leading-tight md:leading-[1.1] tracking-tight text-white drop-shadow-lg whitespace-pre-line">
                     {slide.title}
                   </h1>
