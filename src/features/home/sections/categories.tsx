@@ -21,11 +21,11 @@ const bodyTypes = [
 ];
 
 const brandTypes = [
-  { name: "Mercedes-Benz", count: 45, image: "/car-logo/Mercedes-Benz_Symbol_1.png", href: "/cars?make=mercedes-benz" },
-  { name: "Porsche", count: 28, image: "/car-logo/Porsche_Symbol_1.png", href: "/cars?make=porsche" },
-  { name: "Ferrari", count: 12, image: "/car-logo/Ferrari_Logo_1.png", href: "/cars?make=ferrari" },
-  { name: "Lamborghini", count: 15, image: "/car-logo/Lamborghini_Logo_1.png", href: "/cars?make=lamborghini" },
-  { name: "Aston Martin", count: 8, image: "/car-logo/Aston_Martin_idZRHILK54_1.png", href: "/cars?make=aston-martin" },
+  { name: "Mercedes-Benz", count: 45, image: "/car-logo/mercedes-benz.png", href: "/cars?make=mercedes-benz" },
+  { name: "Porsche", count: 28, image: "/car-logo/porsche.png", href: "/cars?make=porsche" },
+  { name: "Ferrari", count: 12, image: "/car-logo/ferrari.png", href: "/cars?make=ferrari" },
+  { name: "Lamborghini", count: 15, image: "/car-logo/lamborghini.png", href: "/cars?make=lamborghini" },
+  { name: "Aston Martin", count: 8, image: "/car-logo/aston-martin.png", href: "/cars?make=aston-martin" },
 ];
 
 export function CategoriesSection() {
@@ -78,7 +78,7 @@ export function CategoriesSection() {
               <CarouselItem key={type.name} className="pl-4 md:pl-6 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5">
                 <Link
                   href={type.href as any}
-                  className="flex flex-col bg-[#111111] hover:bg-[#1a1a1a] transition-all relative w-full rounded-lg overflow-hidden cursor-pointer group border border-white/5 shadow-lg min-h-[380px]"
+                  className="flex flex-col bg-[#111111] hover:bg-[#1a1a1a] transition-all relative w-full rounded-lg overflow-hidden cursor-pointer group border border-white/5 shadow-lg"
                 >
                   {/* Top Image Section */}
                   <div className="relative h-[220px] w-full bg-gradient-to-br from-[#1e1e1e] to-[#0a0a0a] p-6">
@@ -109,20 +109,6 @@ export function CategoriesSection() {
 
                   {/* Bottom Info Section */}
                   <div className="flex flex-col flex-1 p-5 bg-[#111111]">
-                    {/* Top Info row */}
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex flex-col">
-                        <h4 className="text-white/90 font-normal text-sm tracking-wide">Premium Selection</h4>
-                        <p className="text-muted-foreground text-xs mt-1">Discover our top-tier collection</p>
-                      </div>
-                      <div className="w-10 h-10 bg-[#1a1a1a] rounded-lg flex items-center justify-center border border-white/5 shadow-inner">
-                        <span className="text-accent text-sm font-normal">{type.count}</span>
-                      </div>
-                    </div>
-                    
-                    {/* Divider */}
-                    <div className="w-full h-px bg-white/5 my-2" />
-
                     {/* Bottom Stats Row */}
                     <div className="grid grid-cols-3 gap-2 mt-auto pt-2">
                       <div className="flex flex-col">
@@ -130,12 +116,12 @@ export function CategoriesSection() {
                         <span className="text-muted-foreground text-[9px] uppercase tracking-wider mt-0.5">Vehicles</span>
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-white font-normal text-sm">2024</span>
+                        <span className="text-white font-normal text-sm">All</span>
                         <span className="text-muted-foreground text-[9px] uppercase tracking-wider mt-0.5">Models</span>
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-white font-normal text-sm">AED</span>
-                        <span className="text-muted-foreground text-[9px] uppercase tracking-wider mt-0.5">Starting</span>
+                        <span className="text-white font-normal text-sm">100%</span>
+                        <span className="text-muted-foreground text-[9px] uppercase tracking-wider mt-0.5">Certified</span>
                       </div>
                     </div>
                   </div>

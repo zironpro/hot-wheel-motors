@@ -25,7 +25,7 @@ const slides = [
     tagline: "EXCEPTIONAL PERFORMANCE",
     title: "Premium SUVs.\nReady for Adventure.",
     description:
-      "Discover luxury SUVs perfect for family, off-road, and city driving.",
+      "Discover luxury SUVs perfect for family, \noff-road, and city driving.",
     image: "/images/hero-ranger.png",
     mobileImage: "/images/hero-mobile-renger.png",
   },
