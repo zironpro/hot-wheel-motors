@@ -20,11 +20,6 @@ export function WhyUsSection() {
       description: "Easy loan options\navailable",
     },
     {
-      icon: RefreshCcw,
-      title: "Trade-in Option",
-      description: "Best value for\nyour car",
-    },
-    {
       icon: Headset,
       title: "Sales Support",
       description: "We are here\nto help you",
@@ -35,7 +30,7 @@ export function WhyUsSection() {
     <section className="w-full py-12 md:py-16 lg:py-20 bg-background">
       <div className="container flex flex-col">
         {/* Top Features Strip */}
-        <div className="grid grid-cols-2 lg:grid-cols-5 w-full border border-primary/5 rounded-t-2xl overflow-hidden bg-surface">
+        <div className="grid grid-cols-2 lg:grid-cols-4 w-full border border-primary/5 rounded-t-2xl overflow-hidden bg-surface">
         {features.map((feature, index) => (
           <div 
             key={index}
@@ -57,7 +52,7 @@ export function WhyUsSection() {
               src="/images/hero-3.png" 
               alt="Promo Car"
               fill
-              className="object-cover object-center"
+              className="hidden md:block object-cover object-center"
             />
             {/* Gradient Overlay for Text Readability */}
             {/* <div className="absolute inset-0 bg-black/70 md:bg-gradient-to-r md:from-black/90 md:via-black/60 md:to-transparent" /> */}
