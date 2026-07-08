@@ -27,6 +27,7 @@ const slides = [
     description:
       "Discover luxury SUVs perfect for family, off-road, and city driving.",
     image: "/images/hero-ranger.png",
+    mobileImage: "/images/hero-mobile-renger.png",
   },
   {
     tagline: "UNCOMPROMISING LUXURY",
@@ -34,6 +35,7 @@ const slides = [
     description:
       "Experience the thrill of exclusive and powerful sports cars.",
     image: "/images/hero-porsche.jpeg",
+    mobileImage: "/images/hero-mobile-porsche.png",
   },
   {
     tagline: "GLOBAL EXPORT",
@@ -41,6 +43,7 @@ const slides = [
     description:
       "We handle sourcing and shipping to deliver your dream car anywhere worldwide.",
     image: "/images/hero-bmw.png",
+    mobileImage: "/images/hero-mobile-bmw.png",
   },
 ];
 
