@@ -30,8 +30,8 @@ const FILTER_DATA = {
 
 export function FilterSidebar() {
   return (
-    <div className="w-full bg-[#09090b] border border-white/10 rounded-lg p-6 sticky top-28 max-h-[calc(100vh-8rem)] flex flex-col">
-      <div className="flex items-center justify-between mb-6 shrink-0">
+    <div className="w-full bg-[#09090b] border border-white/10 rounded-lg p-8 sticky top-28 max-h-[calc(100vh-8rem)] flex flex-col">
+      <div className="flex items-center justify-between mb-8 shrink-0">
         <h2 className="text-xl font-normal text-white">Filters</h2>
         <Button variant="link" className="text-muted-foreground hover:text-white px-0 h-auto">
           Reset All
@@ -45,19 +45,19 @@ export function FilterSidebar() {
               Make
             </AccordionTrigger>
             <AccordionContent>
-              <div className="space-y-3 pt-2">
+              <div className="space-y-5 pt-4 pb-2">
                 {FILTER_DATA.makes.map((make) => (
                   <div key={make.id} className="flex items-center justify-between group">
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-4">
                       <Checkbox id={`make-${make.id}`} className="border-white/20 data-[state=checked]:bg-accent data-[state=checked]:text-black" />
                       <Label
                         htmlFor={`make-${make.id}`}
-                        className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-muted-foreground group-hover:text-white cursor-pointer transition-colors"
+                        className="text-sm font-normal leading-normal peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-muted-foreground group-hover:text-white cursor-pointer transition-colors"
                       >
                         {make.label}
                       </Label>
                     </div>
-                    <span className="text-xs text-muted-foreground">({make.count})</span>
+                    <span className="text-xs text-muted-foreground ml-3 shrink-0">({make.count})</span>
                   </div>
                 ))}
               </div>
@@ -69,19 +69,19 @@ export function FilterSidebar() {
               Price Range
             </AccordionTrigger>
             <AccordionContent>
-              <div className="space-y-3 pt-2">
+              <div className="space-y-5 pt-4 pb-2">
                 {FILTER_DATA.priceRanges.map((range) => (
                   <div key={range.id} className="flex items-center justify-between group">
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-4">
                       <Checkbox id={`price-${range.id}`} className="border-white/20 data-[state=checked]:bg-accent data-[state=checked]:text-black" />
                       <Label
                         htmlFor={`price-${range.id}`}
-                        className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-muted-foreground group-hover:text-white cursor-pointer transition-colors"
+                        className="text-sm font-normal leading-normal peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-muted-foreground group-hover:text-white cursor-pointer transition-colors"
                       >
                         {range.label}
                       </Label>
                     </div>
-                    <span className="text-xs text-muted-foreground">({range.count})</span>
+                    <span className="text-xs text-muted-foreground ml-3 shrink-0">({range.count})</span>
                   </div>
                 ))}
               </div>
@@ -93,19 +93,19 @@ export function FilterSidebar() {
               Body Type
             </AccordionTrigger>
             <AccordionContent>
-              <div className="space-y-3 pt-2">
+              <div className="space-y-5 pt-4 pb-2">
                 {FILTER_DATA.bodyTypes.map((body) => (
                   <div key={body.id} className="flex items-center justify-between group">
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-4">
                       <Checkbox id={`body-${body.id}`} className="border-white/20 data-[state=checked]:bg-accent data-[state=checked]:text-black" />
                       <Label
                         htmlFor={`body-${body.id}`}
-                        className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-muted-foreground group-hover:text-white cursor-pointer transition-colors"
+                        className="text-sm font-normal leading-normal peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-muted-foreground group-hover:text-white cursor-pointer transition-colors"
                       >
                         {body.label}
                       </Label>
                     </div>
-                    <span className="text-xs text-muted-foreground">({body.count})</span>
+                    <span className="text-xs text-muted-foreground ml-3 shrink-0">({body.count})</span>
                   </div>
                 ))}
               </div>

@@ -74,7 +74,6 @@ export function CarGrid() {
             <option>Sort by: Recommended</option>
             <option>Price: Low to High</option>
             <option>Price: High to Low</option>
-            <option>Mileage: Low to High</option>
           </select>
         </div>
       </div>
