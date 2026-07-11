@@ -103,12 +103,12 @@ export function Footer() {
             <h4 className="text-muted font-light text-sm mb-6">Opening Hours</h4>
             <ul className="flex flex-col gap-4 text-sm text-muted">
               <li className="flex justify-between border-b border-primary/10 pb-2">
-                <span>Monday - Saturday</span>
-                <span className="text-primary">10:00 - 21:00</span>
+                <span>Monday - Friday</span>
+                <span className="text-primary">09:00 am - 05:00 pm</span>
               </li>
               <li className="flex justify-between border-b border-primary/10 pb-2">
-                <span>Sunday</span>
-                <span className="text-primary">12:00 - 18:00</span>
+                <span>Saturday - Sunday</span>
+                <span className="text-primary">Closed</span>
               </li>
               <li className="mt-4 text-xs italic">
                 * Viewings can be arranged outside these hours by appointment.

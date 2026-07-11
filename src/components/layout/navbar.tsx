@@ -123,7 +123,7 @@ export function Navbar() {
                 {/* Bottom Actions */}
                 <div className="mt-auto space-y-3 pt-4 border-t border-white/10">
                   <SheetClose asChild>
-                    <Button className="w-full h-10 text-sm rounded-lg font-medium text-black bg-primary hover:bg-primary/90 shadow-[0_0_15px_rgba(255,255,255,0.05)]">
+                    <Button className="w-full h-10 text-sm rounded-lg font-normal text-black bg-primary hover:bg-primary/90 shadow-[0_0_15px_rgba(255,255,255,0.05)]">
                       Enquire Now
                     </Button>
                   </SheetClose>

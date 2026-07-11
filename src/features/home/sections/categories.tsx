@@ -186,7 +186,7 @@ export function CategoriesSection({ cars }: { cars: CarData[] }) {
           {/* Pagination Controls */}
           {count > 1 && (
             <div className="flex items-center justify-end gap-4 mt-8">
-              <CarouselPrevious className="relative inset-0 translate-y-0 h-10 w-10 border-white/10 bg-transparent hover:bg-white/10 hover:text-white" />
+              {/* <CarouselPrevious className="relative inset-0 translate-y-0 h-10 w-10 border-white/10 bg-transparent hover:bg-white/10 hover:text-white" /> */}
               <div className="flex items-center gap-2">
                 {Array.from({ length: count }).map((_, i) => (
                   <button
@@ -200,7 +200,7 @@ export function CategoriesSection({ cars }: { cars: CarData[] }) {
                   />
                 ))}
               </div>
-              <CarouselNext className="relative inset-0 translate-y-0 h-10 w-10 border-white/10 bg-transparent hover:bg-white/10 hover:text-white" />
+              {/* <CarouselNext className="relative inset-0 translate-y-0 h-10 w-10 border-white/10 bg-transparent hover:bg-white/10 hover:text-white" /> */}
             </div>
           )}
         </Carousel>
