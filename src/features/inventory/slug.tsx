@@ -8,73 +8,15 @@ import { Button } from "@/components/ui/button";
 import { CarCard } from "./components/car-card";
 import { cn } from "@/lib/utils";
 
-// Mock data to match the grid
-const INVENTORY = [
-  {
-    id: 1,
-    slug: "audi-rs6",
-    name: "Audi RS6",
-    specs: "Gray | 3.6 S | Automatic",
-    price: "AED 139,900",
-    image: "/slug/audi-rs6/audi-rs6-front-view.png",
-    gallery: [
-      "/slug/audi-rs6/audi-rs6-front-view.png",
-      "/slug/audi-rs6/audi-rs6-side-view.png",
-      "/slug/audi-rs6/audi-rs6-back-view.png",
-      "/slug/audi-rs6/audi-rs6-interior.png",
-    ]
-  },
-  {
-    id: 2,
-    slug: "bmw-m4",
-    name: "BMW M4",
-    specs: "Blue | 3.5 S | Automatic",
-    price: "AED 340,000",
-    image: "/slug/bmw-m4/front-view.png",
-    gallery: [
-      "/slug/bmw-m4/front-view.png",
-      "/slug/bmw-m4/side-view.png",
-      "/slug/bmw-m4/back-view.png",
-      "/slug/bmw-m4/interior.png",
-    ]
-  },
-  {
-    id: 3,
-    slug: "cadillac-escalade-sport-platinum",
-    name: "Cadillac Escalade",
-    specs: "Red | 5.9 S | Automatic",
-    price: "AED 490,000",
-    image: "/slug/cadillac/front-view.png",
-    gallery: [
-      "/slug/cadillac/front-view.png",
-      "/slug/cadillac/side-view.png",
-      "/slug/cadillac/back-view.png",
-      "/slug/cadillac/interior.png",
-    ]
-  },
-  {
-    id: 4,
-    slug: "lamborghini-urus-performante",
-    name: "Lamborghini Urus",
-    specs: "Gray | 3.3 S | Automatic",
-    price: "AED 1,150,000",
-    image: "/slug/Lamborghini/front-view.png",
-    gallery: [
-      "/slug/Lamborghini/front-view.png",
-      "/slug/Lamborghini/side-view.png",
-      "/slug/Lamborghini/back-view.png",
-      "/slug/Lamborghini/interior.png",
-    ]
-  }
-];
+import { CarData } from "@/lib/cars";
 
 interface CarSlugPageProps {
-  id: string;
+  car: CarData;
+  relatedCars: CarData[];
+  mdxContent: React.ReactNode;
 }
 
-export function CarSlugPage({ id }: CarSlugPageProps) {
-  // In a real app, we'd fetch the car by ID. Here we mock it or just use the first item.
-  const car = INVENTORY.find(c => c.slug === id || c.id.toString() === id) || INVENTORY[0];
+export function CarSlugPage({ car, relatedCars, mdxContent }: CarSlugPageProps) {
   
   // Dummy gallery images (in a real app, these would come from the car object)
   const galleryImages = car.gallery || [
@@ -174,23 +116,23 @@ export function CarSlugPage({ id }: CarSlugPageProps) {
                   <Fuel className="text-muted-foreground w-5 h-5 mt-0.5" strokeWidth={1.5} />
                   <div className="flex flex-col">
                     <p className="text-white font-normal text-sm">Engine</p>
-                    <p className="text-sm text-muted-foreground mt-1">{car.specs.split(' | ')[0] || 'N/A'}</p>
-                  </div>
-                </div>
-                <div className="w-full h-px bg-white/5" />
-                <div className="flex items-start gap-4">
-                  <CheckCircle2 className="text-muted-foreground w-5 h-5 mt-0.5" strokeWidth={1.5} />
-                  <div className="flex flex-col">
-                    <p className="text-white font-normal text-sm">Transmission</p>
-                    <p className="text-sm text-muted-foreground mt-1">{car.specs.split(' | ')[1] || 'N/A'}</p>
+                    <p className="text-sm text-muted-foreground mt-1">{car.specs.split(' | ')[2] || 'N/A'}</p>
                   </div>
                 </div>
                 <div className="w-full h-px bg-white/5" />
                 <div className="flex items-start gap-4">
                   <Gauge className="text-muted-foreground w-5 h-5 mt-0.5" strokeWidth={1.5} />
                   <div className="flex flex-col">
-                    <p className="text-white font-normal text-sm">Mileage</p>
-                    <p className="text-sm text-muted-foreground mt-1">{car.specs.split(' | ')[2] || 'N/A'}</p>
+                    <p className="text-white font-normal text-sm">KM Driven</p>
+                    <p className="text-sm text-muted-foreground mt-1">{car.specs.split(' | ')[1] || 'N/A'}</p>
+                  </div>
+                </div>
+                <div className="w-full h-px bg-white/5" />
+                <div className="flex items-start gap-4">
+                  <CheckCircle2 className="text-muted-foreground w-5 h-5 mt-0.5" strokeWidth={1.5} />
+                  <div className="flex flex-col">
+                    <p className="text-white font-normal text-sm">Color</p>
+                    <p className="text-sm text-muted-foreground mt-1">{car.specs.split(' | ')[0] || 'N/A'}</p>
                   </div>
                 </div>
                 <div className="w-full h-px bg-white/5" />
@@ -198,7 +140,7 @@ export function CarSlugPage({ id }: CarSlugPageProps) {
                   <Calendar className="text-muted-foreground w-5 h-5 mt-0.5" strokeWidth={1.5} />
                   <div className="flex flex-col">
                     <p className="text-white font-normal text-sm">Year</p>
-                    <p className="text-sm text-muted-foreground mt-1">2024</p>
+                    <p className="text-sm text-muted-foreground mt-1">{car.subtitle ? car.subtitle.replace(' MODEL', '') : 'N/A'}</p>
                   </div>
                 </div>
               </div>
@@ -209,20 +151,15 @@ export function CarSlugPage({ id }: CarSlugPageProps) {
           <div className="lg:col-span-2 flex flex-col gap-6">
             <div className="bg-[#111111] border border-white/5 rounded-lg p-6 md:p-8">
               <h2 className="text-xl font-heading font-normal text-white mb-6">Vehicle Overview</h2>
-              <div className="prose prose-invert max-w-none">
-                <p className="text-muted-foreground leading-relaxed text-sm md:text-base mb-6">
-                  Experience luxury and performance combined in this pristine {car.name}. This vehicle has been meticulously inspected and maintained to ensure the highest quality standards. Featuring advanced technology, premium comfort, and exceptional driving dynamics, it stands out as a prime choice for discerning drivers.
-                </p>
-                <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
-                  Our certified pre-owned vehicles undergo a rigorous multi-point inspection process. We guarantee the authenticity of the mileage and provide a comprehensive vehicle history report for your peace of mind.
-                </p>
+              <div className="prose prose-invert max-w-none text-muted-foreground leading-relaxed text-sm md:text-base prose-p:mb-4">
+                {mdxContent}
               </div>
             </div>
 
             <div className="bg-[#111111] border border-white/5 rounded-lg p-6 md:p-8">
               <h2 className="text-xl font-heading font-normal text-white mb-6">Key Features</h2>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {['Premium Leather Interior', 'Panoramic Sunroof', 'Advanced Driver Assistance', 'Premium Audio System', '360° Camera System', 'Apple CarPlay & Android Auto'].map((feature, idx) => (
+                {(car.features || []).map((feature, idx) => (
                   <li key={idx} className="flex items-start text-muted-foreground text-sm">
                     <CheckCircle2 className="w-4 h-4 text-accent mr-3 mt-0.5 flex-shrink-0" />
                     {feature}
@@ -242,8 +179,8 @@ export function CarSlugPage({ id }: CarSlugPageProps) {
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
-            {INVENTORY.filter(c => c.id.toString() !== id).slice(0, 3).map((relatedCar) => (
-              <CarCard key={relatedCar.id} car={relatedCar} />
+            {relatedCars.map((relatedCar) => (
+              <CarCard key={relatedCar.id} car={relatedCar as any} />
             ))}
           </div>
         </div>

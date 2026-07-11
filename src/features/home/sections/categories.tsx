@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
@@ -9,7 +9,12 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+  type CarouselApi,
 } from "@/components/ui/carousel";
+
+import { CarData } from "@/lib/cars";
 
 const bodyTypes = [
   { name: "Sedan", count: 162, image: "/catagory/sedan.webp", href: "/cars?type=sedan" },
@@ -20,35 +25,78 @@ const bodyTypes = [
   { name: "Luxury", count: 73, image: "/catagory/luxury.webp", href: "/cars?type=luxury" },
 ];
 
-const brandTypes = [
-  { name: "Mercedes-Benz", count: 45, image: "/car-logo/mercedes-benz.png", href: "/cars?make=mercedes-benz" },
-  { name: "Porsche", count: 28, image: "/car-logo/porsche.png", href: "/cars?make=porsche" },
-  { name: "Ferrari", count: 12, image: "/car-logo/ferrari.png", href: "/cars?make=ferrari" },
-  { name: "Lamborghini", count: 15, image: "/car-logo/lamborghini.png", href: "/cars?make=lamborghini" },
-  { name: "Aston Martin", count: 8, image: "/car-logo/aston-martin.png", href: "/cars?make=aston-martin" },
-];
+const CAROUSEL_OPTS = {
+  align: "start" as const,
+  slidesToScroll: 1,
+  duration: 40,
+  breakpoints: {
+    "(min-width: 640px)": { slidesToScroll: 2 },
+    "(min-width: 768px)": { slidesToScroll: 3 },
+    "(min-width: 1024px)": { slidesToScroll: 4 },
+    "(min-width: 1280px)": { slidesToScroll: 5 },
+  }
+};
 
-export function CategoriesSection() {
+export function CategoriesSection({ cars }: { cars: CarData[] }) {
   const [activeTab, setActiveTab] = useState<"body" | "brand">("brand");
-  const currentData = activeTab === "body" ? bodyTypes : brandTypes;
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
+  
+  useEffect(() => {
+    if (!api) return;
+
+    const onSelect = () => {
+      setCount(api.scrollSnapList().length);
+      setCurrent(api.selectedScrollSnap());
+    };
+
+    onSelect(); // initial setup
+
+    api.on("reInit", onSelect);
+    api.on("select", onSelect);
+
+    return () => {
+      api.off("reInit", onSelect);
+      api.off("select", onSelect);
+    };
+  }, [api, activeTab]);
+
+  const makeList = [
+    { id: "audi", label: "Audi", image: null },
+    { id: "bmw", label: "BMW", image: null },
+    { id: "mercedes", label: "Mercedes-Benz", image: "/car-logo/mercedes-benz.png" },
+    { id: "porsche", label: "Porsche", image: "/car-logo/porsche.png" },
+    { id: "range rover", label: "Range Rover", image: null },
+    { id: "cadillac", label: "Cadillac", image: null },
+    { id: "chevrolet", label: "Chevrolet", image: null },
+    { id: "lamborghini", label: "Lamborghini", image: "/car-logo/lamborghini.png" },
+    { id: "jeep", label: "Jeep", image: null },
+    { id: "ford", label: "Ford", image: null },
+    { id: "aston martin", label: "Aston Martin", image: "/car-logo/aston-martin.png" },
+    { id: "dodge", label: "Dodge", image: null },
+    { id: "honda", label: "Honda", image: null },
+    { id: "maserati", label: "Maserati", image: null },
+    { id: "ferrari", label: "Ferrari", image: "/car-logo/ferrari.png" },
+  ];
+
+  const dynamicBrandTypes = makeList.map(make => {
+    const carCount = cars.filter(c => c.name.toLowerCase().includes(make.id)).length;
+    return {
+      name: make.label,
+      count: carCount,
+      image: make.image, // Fallback handled in rendering
+      href: `/cars?make=${make.id}`
+    };
+  }).filter(brand => brand.count > 0);
+
+  const currentData = activeTab === "body" ? bodyTypes : dynamicBrandTypes;
 
   return (
     <section className="w-full pt-4 md:pt-6 lg:pt-8 pb-12 md:pb-16 lg:pb-20 bg-background">
       <div className="container">
         <div className="flex items-center justify-between mb-8 md:mb-12 border-b border-primary/10 pb-4">
           <div className="flex items-center gap-6 md:gap-10">
-            {/* <button 
-              onClick={() => setActiveTab("body")}
-              className={cn(
-                "text-sm sm:text-base font-light tracking-widest uppercase transition-all relative",
-                activeTab === "body" ? "text-primary" : "text-muted hover:text-primary/80"
-              )}
-            >
-              BODY TYPE
-              {activeTab === "body" && (
-                <span className="absolute -bottom-[17px] left-0 w-full h-[1px] bg-accent" />
-              )}
-            </button> */}
             <button 
               onClick={() => setActiveTab("brand")}
               className={cn(
@@ -68,9 +116,8 @@ export function CategoriesSection() {
         </div>
 
         <Carousel
-          opts={{
-            align: "start",
-          }}
+          setApi={setApi}
+          opts={CAROUSEL_OPTS}
           className="w-full relative"
         >
           <CarouselContent className="-ml-4 md:-ml-6">
@@ -81,15 +128,21 @@ export function CategoriesSection() {
                   className="flex flex-col bg-[#111111] hover:bg-[#1a1a1a] transition-all relative w-full rounded-lg overflow-hidden cursor-pointer group border border-white/5 shadow-lg"
                 >
                   {/* Top Image Section */}
-                  <div className="relative h-[220px] w-full bg-gradient-to-br from-[#1e1e1e] to-[#0a0a0a] p-6">
-                    {/* The actual image */}
-                    <div className="relative w-full h-full transform group-hover:scale-110 transition-transform duration-700 ease-out z-0">
-                      <Image
-                        src={type.image}
-                        alt={type.name}
-                        fill
-                        className="object-contain drop-shadow-2xl"
-                      />
+                  <div className="relative h-[220px] w-full bg-gradient-to-br from-[#1e1e1e] to-[#0a0a0a] p-6 flex items-center justify-center">
+                    {/* The actual image or fallback */}
+                    <div className="relative w-full h-full transform group-hover:scale-110 transition-transform duration-700 ease-out z-0 flex items-center justify-center">
+                      {type.image ? (
+                        <Image
+                          src={type.image}
+                          alt={type.name}
+                          fill
+                          className="object-contain drop-shadow-2xl"
+                        />
+                      ) : (
+                        <span className="font-heading text-2xl tracking-widest uppercase text-muted/50 select-none whitespace-nowrap">
+                          {type.name}
+                        </span>
+                      )}
                     </div>
                     
                     {/* Gradient Overlay for Text Readability */}
@@ -129,6 +182,27 @@ export function CategoriesSection() {
               </CarouselItem>
             ))}
           </CarouselContent>
+          
+          {/* Pagination Controls */}
+          {count > 1 && (
+            <div className="flex items-center justify-end gap-4 mt-8">
+              <CarouselPrevious className="relative inset-0 translate-y-0 h-10 w-10 border-white/10 bg-transparent hover:bg-white/10 hover:text-white" />
+              <div className="flex items-center gap-2">
+                {Array.from({ length: count }).map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => api?.scrollTo(i)}
+                    className={cn(
+                      "transition-all duration-300 rounded-full",
+                      current === i ? "w-6 h-2 bg-primary" : "w-2 h-2 bg-white/20 hover:bg-white/40"
+                    )}
+                    aria-label={`Go to slide ${i + 1}`}
+                  />
+                ))}
+              </div>
+              <CarouselNext className="relative inset-0 translate-y-0 h-10 w-10 border-white/10 bg-transparent hover:bg-white/10 hover:text-white" />
+            </div>
+          )}
         </Carousel>
       </div>
     </section>

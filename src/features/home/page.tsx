@@ -7,14 +7,16 @@ import { WhyUsSection } from "./sections/why-us";
 import { TestimonialsSection } from "./sections/testimonials";
 import { NewsletterSection } from "./sections/newsletter";
 
-export function HomePage() {
+import { CarData } from "@/lib/cars";
+
+export function HomePage({ initialCars }: { initialCars: CarData[] }) {
   return (
     <div className="flex flex-col w-full">
       <HeroSection />
-      {/* <BrandsSection /> */}
-      <FeaturedCarsSection />
+      {/* <BrandsSection cars={initialCars} /> */}
+      <FeaturedCarsSection cars={initialCars} />
       <ShippingSection />
-      <CategoriesSection />
+      <CategoriesSection cars={initialCars} />
       <WhyUsSection />
       <TestimonialsSection />
       <NewsletterSection />

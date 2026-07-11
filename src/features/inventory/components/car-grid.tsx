@@ -4,56 +4,57 @@ import { useState } from "react";
 import { Search } from "lucide-react";
 import { Car, CarCard } from "./car-card";
 
-const INVENTORY: Car[] = [
-  {
-    id: 1,
-    slug: "audi-rs6",
-    name: "Audi RS6",
-    subtitle: "2024 MODEL",
-    specs: "Gray | 3.6 S | Automatic",
-    description: "The Audi RS6 Avant perfectly combines extreme performance with everyday practicality and stunning design.",
-    price: "AED 450,000",
-    image: "/slug/audi-rs6/audi-rs6-front-view.png", // using the new real image
-  },
-  {
-    id: 2,
-    slug: "bmw-m4",
-    name: "BMW M4",
-    subtitle: "2022 MODEL",
-    specs: "Blue | 3.4 S | Automatic",
-    description: "The BMW M4 delivers pure motorsport technology into a production model for unparalleled track performance.",
-    price: "AED 320,000",
-    image: "/inventory/BMW-M4-2022-Blue.png",
-  },
-  {
-    id: 3,
-    slug: "cadillac-escalade-sport-platinum",
-    name: "Cadillac Escalade",
-    subtitle: "2026 SPORT PLATINUM",
-    specs: "Red | 5.9 S | Automatic",
-    description: "The Escalade Sport Platinum blends commanding presence with incredible luxury and state-of-the-art technology.",
-    price: "AED 490,000",
-    image: "/inventory/Cadillac-Escalade-Sport-Platinum-2026-Red.png",
-  },
-  {
-    id: 4,
-    slug: "lamborghini-urus-performante",
-    name: "Lamborghini Urus",
-    subtitle: "2024 PERFORMANTE",
-    specs: "Gray | 3.3 S | Automatic",
-    description: "The Urus Performante elevates the Super SUV to a new level of performance, combining extreme driving dynamics with bold design.",
-    price: "AED 1,150,000",
-    image: "/inventory/Lamborghini-Urus-Performante-2024-Gray.png",
-  }
-];
+interface Filters {
+  makes: string[];
+  priceRanges: string[];
+  bodyTypes: string[];
+}
 
-export function CarGrid() {
+interface CarGridProps {
+  cars: Car[];
+  filters: Filters;
+}
+
+export function CarGrid({ cars, filters }: CarGridProps) {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredInventory = INVENTORY.filter((car) =>
-    car.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    car.specs.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const suvKeywords = ["x5", "x7", "q8", "escalade", "suburban", "silverado", "f-150", "f250", "cr-v", "wrangler", "cherokee", "urus", "gle", "gls", "g550", "g63", "g580", "levante", "cayenne", "range rover", "durango", "expedition"];
+  const sportsKeywords = ["m8", "camaro", "corvette", "aventador", "targa", "carrera", "rs3", "m4", "m3"];
+  
+  const getBodyType = (carName: string) => {
+    const n = carName.toLowerCase();
+    if (suvKeywords.some(k => n.includes(k))) return "suv";
+    if (sportsKeywords.some(k => n.includes(k))) return "sports";
+    return "sedan"; // Default fallback
+  };
+
+  const getPriceRange = (priceStr: string) => {
+    if (priceStr.toLowerCase().includes("request") || priceStr === "N/A" || !priceStr.includes("AED")) return "on-request";
+    const price = parseInt(priceStr.replace(/[^0-9]/g, ''), 10);
+    if (isNaN(price)) return "on-request";
+    if (price < 150000) return "under-150k";
+    if (price < 300000) return "150k-300k";
+    if (price < 500000) return "300k-500k";
+    return "over-500k";
+  };
+
+  const filteredInventory = cars.filter((car) => {
+    // Search filter
+    const matchesSearch = car.name.toLowerCase().includes(searchQuery.toLowerCase()) || car.specs.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    // Make filter
+    const matchesMake = filters.makes.length === 0 || filters.makes.some(m => car.name.toLowerCase().includes(m));
+    
+    // Price filter
+    const carPriceRange = getPriceRange(car.price || "");
+    const matchesPrice = filters.priceRanges.length === 0 || filters.priceRanges.includes(carPriceRange);
+    
+    // Body filter
+    const carBodyType = getBodyType(car.name);
+    const matchesBody = filters.bodyTypes.length === 0 || filters.bodyTypes.includes(carBodyType);
+
+    return matchesSearch && matchesMake && matchesPrice && matchesBody;
+  });
 
   return (
     <div className="w-full">
@@ -84,7 +85,7 @@ export function CarGrid() {
         ))}
         {filteredInventory.length === 0 && (
           <div className="col-span-full py-12 text-center text-muted-foreground">
-            No vehicles found matching your search.
+            No vehicles found matching your filters.
           </div>
         )}
       </div>

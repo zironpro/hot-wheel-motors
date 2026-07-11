@@ -2,47 +2,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CarData } from "@/lib/cars";
 
-const featuredCars = [
-  {
-    id: 1,
-    slug: "audi-rs6",
-    name: "Audi RS6",
-    subtitle: "2024 MODEL",
-    specs: "Gray | 3.6 S | Automatic",
-    description: "The Audi RS6 Avant perfectly combines extreme performance with everyday practicality and stunning design.",
-    image: "/inventory/Audi-RS6-2024-Gray.png",
-  },
-  {
-    id: 2,
-    slug: "bmw-m4",
-    name: "BMW M4",
-    subtitle: "2022 MODEL",
-    specs: "Blue | 3.4 S | Automatic",
-    description: "The BMW M4 delivers pure motorsport technology into a production model for unparalleled track performance.",
-    image: "/inventory/BMW-M4-2022-Blue.png",
-  },
-  {
-    id: 3,
-    slug: "cadillac-escalade-sport-platinum",
-    name: "Cadillac Escalade",
-    subtitle: "2026 SPORT PLATINUM",
-    specs: "Red | 5.9 S | Automatic",
-    description: "The Escalade Sport Platinum blends commanding presence with incredible luxury and state-of-the-art technology.",
-    image: "/inventory/Cadillac-Escalade-Sport-Platinum-2026-Red.png",
-  },
-  {
-    id: 4,
-    slug: "lamborghini-urus-performante",
-    name: "Lamborghini Urus",
-    subtitle: "2024 PERFORMANTE",
-    specs: "Gray | 3.3 S | Automatic",
-    description: "The Urus Performante elevates the Super SUV to a new level of performance, combining extreme driving dynamics with bold design.",
-    image: "/inventory/Lamborghini-Urus-Performante-2024-Gray.png",
-  }
-];
+export function FeaturedCarsSection({ cars }: { cars: CarData[] }) {
+  // Take 4 random cars or just the first 4 for featured
+  const featuredCars = cars.slice(0, 4).map(c => {
+    // Extract a short description from the markdown body
+    const firstParagraph = c.description ? c.description.split('\n').find(line => line.trim().length > 10) : "";
+    return {
+      ...c,
+      shortDescription: firstParagraph || "Experience unparalleled luxury and performance in this pristine vehicle."
+    }
+  });
 
-export function FeaturedCarsSection() {
   return (
     <section className="w-full pt-12 md:pt-16 lg:pt-20 pb-4 md:pb-6 lg:pb-8 bg-background">
       <div className="container">
@@ -96,8 +68,8 @@ export function FeaturedCarsSection() {
                 </p>
 
                 {/* Description Paragraph */}
-                <p className="text-[11px] text-muted-foreground/60 leading-relaxed mt-auto pt-4 border-t border-white/5">
-                  {car.description}
+                <p className="text-[11px] text-muted-foreground/60 leading-relaxed mt-auto pt-4 border-t border-white/5 line-clamp-3">
+                  {car.shortDescription}
                 </p>
               </div>
             </Link>
