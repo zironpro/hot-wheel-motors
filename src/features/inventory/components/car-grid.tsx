@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { Search } from "lucide-react";
+import { Search, SearchX } from "lucide-react";
 import { Car, CarCard } from "./car-card";
 
 interface Filters {
@@ -95,8 +95,20 @@ export function CarGrid({ cars, filters }: CarGridProps) {
           <CarCard key={car.id} car={car} />
         ))}
         {filteredInventory.length === 0 && (
-          <div className="col-span-full py-12 text-center text-muted-foreground">
-            No vehicles found matching your filters.
+          <div className="col-span-full py-16 flex flex-col items-center justify-center text-center border border-white/10 bg-[#18181b] rounded-lg">
+            <div className="w-16 h-16 bg-white/5 rounded-lg flex items-center justify-center mb-4">
+              <SearchX className="w-8 h-8 text-muted-foreground" />
+            </div>
+            <h3 className="text-xl font-normal text-white mb-2">Vehicle Not Found</h3>
+            <p className="max-w-md mb-6">
+              This car is currently unavailable. Share your requirements, and our team will source it for you.
+            </p>
+            <a 
+              href="/contact" 
+              className="bg-accent hover:bg-accent/90 text-black font-normal px-8 py-3 rounded-lg transition-colors"
+            >
+              Share Details
+            </a>
           </div>
         )}
       </div>
