@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { Search } from "lucide-react";
 import { Car, CarCard } from "./car-card";
 
@@ -16,7 +17,15 @@ interface CarGridProps {
 }
 
 export function CarGrid({ cars, filters }: CarGridProps) {
-  const [searchQuery, setSearchQuery] = useState("");
+  const searchParams = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState(() => {
+    return searchParams.get("q") || "";
+  });
+
+  useEffect(() => {
+    const q = searchParams.get("q");
+    if (q) setSearchQuery(q);
+  }, [searchParams]);
 
   const suvKeywords = ["x5", "x7", "q8", "escalade", "suburban", "silverado", "f-150", "f250", "cr-v", "wrangler", "cherokee", "urus", "gle", "gls", "g550", "g63", "g580", "levante", "cayenne", "range rover", "durango", "expedition"];
   const sportsKeywords = ["m8", "camaro", "corvette", "aventador", "targa", "carrera", "rs3", "m4", "m3"];
@@ -40,7 +49,9 @@ export function CarGrid({ cars, filters }: CarGridProps) {
 
   const filteredInventory = cars.filter((car) => {
     // Search filter
-    const matchesSearch = car.name.toLowerCase().includes(searchQuery.toLowerCase()) || car.specs.toLowerCase().includes(searchQuery.toLowerCase());
+    const keywords = searchQuery.toLowerCase().split(/\s+/).filter(Boolean);
+    const searchableText = `${car.name} ${car.specs} ${car.subtitle || ''} ${car.description || ''} ${car.features?.join(' ') || ''}`.toLowerCase();
+    const matchesSearch = keywords.length === 0 || keywords.every(kw => searchableText.includes(kw));
     
     // Make filter
     const matchesMake = filters.makes.length === 0 || filters.makes.some(m => car.name.toLowerCase().includes(m));

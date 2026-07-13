@@ -1,4 +1,5 @@
 import { HeroSection } from "./sections/hero";
+import { SearchSection } from "./sections/search-section";
 import { BrandsSection } from "./sections/brands";
 import { CategoriesSection } from "./sections/categories";
 import { FeaturedCarsSection } from "./sections/featured-cars";
@@ -13,6 +14,7 @@ export function HomePage({ initialCars }: { initialCars: CarData[] }) {
   return (
     <div className="flex flex-col w-full">
       <HeroSection />
+      <SearchSection />
       {/* <BrandsSection cars={initialCars} /> */}
       <FeaturedCarsSection cars={initialCars} />
       <ShippingSection />

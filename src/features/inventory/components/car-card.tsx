@@ -11,6 +11,7 @@ export type Car = {
   specs: string;
   price?: string;
   image: string;
+  features?: string[];
 };
 
 interface CarCardProps {

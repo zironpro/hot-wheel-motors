@@ -1,7 +1,12 @@
+import { Suspense } from "react";
 import { InventoryPage } from "@/features/inventory/page";
 import { getAllCars } from "@/lib/cars";
 
 export default function Cars() {
   const cars = getAllCars();
-  return <InventoryPage initialCars={cars} />;
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-background pt-32 pb-16 flex items-center justify-center text-white">Loading inventory...</div>}>
+      <InventoryPage initialCars={cars} />
+    </Suspense>
+  );
 }
