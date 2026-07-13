@@ -100,7 +100,7 @@ export function CarGrid({ cars, filters }: CarGridProps) {
               <SearchX className="w-8 h-8 text-muted-foreground" />
             </div>
             <h3 className="text-xl font-normal text-white mb-2">Vehicle Not Found</h3>
-            <p className="max-w-md mb-6">
+            <p className="max-w-md mb-6 font-light text-white/80">
               This car is currently unavailable. Share your requirements, and our team will source it for you.
             </p>
             <a 
