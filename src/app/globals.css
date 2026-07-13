@@ -28,6 +28,11 @@ body {
   font-family: var(--font-sans);
 }
 
+/* Ensure all interactive elements have a pointer cursor globally */
+a, button, select, input[type="submit"], input[type="button"], [role="button"], label {
+  cursor: pointer;
+}
+
 /* Base heading styles to automatically use Manrope and the requested weight */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);

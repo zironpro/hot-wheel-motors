@@ -190,13 +190,16 @@ export function HeroSection() {
               EXPLORE COLLECTIONS
             </Button>
             <Button
+              asChild
               variant="ghost"
-              className="text-primary hover:bg-transparent hover:text-primary/80 font-light px-0 h-10 md:h-12 text-xs md:text-sm flex items-center gap-2 md:gap-3 uppercase tracking-wider rounded-none"
+              className="text-primary hover:!bg-transparent hover:text-primary/80 font-light px-0 h-10 md:h-12 text-xs md:text-sm flex items-center gap-2 md:gap-3 uppercase tracking-wider rounded-none"
             >
-              <div className="w-7 h-7 md:w-8 md:h-8 rounded-full border border-primary/30 flex items-center justify-center transition-colors hover:border-primary">
-                <Play className="w-2.5 h-2.5 md:w-3 md:h-3 ml-0.5 fill-primary text-primary" />
-              </div>
-              VIEW SERVICES
+              <a>
+                <div className="w-7 h-7 md:w-8 md:h-8 rounded-full border border-primary/30 flex items-center justify-center transition-colors hover:border-primary">
+                  <Play className="w-2.5 h-2.5 md:w-3 md:h-3 ml-0.5 fill-primary text-primary" />
+                </div>
+                VIEW SERVICES
+              </a>
             </Button>
           </div>
 
