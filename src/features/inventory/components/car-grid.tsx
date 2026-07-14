@@ -82,11 +82,6 @@ export function CarGrid({ cars, filters }: CarGridProps) {
               className="w-full bg-[#09090b] border border-white/10 text-white text-sm rounded-md pl-9 pr-3 py-2 outline-none focus:border-accent transition-colors placeholder:text-muted-foreground"
             />
           </div>
-          <select className="bg-[#09090b] border border-white/10 text-white text-sm rounded-md px-3 py-2 outline-none focus:border-accent transition-colors shrink-0">
-            <option>Sort by: Recommended</option>
-            <option>Price: Low to High</option>
-            <option>Price: High to Low</option>
-          </select>
         </div>
       </div>
 
