@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -25,6 +25,15 @@ const Whatsapp = ({ className }: { className?: string }) => (
 export function ContactFormSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const msg = params.get("message");
+    if (msg) {
+      setMessage(msg);
+    }
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -129,7 +138,7 @@ export function ContactFormSection() {
 
                 <div className="space-y-2">
                   <Label htmlFor="message" className="font-normal text-zinc-300">Message</Label>
-                  <Textarea id="message" required placeholder="How can we help you?" className="bg-zinc-950/50 font-normal min-h-[100px]" />
+                  <Textarea id="message" value={message} onChange={(e) => setMessage(e.target.value)} required placeholder="How can we help you?" className="bg-zinc-950/50 font-normal min-h-[100px]" />
                 </div>
 
                 <Button type="submit" className="w-full font-normal" disabled={isSubmitting}>

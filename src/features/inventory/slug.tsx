@@ -154,8 +154,10 @@ export function CarSlugPage({ car, relatedCars, mdxContent }: CarSlugPageProps) 
            <p className="text-white/80 font-light text-sm md:text-base mb-4 sm:mb-0">
              Interested in this beautiful vehicle? Reach out to our team today.
            </p>
-           <Button className="w-full sm:w-auto px-8 rounded-lg h-12 text-sm bg-accent hover:bg-accent/90 text-black font-normal uppercase tracking-widest transition-colors">
-              Enquire Now <ArrowUpRight className="ml-2 w-4 h-4" />
+           <Button asChild className="w-full sm:w-auto px-8 rounded-lg h-12 text-sm bg-accent hover:bg-accent/90 text-black font-normal uppercase tracking-widest transition-colors">
+              <Link href={`/contact?message=${encodeURIComponent(`I am interested in inquiring about the ${car.name} ${car.subtitle ? car.subtitle.replace(' MODEL', '') : ''}. Please provide me with more information.`)}`}>
+                Enquire Now <ArrowUpRight className="ml-2 w-4 h-4" />
+              </Link>
            </Button>
         </div>
 

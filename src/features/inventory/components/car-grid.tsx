@@ -104,7 +104,7 @@ export function CarGrid({ cars, filters }: CarGridProps) {
               This car is currently unavailable. Share your requirements, and our team will source it for you.
             </p>
             <a 
-              href="/contact" 
+              href={searchQuery ? `/contact?message=${encodeURIComponent(`I am looking to source a vehicle. My specific requirement is: "${searchQuery}". Please let me know if you can assist.`)}` : "/contact"} 
               className="bg-accent hover:bg-accent/90 text-black font-normal px-8 py-3 rounded-lg transition-colors"
             >
               Share Details
