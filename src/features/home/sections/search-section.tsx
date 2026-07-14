@@ -50,7 +50,7 @@ export function SearchSection() {
   const filteredBrands = POPULAR_BRANDS.filter(b => b.toLowerCase().includes(brand.toLowerCase()));
 
   return (
-    <section className="py-12 bg-background">
+    <section className="py-12 bg-background relative z-20">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-heading font-normal text-white mb-8 text-center">
@@ -73,7 +73,7 @@ export function SearchSection() {
                 autoComplete="off"
               />
               {showDropdown && filteredBrands.length > 0 && (
-                <div className="absolute z-10 w-full mt-1 bg-[#18181b] border border-white/10 rounded-md shadow-xl max-h-60 overflow-y-auto hide-scrollbar">
+                <div className="absolute z-50 w-full mt-1 bg-[#18181b] border border-white/10 rounded-md shadow-xl max-h-60 overflow-y-auto hide-scrollbar">
                   {filteredBrands.map((b) => (
                     <div
                       key={b}
