@@ -21,13 +21,13 @@ export function WhyUsSection() {
     },
     {
       icon: Headset,
-      title: "Sales Support",
+      title: "Dedicated Support",
       description: "We are here\nto help you",
     },
   ];
 
   return (
-    <section className="w-full py-12 md:py-16 lg:py-20 bg-background">
+    <section className="w-full pt-4 md:pt-8 lg:pt-10 pb-12 md:pb-16 lg:pb-20 bg-background">
       <div className="container flex flex-col">
         {/* Top Features Strip */}
         <div className="grid grid-cols-2 lg:grid-cols-4 w-full border border-primary/5 rounded-t-2xl overflow-hidden bg-surface">

@@ -13,20 +13,21 @@ import { CarData } from "@/lib/cars";
 
 export function BrandsSection({ cars }: { cars: CarData[] }) {
   const makeList = [
-    { id: "audi", label: "Audi", image: null },
-    { id: "bmw", label: "BMW", image: null },
+    { id: "audi", label: "Audi", image: "/car-logo/audi.png" },
+    { id: "bmw", label: "BMW", image: "/car-logo/bmw.png" },
     { id: "mercedes", label: "Mercedes-Benz", image: "/car-logo/mercedes-benz.png" },
     { id: "porsche", label: "Porsche", image: "/car-logo/porsche.png" },
-    { id: "range rover", label: "Range Rover", image: null },
-    { id: "cadillac", label: "Cadillac", image: null },
-    { id: "chevrolet", label: "Chevrolet", image: null },
+    { id: "range rover", label: "Range Rover", image: "/car-logo/range-rover.png" },
+    { id: "cadillac", label: "Cadillac", image: "/car-logo/cadillac.png" },
+    { id: "chevrolet", label: "Chevrolet", image: "/car-logo/chevrolet.png" },
     { id: "lamborghini", label: "Lamborghini", image: "/car-logo/lamborghini.png" },
-    { id: "jeep", label: "Jeep", image: null },
-    { id: "ford", label: "Ford", image: null },
+    { id: "jeep", label: "Jeep", image: "/car-logo/jeep.png" },
+    { id: "ford", label: "Ford", image: "/car-logo/ford.png" },
     { id: "aston martin", label: "Aston Martin", image: "/car-logo/aston-martin.png" },
-    { id: "dodge", label: "Dodge", image: null },
-    { id: "honda", label: "Honda", image: null },
-    { id: "maserati", label: "Maserati", image: null },
+    { id: "dodge", label: "Dodge", image: "/car-logo/dodge.png" },
+    { id: "honda", label: "Honda", image: "/car-logo/honda.png" },
+    { id: "maserati", label: "Maserati", image: "/car-logo/maserati.png" },
+    { id: "ferrari", label: "Ferrari", image: "/car-logo/ferrari.png" },
   ];
 
   // Only include brands that have at least one car in inventory

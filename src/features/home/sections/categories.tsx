@@ -63,20 +63,20 @@ export function CategoriesSection({ cars }: { cars: CarData[] }) {
   }, [api, activeTab]);
 
   const makeList = [
-    { id: "audi", label: "Audi", image: null },
-    { id: "bmw", label: "BMW", image: null },
+    { id: "audi", label: "Audi", image: "/car-logo/audi.png" },
+    { id: "bmw", label: "BMW", image: "/car-logo/bmw.png" },
     { id: "mercedes", label: "Mercedes-Benz", image: "/car-logo/mercedes-benz.png" },
     { id: "porsche", label: "Porsche", image: "/car-logo/porsche.png" },
-    { id: "range rover", label: "Range Rover", image: null },
-    { id: "cadillac", label: "Cadillac", image: null },
-    { id: "chevrolet", label: "Chevrolet", image: null },
+    { id: "range rover", label: "Range Rover", image: "/car-logo/range-rover.png" },
+    { id: "cadillac", label: "Cadillac", image: "/car-logo/cadillac.png" },
+    { id: "chevrolet", label: "Chevrolet", image: "/car-logo/chevrolet.png" },
     { id: "lamborghini", label: "Lamborghini", image: "/car-logo/lamborghini.png" },
-    { id: "jeep", label: "Jeep", image: null },
-    { id: "ford", label: "Ford", image: null },
+    { id: "jeep", label: "Jeep", image: "/car-logo/jeep.png" },
+    { id: "ford", label: "Ford", image: "/car-logo/ford.png" },
     { id: "aston martin", label: "Aston Martin", image: "/car-logo/aston-martin.png" },
-    { id: "dodge", label: "Dodge", image: null },
-    { id: "honda", label: "Honda", image: null },
-    { id: "maserati", label: "Maserati", image: null },
+    { id: "dodge", label: "Dodge", image: "/car-logo/dodge.png" },
+    { id: "honda", label: "Honda", image: "/car-logo/honda.png" },
+    { id: "maserati", label: "Maserati", image: "/car-logo/maserati.png" },
     { id: "ferrari", label: "Ferrari", image: "/car-logo/ferrari.png" },
   ];
 
@@ -93,7 +93,7 @@ export function CategoriesSection({ cars }: { cars: CarData[] }) {
   const currentData = activeTab === "body" ? bodyTypes : dynamicBrandTypes;
 
   return (
-    <section className="w-full pt-4 md:pt-6 lg:pt-8 pb-12 md:pb-16 lg:pb-20 bg-background">
+    <section className="w-full pt-4 md:pt-6 lg:pt-8 pb-6 md:pb-8 lg:pb-10 bg-background">
       <div className="container">
         <div className="flex items-center justify-between mb-8 md:mb-12 border-b border-primary/10 pb-4">
           <div className="flex items-center gap-6 md:gap-10">
@@ -161,8 +161,8 @@ export function CategoriesSection({ cars }: { cars: CarData[] }) {
                   </div>
 
                   {/* Bottom Info Section */}
-                  <div className="flex flex-col flex-1 p-5 bg-[#111111]">
-                    {/* Bottom Stats Row */}
+                  {/* <div className="flex flex-col flex-1 p-5 bg-[#111111]">
+                    Bottom Stats Row
                     <div className="grid grid-cols-3 gap-2 mt-auto pt-2">
                       <div className="flex flex-col">
                         <span className="text-white font-normal text-sm">{type.count}</span>
@@ -177,7 +177,7 @@ export function CategoriesSection({ cars }: { cars: CarData[] }) {
                         <span className="text-muted-foreground text-[9px] uppercase tracking-wider mt-0.5">Certified</span>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </Link>
               </CarouselItem>
             ))}

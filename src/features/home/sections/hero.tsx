@@ -2,6 +2,7 @@
 
 import { Play } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
@@ -15,7 +16,7 @@ import {
 const slides = [
   {
     tagline: "DUBAI'S PREMIER BOUTIQUE",
-    title: "Luxury Cars.\nWorldwide Delivered.",
+    title: "Luxury Cars.\nDelivered Worldwide.",
     description:
       "Explore our curated collection of the finest pre-owned luxury vehicles.",
     image: "/images/hero-aston.jpeg",
@@ -23,7 +24,7 @@ const slides = [
   },
   {
     tagline: "EXCEPTIONAL PERFORMANCE",
-    title: "Premium SUVs.\nReady for Adventure.",
+    title: "Exclusive SUVs.\nFor Every Journey.",
     description:
       "Discover luxury SUVs perfect for family, \noff-road, and city driving.",
     image: "/images/hero-ranger.png",
@@ -31,17 +32,17 @@ const slides = [
   },
   {
     tagline: "UNCOMPROMISING LUXURY",
-    title: "Exotic Sports Cars.\nUnleash the Power.",
+    title: "Icons of Performance.",
     description:
-      "Experience the thrill of exclusive and powerful sports cars.",
+      "Experience the thrill of exclusive, high performance sports cars.",
     image: "/images/hero-porsche.jpeg",
     mobileImage: "/images/hero-mobile-porsche.png",
   },
   {
     tagline: "GLOBAL EXPORT",
-    title: "Seamless Export.\nDelivered to You.",
+    title: "Seamless Global Export",
     description:
-      "We handle sourcing and shipping to deliver your dream car anywhere worldwide.",
+      "From sourcing to shipping,\nwe deliver your dream car worldwide.",
     image: "/images/hero-bmw.png",
     mobileImage: "/images/hero-mobile-bmw.png",
   },
@@ -186,20 +187,20 @@ export function HeroSection() {
         
           {/* Static Action Buttons */}
           <div className="flex flex-wrap items-center gap-4 sm:gap-6 pointer-events-auto">
-            <Button className="px-6 md:px-8 h-10 md:h-12 text-xs md:text-sm rounded-lg uppercase">
-              EXPLORE COLLECTIONS
+            <Button asChild className="px-6 md:px-8 h-10 md:h-12 text-xs md:text-sm rounded-lg uppercase">
+              <Link href="/cars">EXPLORE COLLECTIONS</Link>
             </Button>
             <Button
               asChild
               variant="ghost"
               className="text-primary hover:!bg-transparent hover:text-primary/80 font-light px-0 h-10 md:h-12 text-xs md:text-sm flex items-center gap-2 md:gap-3 uppercase tracking-wider rounded-none"
             >
-              <a>
+              <Link href="/services">
                 <div className="w-7 h-7 md:w-8 md:h-8 rounded-full border border-primary/30 flex items-center justify-center transition-colors hover:border-primary">
                   <Play className="w-2.5 h-2.5 md:w-3 md:h-3 ml-0.5 fill-primary text-primary" />
                 </div>
-                VIEW SERVICES
-              </a>
+                OUR SERVICES
+              </Link>
             </Button>
           </div>
 

@@ -51,8 +51,9 @@ export function Navbar() {
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Collections", href: "/cars" },
+    { name: "Services", href: "/services" },
     { name: "About Us", href: "/about" },
-    { name: "Contact Us", href: "/contact" },
+    // { name: "Contact Us", href: "/contact" },
   ];
 
   return (
@@ -123,21 +124,21 @@ export function Navbar() {
                 {/* Bottom Actions */}
                 <div className="mt-auto space-y-3 pt-4 border-t border-white/10">
                   <SheetClose asChild>
-                    <Button className="w-full h-10 text-sm rounded-lg font-normal text-black bg-primary hover:bg-primary/90 shadow-[0_0_15px_rgba(255,255,255,0.05)]">
-                      Enquire Now
+                    <Button asChild className="w-full h-10 text-sm rounded-lg font-normal text-black bg-primary hover:bg-primary/90 shadow-[0_0_15px_rgba(255,255,255,0.05)]">
+                      <Link href="/contact">Enquire Now</Link>
                     </Button>
                   </SheetClose>
 
                   <div className="flex flex-col items-center justify-center gap-2 text-white/60 text-sm">
                     <SheetClose asChild>
                       <a
-                        href="tel:+971501234567"
+                        href="tel:+971555781902"
                         className="flex items-center gap-2 hover:text-white transition-colors"
                       >
                         <div className="bg-white/10 p-1.5 rounded-full">
                           <Phone className="w-3 h-3 text-accent" />
                         </div>
-                        <span className="text-sm tracking-wider font-light">+971 50 123 4567</span>
+                        <span className="text-sm tracking-wider font-light">+971 55 578 1902</span>
                       </a>
                     </SheetClose>
                   </div>
@@ -177,12 +178,12 @@ export function Navbar() {
             <div className="bg-white/10 p-2 rounded-full shrink-0">
               <Phone className="w-4 h-4 text-accent" />
             </div>
-            <a href="tel:+971501234567" className="text-white font-normal hover:text-accent transition-colors whitespace-nowrap">
-              +971 50 123 4567
+            <a href="tel:+971555781902" className="text-white font-normal hover:text-accent transition-colors whitespace-nowrap">
+              +971 55 578 1902
             </a>
           </div>
-          <Button className="hidden sm:flex px-6 h-10 rounded-lg">
-            Enquire Now
+          <Button asChild className="hidden sm:flex px-6 h-10 rounded-lg">
+            <Link href="/contact">Contact Us</Link>
           </Button>
         </div>
       </div>

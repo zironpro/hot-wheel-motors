@@ -77,7 +77,7 @@ export function ContactFormSection() {
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-zinc-500 text-xs tracking-widest uppercase mt-0.5 w-14">PHONE.</span>
-                  <a href="tel:+15551234567" className="text-zinc-300 text-sm hover:text-white transition-colors">(+1) 555 123 4567</a>
+                  <a href="tel:+971555781902" className="text-zinc-300 text-sm hover:text-white transition-colors">+971 55 578 1902</a>
                 </div>
               </div>
             </div>
