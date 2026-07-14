@@ -183,7 +183,7 @@ export function Navbar() {
             </a>
           </div>
           <Button asChild className="hidden sm:flex px-6 h-10 rounded-lg">
-            <Link href="/contact">Contact Us</Link>
+            <Link href="/contact">Enquire Now</Link>
           </Button>
         </div>
       </div>
