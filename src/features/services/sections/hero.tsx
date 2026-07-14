@@ -22,7 +22,7 @@ export function ServicesHeroSection() {
           Premium Services
         </h1>
         <p className="text-gray-200 text-base md:text-lg max-w-2xl font-light leading-relaxed drop-shadow-md">
-          Experience automotive excellence. From worldwide shipping to bespoke financing, we provide a seamless journey for your luxury car acquisition.
+          From worldwide shipping to tailored financing, we make your luxury car purchase effortless.
         </p>
       </div>
     </section>

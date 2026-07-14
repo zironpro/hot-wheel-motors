@@ -13,37 +13,37 @@ export function ServiceListSection() {
     {
       icon: CarFront,
       title: "Vehicle Sourcing",
-      description: "Looking for a specific model? We leverage our global network to find and acquire the exact vehicle you desire, ensuring it meets our rigorous standards of quality.",
+      description: "Tell us what you’re looking for, and we’ll source the right vehicle through our trusted network.",
       image: "/images/about-us-card1.png"
     },
     {
       icon: Banknote,
       title: "Tailored Financing",
-      description: "We offer flexible and bespoke financing solutions to make your luxury car purchase as smooth and effortless as possible. Subject to approval.",
+      description: "Flexible financing options designed to make your luxury car purchase simple and convenient.",
       image: "/images/about-us-card2.png"
     },
     {
       icon: Globe2,
       title: "Worldwide Export",
-      description: "No matter where you are in the world, we handle all logistics, paperwork, and shipping to deliver your dream car safely to your doorstep.",
+      description: "We manage the paperwork, logistics and secure delivery of your vehicle worldwide.",
       image: "/images/about-us-card3.png"
     },
     {
       icon: ShieldCheck,
       title: "Extended Warranty",
-      description: "Drive with peace of mind. We offer comprehensive extended warranty packages tailored for high-performance and luxury vehicles.",
+      description: "Choose extended warranty coverage designed for added confidence and peace of mind.",
       image: "/images/about-us-card4.png"
     },
     {
       icon: Settings2,
       title: "Consignment & Trade-In",
-      description: "Upgrade your collection seamlessly. We offer fair valuations for trade-ins and provide a hassle-free consignment service to sell your current vehicle.",
+      description: "Receive a fair valuation and enjoy a smooth, hassle-free selling or trade-in process.",
       image: "/images/about-us-card1.png"
     },
     {
       icon: FileText,
       title: "Registration & Insurance",
-      description: "We assist with all necessary documentation, including vehicle registration and finding premium insurance coverage for your new luxury car.",
+      description: "We assist with vehicle registration, documentation and suitable insurance options.",
       image: "/images/about-us-card2.png"
     },
   ];
@@ -62,7 +62,7 @@ export function ServiceListSection() {
             What We Offer
           </h2>
           <p className="text-muted-foreground text-base md:text-lg max-w-2xl font-light">
-            Dedicated to providing an exceptional automotive experience, our services cover every aspect of luxury car ownership with unparalleled attention to detail.
+            Thoughtfully designed services supporting every stage of your luxury car journey.
           </p>
         </div>
 
