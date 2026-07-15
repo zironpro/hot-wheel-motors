@@ -175,7 +175,7 @@ export function CarSlugPage({ car, relatedCars, mdxContent }: CarSlugPageProps) 
                   </div>
                   <div className="flex flex-col justify-center">
                     <p className="text-white/50 font-light text-xs uppercase tracking-wider mb-1">Engine</p>
-                    <p className="text-base text-white font-normal">{car.specs.split(' | ')[2] || 'N/A'}</p>
+                    <p className="text-base text-white font-normal">{car.engine || 'N/A'}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -184,7 +184,7 @@ export function CarSlugPage({ car, relatedCars, mdxContent }: CarSlugPageProps) 
                   </div>
                   <div className="flex flex-col justify-center">
                     <p className="text-white/50 font-light text-xs uppercase tracking-wider mb-1">KM Driven</p>
-                    <p className="text-base text-white font-normal">{car.specs.split(' | ')[1] || 'N/A'}</p>
+                    <p className="text-base text-white font-normal">{car.kmDriven || 'N/A'}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -193,7 +193,7 @@ export function CarSlugPage({ car, relatedCars, mdxContent }: CarSlugPageProps) 
                   </div>
                   <div className="flex flex-col justify-center">
                     <p className="text-white/50 font-light text-xs uppercase tracking-wider mb-1">Color</p>
-                    <p className="text-base text-white font-normal">{car.specs.split(' | ')[0] || 'N/A'}</p>
+                    <p className="text-base text-white font-normal">{car.color || 'N/A'}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -202,7 +202,7 @@ export function CarSlugPage({ car, relatedCars, mdxContent }: CarSlugPageProps) 
                   </div>
                   <div className="flex flex-col justify-center">
                     <p className="text-white/50 font-light text-xs uppercase tracking-wider mb-1">Year</p>
-                    <p className="text-base text-white font-normal">{car.subtitle ? car.subtitle.replace(' MODEL', '') : 'N/A'}</p>
+                    <p className="text-base text-white font-normal">{car.year || 'N/A'}</p>
                   </div>
                 </div>
               </div>
@@ -213,7 +213,7 @@ export function CarSlugPage({ car, relatedCars, mdxContent }: CarSlugPageProps) 
           <div className="lg:col-span-2 flex flex-col gap-6">
             <div className="bg-surface border border-white/5 rounded-2xl p-6 md:p-8">
               <h2 className="text-xl font-heading font-normal text-white mb-8 border-b border-white/5 pb-4">Vehicle Overview</h2>
-              <div className="prose prose-invert max-w-none text-white/70 font-light leading-relaxed text-sm md:text-base prose-p:mb-4">
+              <div className="prose prose-invert max-w-none text-white/70 font-light leading-relaxed text-sm md:text-base prose-p:mb-4 break-words">
                 {mdxContent}
               </div>
             </div>
@@ -224,7 +224,7 @@ export function CarSlugPage({ car, relatedCars, mdxContent }: CarSlugPageProps) 
                 {(car.features || []).map((feature, idx) => (
                   <li key={idx} className="flex items-start text-white/70 font-light text-sm md:text-base">
                     <CheckCircle2 className="w-4 h-4 text-accent mr-3 mt-1 flex-shrink-0" strokeWidth={1.5} />
-                    {feature}
+                    <span className="break-words min-w-0 flex-1">{feature}</span>
                   </li>
                 ))}
               </ul>

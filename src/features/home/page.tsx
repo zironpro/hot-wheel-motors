@@ -8,19 +8,19 @@ import { WhyUsSection } from "./sections/why-us";
 import { TestimonialsSection } from "./sections/testimonials";
 import { NewsletterSection } from "./sections/newsletter";
 
-import { CarData } from "@/lib/cars";
+import { CarData, BrandData, ReviewData } from "@/lib/cars";
 
-export function HomePage({ initialCars }: { initialCars: CarData[] }) {
+export function HomePage({ initialCars, initialBrands, initialReviews }: { initialCars: CarData[], initialBrands: BrandData[], initialReviews: ReviewData[] }) {
   return (
     <div className="flex flex-col w-full">
       <HeroSection />
       <SearchSection />
-      {/* <BrandsSection cars={initialCars} /> */}
+      {/* <BrandsSection cars={initialCars} brands={initialBrands} /> */}
       <FeaturedCarsSection cars={initialCars} />
       <ShippingSection />
-      <CategoriesSection cars={initialCars} />
+      <CategoriesSection cars={initialCars} brands={initialBrands} />
       <WhyUsSection />
-      <TestimonialsSection />
+      <TestimonialsSection reviews={initialReviews} />
       <NewsletterSection />
     </div>
   );
