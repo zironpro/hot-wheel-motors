@@ -47,5 +47,10 @@
     "babel-plugin-react-compiler": "1.0.0",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "@payloadcms/db-sqlite@3.86.0": "patches/@payloadcms__db-sqlite.patch"
+    }
   }
 }
