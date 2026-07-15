@@ -3,5 +3,3 @@ packages:
 ignoredBuiltDependencies:
   - sharp
   - unrs-resolver
-patchedDependencies:
-  '@payloadcms/db-sqlite': patches/@payloadcms__db-sqlite.patch
