@@ -43,16 +43,20 @@ export async function GET() {
       const kmDriven = specsParts[1] || '0 KM';
       const engine = specsParts[2] || 'Unknown';
 
-      // Parse Price (e.g., "AED 444,000")
+      // Parse Price (e.g., "AED 444,000" or "Price on Request")
       let currency = 'AED';
       let priceValue = 0;
       if (frontmatter.price) {
-        const parts = frontmatter.price.split(' ');
-        if (parts.length >= 2) {
-          currency = parts[0];
-          priceValue = parseInt(parts[1].replace(/,/g, ''), 10);
+        if (frontmatter.price.toLowerCase().includes('request')) {
+          priceValue = 0;
         } else {
-          priceValue = parseInt(frontmatter.price.replace(/,/g, ''), 10);
+          const parts = frontmatter.price.split(' ');
+          if (parts.length >= 2) {
+            currency = parts[0];
+            priceValue = parseInt(parts[1].replace(/,/g, ''), 10);
+          } else {
+            priceValue = parseInt(frontmatter.price.replace(/,/g, ''), 10);
+          }
         }
       }
 
