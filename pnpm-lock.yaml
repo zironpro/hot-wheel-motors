@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  '@payloadcms/db-sqlite':
+    hash: 1c56c3a5efe4916b63713990c90734c97d88bb0d5e8d61d843f639264c3a0185
+    path: patches/@payloadcms__db-sqlite.patch
+
 importers:
 
   .:
@@ -16,7 +21,7 @@ importers:
         version: 1.5.1(next@16.2.10(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.77.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@payloadcms/db-sqlite':
         specifier: ^3.86.0
-        version: 3.86.0(payload@3.86.0(graphql@16.14.2)(typescript@5.9.3))
+        version: 3.86.0(patch_hash=1c56c3a5efe4916b63713990c90734c97d88bb0d5e8d61d843f639264c3a0185)(payload@3.86.0(graphql@16.14.2)(typescript@5.9.3))
       '@payloadcms/next':
         specifier: ^3.86.0
         version: 3.86.0(@types/react@19.2.17)(graphql@16.14.2)(monaco-editor@0.55.1)(next@16.2.10(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.77.4))(payload@3.86.0(graphql@16.14.2)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
@@ -5243,7 +5248,7 @@ snapshots:
       '@rrweb/types': 2.0.0-alpha.20
       rrweb: 2.0.0-alpha.20
 
-  '@payloadcms/db-sqlite@3.86.0(payload@3.86.0(graphql@16.14.2)(typescript@5.9.3))':
+  '@payloadcms/db-sqlite@3.86.0(patch_hash=1c56c3a5efe4916b63713990c90734c97d88bb0d5e8d61d843f639264c3a0185)(payload@3.86.0(graphql@16.14.2)(typescript@5.9.3))':
     dependencies:
       '@libsql/client': 0.14.0
       '@payloadcms/drizzle': 3.86.0(@libsql/client@0.14.0)(payload@3.86.0(graphql@16.14.2)(typescript@5.9.3))

@@ -1,0 +1,13 @@
+diff --git a/dist/connect.js b/dist/connect.js
+index 9f4c05b97f5a4d67d4b98044e485c4024092f08a..eeab2803c9f1b00ddc9d3bfe47ba28887fae255e 100644
+--- a/dist/connect.js
++++ b/dist/connect.js
+@@ -47,7 +47,7 @@ export const connect = async function connect(options = {
+         throw new Error(`Error: cannot connect to SQLite: ${message}`);
+     }
+     // Only push schema if not in production
+-    if (process.env.NODE_ENV !== 'production' && process.env.PAYLOAD_MIGRATING !== 'true' && this.push !== false) {
++    if (process.env.PAYLOAD_MIGRATING !== 'true' && this.push !== false) {
+         await pushDevSchema(this);
+     }
+     if (typeof this.resolveInitializing === 'function') {
