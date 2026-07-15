@@ -4,6 +4,8 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import "./globals.css";
 
+export const dynamic = "force-dynamic";
+
 const ansage = localFont({
   src: [
     { path: "../../assets/fonts/Ansage-HairlineXP.otf", weight: "100", style: "normal" },
