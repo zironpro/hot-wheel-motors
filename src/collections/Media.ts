@@ -12,5 +12,10 @@ export const Media: CollectionConfig = {
       required: true,
     },
   ],
-  upload: true,
+  upload: {
+    staticURL: '/media',
+    staticDir: process.env.NODE_ENV === 'production' ? '/data/media' : 'media',
+    adminThumbnail: 'thumbnail',
+    mimeTypes: ['image/*'],
+  },
 }
