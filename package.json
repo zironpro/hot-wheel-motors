@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "node src/setup.js && next start",
     "lint": "biome check",
     "format": "biome format --write"
   },
@@ -47,10 +47,5 @@
     "babel-plugin-react-compiler": "1.0.0",
     "tailwindcss": "^4",
     "typescript": "^5"
-  },
-  "pnpm": {
-    "patchedDependencies": {
-      "@payloadcms/db-sqlite@3.86.0": "patches/@payloadcms__db-sqlite.patch"
-    }
   }
 }

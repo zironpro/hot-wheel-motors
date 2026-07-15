@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 patchedDependencies:
-  '@payloadcms/db-sqlite@3.86.0':
+  '@payloadcms/db-sqlite':
     hash: 1c56c3a5efe4916b63713990c90734c97d88bb0d5e8d61d843f639264c3a0185
     path: patches/@payloadcms__db-sqlite.patch
 
