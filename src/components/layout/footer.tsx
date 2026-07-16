@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { MapPin, Phone, Mail } from "lucide-react";
 
-export function Footer() {
+export function Footer({ settings }: { settings?: any }) {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -13,7 +13,7 @@ export function Footer() {
           <div className="flex flex-col gap-6">
             <Link href="/" className="inline-block">
               <Image
-                src="/icons/Logo_Stacked_White_SVG.svg"
+                src={settings?.logo?.url || "/icons/Logo_Stacked_White_SVG.svg"}
                 alt="Hotwheel Motors Logo"
                 width={120}
                 height={60}
@@ -77,22 +77,20 @@ export function Footer() {
             <ul className="flex flex-col gap-5">
               <li className="flex items-start gap-4">
                 <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                <span className="text-muted text-sm leading-relaxed font-light">
-                  123 Luxury Car Showroom<br />
-                  Sheikh Zayed Road<br />
-                  Dubai, UAE
+                <span className="text-muted text-sm leading-relaxed font-light whitespace-pre-line">
+                  {settings?.address || `123 Luxury Car Showroom\nSheikh Zayed Road\nDubai, UAE`}
                 </span>
               </li>
               <li className="flex items-center gap-4">
                 <Phone className="w-5 h-5 text-primary shrink-0" />
-                <a href="tel:+971555781902" className="text-muted hover:text-primary transition-colors text-sm font-light">
-                  +971 55 578 1902
+                <a href={`tel:${(settings?.phoneNumber || "+971 55 578 1902").replace(/\s/g, '')}`} className="text-muted hover:text-primary transition-colors text-sm font-light">
+                  {settings?.phoneNumber || "+971 55 578 1902"}
                 </a>
               </li>
               <li className="flex items-center gap-4">
                 <Mail className="w-5 h-5 text-primary" />
-                <a href="mailto:sales@hotwheelmotors.com" className="text-muted hover:text-primary transition-colors text-sm font-light">
-                  sales@hotwheelmotors.com
+                <a href={`mailto:${settings?.email || "sales@hotwheelmotors.com"}`} className="text-muted hover:text-primary transition-colors text-sm font-light">
+                  {settings?.email || "sales@hotwheelmotors.com"}
                 </a>
               </li>
             </ul>
@@ -102,17 +100,30 @@ export function Footer() {
           <div>
             <h4 className="text-muted font-light text-sm mb-6">Opening Hours</h4>
             <ul className="flex flex-col gap-4 text-sm text-muted">
-              <li className="flex justify-between border-b border-primary/10 pb-2">
-                <span>Monday - Friday</span>
-                <span className="text-primary">09:00 am - 05:00 pm</span>
-              </li>
-              <li className="flex justify-between border-b border-primary/10 pb-2">
-                <span>Saturday - Sunday</span>
-                <span className="text-primary">Closed</span>
-              </li>
-              <li className="mt-4 text-xs italic">
-                * Viewings can be arranged outside these hours by appointment.
-              </li>
+              {settings?.openingHours ? (
+                settings.openingHours.map((slot: any, idx: number) => (
+                  <li key={idx} className="flex justify-between border-b border-primary/10 pb-2">
+                    <span>{slot.days}</span>
+                    <span className="text-primary">{slot.hours}</span>
+                  </li>
+                ))
+              ) : (
+                <>
+                  <li className="flex justify-between border-b border-primary/10 pb-2">
+                    <span>Monday - Friday</span>
+                    <span className="text-primary">09:00 am - 05:00 pm</span>
+                  </li>
+                  <li className="flex justify-between border-b border-primary/10 pb-2">
+                    <span>Saturday - Sunday</span>
+                    <span className="text-primary">Closed</span>
+                  </li>
+                </>
+              )}
+              {settings?.openingHoursNote && (
+                <li className="mt-4 text-xs italic">
+                  {settings.openingHoursNote}
+                </li>
+              )}
             </ul>
           </div>
         </div>

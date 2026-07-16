@@ -35,19 +35,24 @@ export const metadata: Metadata = {
   description: "Hotwheel Motors",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { getPayload } = await import('payload');
+  const configPromise = await import('@/payload.config').then(m => m.default);
+  const payload = await getPayload({ config: configPromise });
+  const siteSettings = await payload.findGlobal({ slug: "site-settings" });
+
   return (
     <html lang="en" className={`${ansage.variable} antialiased h-full`}>
       <body className="min-h-full flex flex-col">
-        <Navbar />
+        <Navbar settings={siteSettings} />
         <main className="flex-1">
           {children}
         </main>
-        <Footer />
+        <Footer settings={siteSettings} />
       </body>
     </html>
   );

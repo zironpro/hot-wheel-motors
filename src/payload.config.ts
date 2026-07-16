@@ -12,6 +12,7 @@ import { Reviews } from './collections/Reviews'
 
 import { AboutPage } from './globals/AboutPage'
 import { ServicesPage } from './globals/ServicesPage'
+import { SiteSettings } from './globals/SiteSettings'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -37,6 +38,7 @@ export default buildConfig({
   globals: [
     AboutPage,
     ServicesPage,
+    SiteSettings,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || 'fallback-secret',

@@ -96,10 +96,12 @@ export interface Config {
   globals: {
     'about-page': AboutPage;
     'services-page': ServicesPage;
+    'site-settings': SiteSetting;
   };
   globalsSelect: {
     'about-page': AboutPageSelect<false> | AboutPageSelect<true>;
     'services-page': ServicesPageSelect<false> | ServicesPageSelect<true>;
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
   };
   locale: null;
   widgets: {
@@ -524,6 +526,29 @@ export interface ServicesPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings".
+ */
+export interface SiteSetting {
+  id: number;
+  logo?: (number | null) | Media;
+  phoneNumber?: string | null;
+  email?: string | null;
+  address?: string | null;
+  openingHours?:
+    | {
+        days: string;
+        hours: string;
+        id?: string | null;
+      }[]
+    | null;
+  openingHoursNote?: string | null;
+  contactUsButtonText?: string | null;
+  contactUsButtonLink?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "about-page_select".
  */
 export interface AboutPageSelect<T extends boolean = true> {
@@ -595,6 +620,29 @@ export interface ServicesPageSelect<T extends boolean = true> {
               id?: T;
             };
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  logo?: T;
+  phoneNumber?: T;
+  email?: T;
+  address?: T;
+  openingHours?:
+    | T
+    | {
+        days?: T;
+        hours?: T;
+        id?: T;
+      };
+  openingHoursNote?: T;
+  contactUsButtonText?: T;
+  contactUsButtonLink?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

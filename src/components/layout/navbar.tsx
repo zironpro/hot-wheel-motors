@@ -7,7 +7,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 
-export function Navbar() {
+export function Navbar({ settings }: { settings?: any }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [touchStartY, setTouchStartY] = useState(0);
@@ -94,7 +94,7 @@ export function Navbar() {
                 {/* Logo Header */}
                 <div className="flex justify-center pb-4 border-b border-white/10">
                   <Image
-                    src="/icons/Logo_Stacked_White_SVG.svg"
+                    src={settings?.logo?.url || "/icons/Logo_Stacked_White_SVG.svg"}
                     alt="Hotwheel Motors"
                     width={80}
                     height={40}
@@ -125,20 +125,20 @@ export function Navbar() {
                 <div className="mt-auto space-y-3 pt-4 border-t border-white/10">
                   <SheetClose asChild>
                     <Button asChild className="w-full h-10 text-sm rounded-lg font-normal text-black bg-primary hover:bg-primary/90 shadow-[0_0_15px_rgba(255,255,255,0.05)]">
-                      <Link href="/contact">Enquire Now</Link>
+                      <Link href={settings?.contactUsButtonLink || "/contact"}>{settings?.contactUsButtonText || "Enquire Now"}</Link>
                     </Button>
                   </SheetClose>
 
                   <div className="flex flex-col items-center justify-center gap-2 text-white/60 text-sm">
                     <SheetClose asChild>
                       <a
-                        href="tel:+971555781902"
+                        href={`tel:${(settings?.phoneNumber || "+971 55 578 1902").replace(/\s/g, '')}`}
                         className="flex items-center gap-2 hover:text-white transition-colors"
                       >
                         <div className="bg-white/10 p-1.5 rounded-full">
                           <Phone className="w-3 h-3 text-accent" />
                         </div>
-                        <span className="text-sm tracking-wider font-light">+971 55 578 1902</span>
+                        <span className="text-sm tracking-wider font-light">{settings?.phoneNumber || "+971 55 578 1902"}</span>
                       </a>
                     </SheetClose>
                   </div>
@@ -163,7 +163,7 @@ export function Navbar() {
         <div className="flex-1 flex justify-center">
           <Link href="/">
             <Image
-              src="/icons/Logo_Stacked_White_SVG.svg"
+              src={settings?.logo?.url || "/icons/Logo_Stacked_White_SVG.svg"}
               alt="Logo"
               width={75}
               height={38}
@@ -178,12 +178,12 @@ export function Navbar() {
             <div className="bg-white/10 p-2 rounded-full shrink-0">
               <Phone className="w-4 h-4 text-accent" />
             </div>
-            <a href="tel:+971555781902" className="text-white font-normal hover:text-accent transition-colors whitespace-nowrap">
-              +971 55 578 1902
+            <a href={`tel:${(settings?.phoneNumber || "+971 55 578 1902").replace(/\s/g, '')}`} className="text-white font-normal hover:text-accent transition-colors whitespace-nowrap">
+              {settings?.phoneNumber || "+971 55 578 1902"}
             </a>
           </div>
           <Button asChild className="hidden sm:flex px-6 h-10 rounded-lg">
-            <Link href="/contact">Enquire Now</Link>
+            <Link href={settings?.contactUsButtonLink || "/contact"}>{settings?.contactUsButtonText || "Enquire Now"}</Link>
           </Button>
         </div>
       </div>
