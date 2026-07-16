@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Calendar, Gauge, Fuel, CheckCircle2, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { Calendar, Gauge, Fuel, CheckCircle2, ArrowUpRight, ChevronLeft, ChevronRight, Hash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CarCard } from "./components/car-card";
 import { cn } from "@/lib/utils";
@@ -203,6 +203,15 @@ export function CarSlugPage({ car, relatedCars, mdxContent }: CarSlugPageProps) 
                   <div className="flex flex-col justify-center">
                     <p className="text-white/50 font-light text-xs uppercase tracking-wider mb-1">Year</p>
                     <p className="text-base text-white font-normal">{car.year || 'N/A'}</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+                    <Hash className="text-accent w-4 h-4" strokeWidth={1.5} />
+                  </div>
+                  <div className="flex flex-col justify-center">
+                    <p className="text-white/50 font-light text-xs uppercase tracking-wider mb-1">VIN Number</p>
+                    <p className="text-base text-white font-normal break-all">{car.vin || 'N/A'}</p>
                   </div>
                 </div>
               </div>

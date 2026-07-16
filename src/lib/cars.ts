@@ -16,6 +16,7 @@ export type CarData = {
   color?: string;
   engine?: string;
   year?: number;
+  vin?: string;
 };
 
 export type CarDataWithMdx = CarData & {
@@ -80,6 +81,7 @@ export async function getAllCars(): Promise<CarData[]> {
         color: car.color,
         engine: car.engine,
         year: car.year,
+        vin: car.vin,
       }
     })
   } catch (error) {
@@ -125,6 +127,7 @@ export async function getCarBySlug(slug: string): Promise<CarDataWithMdx | undef
       color: car.color,
       engine: car.engine,
       year: car.year,
+      vin: car.vin,
     };
   } catch (e) {
     console.error("Error fetching car by id:", e);

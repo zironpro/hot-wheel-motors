@@ -34,6 +34,13 @@ export const Cars: CollectionConfig = {
       required: true,
     },
     {
+      name: 'vin',
+      type: 'text',
+      admin: {
+        description: 'Vehicle Identification Number',
+      },
+    },
+    {
       name: 'currency',
       type: 'select',
       required: true,
