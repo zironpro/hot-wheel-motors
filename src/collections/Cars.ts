@@ -4,6 +4,9 @@ export const Cars: CollectionConfig = {
   slug: 'cars',
   admin: {
     useAsTitle: 'make',
+    components: {
+      beforeListTable: ['@/components/BulkUpload#BulkUpload'],
+    },
   },
   access: {
     read: () => true,

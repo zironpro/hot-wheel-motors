@@ -171,6 +171,10 @@ export interface Car {
   slug: string;
   model: string;
   year: number;
+  /**
+   * Vehicle Identification Number
+   */
+  vin?: string | null;
   currency: 'AED' | 'USD' | 'EUR' | 'GBP' | 'SAR' | 'QAR' | 'KWD' | 'OMR' | 'BHD';
   price: number;
   engine: string;
