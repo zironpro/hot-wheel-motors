@@ -10,6 +10,9 @@ import { Media } from './collections/Media'
 import { Brands } from './collections/Brands'
 import { Reviews } from './collections/Reviews'
 
+import { AboutPage } from './globals/AboutPage'
+import { ServicesPage } from './globals/ServicesPage'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -30,6 +33,10 @@ export default buildConfig({
     Media,
     Brands,
     Reviews,
+  ],
+  globals: [
+    AboutPage,
+    ServicesPage,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || 'fallback-secret',

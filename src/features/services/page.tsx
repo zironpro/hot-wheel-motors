@@ -1,11 +1,16 @@
 import { ServicesHeroSection } from "./sections/hero";
 import { ServiceListSection } from "./sections/service-list";
+import type { ServicesPage as ServicesPageType } from "@/payload-types";
 
-export function ServicesPage() {
+interface ServicesPageProps {
+  data: ServicesPageType;
+}
+
+export function ServicesPage({ data }: ServicesPageProps) {
   return (
     <div className="flex flex-col w-full">
-      <ServicesHeroSection />
-      <ServiceListSection />
+      <ServicesHeroSection data={data.hero} />
+      <ServiceListSection data={data.servicesList} />
     </div>
   );
 }
