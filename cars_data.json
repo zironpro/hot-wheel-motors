@@ -1,0 +1,332 @@
+[
+  {
+    "make": "ASTON",
+    "model": "MARTIN",
+    "slug": "aston-martin-2022-black-0",
+    "year": 2022,
+    "vin": "SD7VUJAW2NTV04641",
+    "currency": "AED",
+    "price": 444000,
+    "engine": "V8",
+    "kmDriven": "4,000 KM",
+    "color": "BLACK",
+    "features": [
+      {
+        "feature": "Keyless Entry & Start"
+      },
+      {
+        "feature": "Advanced Driver Assistance"
+      },
+      {
+        "feature": "Adaptive Air Suspension"
+      },
+      {
+        "feature": "Carbon Ceramic Brakes"
+      },
+      {
+        "feature": "Carbon Fiber Interior Trim"
+      },
+      {
+        "feature": "Launch Control"
+      }
+    ],
+    "description": "Experience unparalleled luxury and performance in this pristine ASTON MARTIN. Engineered to turn heads and provide an unforgettable driving experience, it stands out as the ultimate choice for discerning drivers.\r\n\r\nOur certified pre-owned vehicles undergo a rigorous multi-point inspection process. We guarantee the authenticity of the mileage and provide a comprehensive vehicle history report for your peace of mind."
+  },
+  {
+    "make": "AUDI",
+    "model": "RS6",
+    "slug": "audi-rs6-2024-gray-1",
+    "year": 2024,
+    "vin": "WUAZZZF27RN906580",
+    "currency": "AED",
+    "price": 455000,
+    "engine": "V8",
+    "kmDriven": "33,000 KM",
+    "color": "GRAY",
+    "features": [
+      {
+        "feature": "Keyless Entry & Start"
+      },
+      {
+        "feature": "Track Mode Setup"
+      },
+      {
+        "feature": "Sport Exhaust System"
+      },
+      {
+        "feature": "Alcantara Steering Wheel"
+      },
+      {
+        "feature": "Blind Spot Monitor"
+      },
+      {
+        "feature": "Advanced Driver Assistance"
+      }
+    ],
+    "description": "The AUDI RS6 embodies a perfect balance of comfort, advanced technology, and raw power. This meticulously maintained vehicle is ready to conquer any journey you embark on.\r\n\r\nOur certified pre-owned vehicles undergo a rigorous multi-point inspection process. We guarantee the authenticity of the mileage and provide a comprehensive vehicle history report for your peace of mind."
+  },
+  {
+    "make": "AUDI",
+    "model": "SQ8",
+    "slug": "audi-sq8-2021-red-3",
+    "year": 2021,
+    "vin": "WAUZZZF12MD020960",
+    "currency": "AED",
+    "price": 199000,
+    "engine": "V8",
+    "kmDriven": "82,000 KM",
+    "color": "RED",
+    "features": [
+      {
+        "feature": "Soft-Close Doors"
+      },
+      {
+        "feature": "360° Camera System"
+      },
+      {
+        "feature": "Apple CarPlay & Android Auto"
+      },
+      {
+        "feature": "Massaging Seats"
+      },
+      {
+        "feature": "Premium Leather Interior"
+      },
+      {
+        "feature": "Panoramic Night Sky Roof"
+      }
+    ],
+    "description": "This exceptional AUDI SQ8 delivers thrilling performance combined with remarkable comfort. From its aggressive stance to its refined interior, every detail has been perfectly engineered.\r\n\r\nOur certified pre-owned vehicles undergo a rigorous multi-point inspection process. We guarantee the authenticity of the mileage and provide a comprehensive vehicle history report for your peace of mind."
+  },
+  {
+    "make": "BMW",
+    "model": "735i GCC",
+    "slug": "bmw-735i-gcc-2023-black-11",
+    "year": 2023,
+    "vin": "WBA11EH08PCM54358",
+    "currency": "AED",
+    "price": 299000,
+    "engine": "V6",
+    "kmDriven": "49,000 KM",
+    "color": "BLACK",
+    "features": [
+      {
+        "feature": "Carbon Ceramic Brakes"
+      },
+      {
+        "feature": "Track Mode Setup"
+      },
+      {
+        "feature": "Sport Exhaust System"
+      },
+      {
+        "feature": "Keyless Entry & Start"
+      },
+      {
+        "feature": "Carbon Fiber Interior Trim"
+      },
+      {
+        "feature": "Alcantara Steering Wheel"
+      }
+    ],
+    "description": "The BMW 735i GCC embodies a perfect balance of comfort, advanced technology, and raw power. This meticulously maintained vehicle is ready to conquer any journey you embark on.\r\n\r\nOur certified pre-owned vehicles undergo a rigorous multi-point inspection process. We guarantee the authenticity of the mileage and provide a comprehensive vehicle history report for your peace of mind."
+  },
+  {
+    "make": "BMW",
+    "model": "M3",
+    "slug": "bmw-m3-2026-gray-5",
+    "year": 2026,
+    "vin": "WBS33HJ02TFW06878",
+    "currency": "AED",
+    "price": 377000,
+    "engine": "V6",
+    "kmDriven": "0 KM",
+    "color": "GRAY",
+    "features": [
+      {
+        "feature": "Adaptive Air Suspension"
+      },
+      {
+        "feature": "Sport Exhaust System"
+      },
+      {
+        "feature": "Keyless Entry & Start"
+      },
+      {
+        "feature": "Apple CarPlay & Android Auto"
+      },
+      {
+        "feature": "Alcantara Steering Wheel"
+      },
+      {
+        "feature": "Blind Spot Monitor"
+      }
+    ],
+    "description": "Experience unparalleled luxury and performance in this pristine BMW M3. Engineered to turn heads and provide an unforgettable driving experience, it stands out as the ultimate choice for discerning drivers.\r\n\r\nOur certified pre-owned vehicles undergo a rigorous multi-point inspection process. We guarantee the authenticity of the mileage and provide a comprehensive vehicle history report for your peace of mind."
+  },
+  {
+    "make": "BMW",
+    "model": "M4",
+    "slug": "bmw-m4-2022-black-7",
+    "year": 2022,
+    "vin": "WBS33BA06NCJ20883",
+    "currency": "AED",
+    "price": 299000,
+    "engine": "V8",
+    "kmDriven": "54,000 KM",
+    "color": "BLACK",
+    "features": [
+      {
+        "feature": "Apple CarPlay & Android Auto"
+      },
+      {
+        "feature": "360° Camera System"
+      },
+      {
+        "feature": "Track Mode Setup"
+      },
+      {
+        "feature": "Keyless Entry & Start"
+      },
+      {
+        "feature": "Adaptive Air Suspension"
+      },
+      {
+        "feature": "Carbon Fiber Interior Trim"
+      }
+    ],
+    "description": "Step into the future of driving with the BMW M4. Offering state-of-the-art features and a meticulously crafted interior, this car sets the standard for modern automotive excellence.\r\n\r\nOur certified pre-owned vehicles undergo a rigorous multi-point inspection process. We guarantee the authenticity of the mileage and provide a comprehensive vehicle history report for your peace of mind."
+  },
+  {
+    "make": "BMW",
+    "model": "M4",
+    "slug": "bmw-m4-2022-blue-6",
+    "year": 2022,
+    "vin": "WBS33AZ09NCJ14056",
+    "currency": "AED",
+    "price": 265000,
+    "engine": "N/A",
+    "kmDriven": "39,000 KM",
+    "color": "BLUE",
+    "features": [
+      {
+        "feature": "Blind Spot Monitor"
+      },
+      {
+        "feature": "Keyless Entry & Start"
+      },
+      {
+        "feature": "Launch Control"
+      },
+      {
+        "feature": "Carbon Ceramic Brakes"
+      },
+      {
+        "feature": "Track Mode Setup"
+      },
+      {
+        "feature": "Advanced Driver Assistance"
+      }
+    ],
+    "description": "The BMW M4 embodies a perfect balance of comfort, advanced technology, and raw power. This meticulously maintained vehicle is ready to conquer any journey you embark on.\r\n\r\nOur certified pre-owned vehicles undergo a rigorous multi-point inspection process. We guarantee the authenticity of the mileage and provide a comprehensive vehicle history report for your peace of mind."
+  },
+  {
+    "make": "BMW",
+    "model": "M8 CONVERTIBLE",
+    "slug": "bmw-m8-convertible-2024-white-12",
+    "year": 2024,
+    "vin": "WBSAE0C02RCN69549",
+    "currency": "AED",
+    "price": 440000,
+    "engine": "V8",
+    "kmDriven": "35,000 KM",
+    "color": "WHITE",
+    "features": [
+      {
+        "feature": "Sport Exhaust System"
+      },
+      {
+        "feature": "Alcantara Steering Wheel"
+      },
+      {
+        "feature": "Blind Spot Monitor"
+      },
+      {
+        "feature": "Keyless Entry & Start"
+      },
+      {
+        "feature": "Carbon Fiber Interior Trim"
+      },
+      {
+        "feature": "Advanced Driver Assistance"
+      }
+    ],
+    "description": "Step into the future of driving with the BMW M8 CONVERTIBLE. Offering state-of-the-art features and a meticulously crafted interior, this car sets the standard for modern automotive excellence.\r\n\r\nOur certified pre-owned vehicles undergo a rigorous multi-point inspection process. We guarantee the authenticity of the mileage and provide a comprehensive vehicle history report for your peace of mind."
+  },
+  {
+    "make": "BMW",
+    "model": "X5",
+    "slug": "bmw-x5-2024-black-9",
+    "year": 2024,
+    "vin": "5UX33EU05R9S35495",
+    "currency": "AED",
+    "price": 333000,
+    "engine": "V8",
+    "kmDriven": "N/A",
+    "color": "BLACK",
+    "features": [
+      {
+        "feature": "Keyless Entry & Start"
+      },
+      {
+        "feature": "Adaptive Air Suspension"
+      },
+      {
+        "feature": "Track Mode Setup"
+      },
+      {
+        "feature": "Carbon Ceramic Brakes"
+      },
+      {
+        "feature": "Launch Control"
+      },
+      {
+        "feature": "Alcantara Steering Wheel"
+      }
+    ],
+    "description": "Command the road in the iconic BMW X5. Known for its breathtaking speed and supreme luxury, this vehicle offers a driving experience that is simply unmatched.\r\n\r\nOur certified pre-owned vehicles undergo a rigorous multi-point inspection process. We guarantee the authenticity of the mileage and provide a comprehensive vehicle history report for your peace of mind."
+  },
+  {
+    "make": "BMW",
+    "model": "X5",
+    "slug": "bmw-x5-2025-gray-8",
+    "year": 2025,
+    "vin": "5UX33EU01S9Y47201",
+    "currency": "AED",
+    "price": 0,
+    "engine": "N/A",
+    "kmDriven": "N/A",
+    "color": "GRAY",
+    "features": [
+      {
+        "feature": "Carbon Ceramic Brakes"
+      },
+      {
+        "feature": "360° Camera System"
+      },
+      {
+        "feature": "Sport Exhaust System"
+      },
+      {
+        "feature": "Adaptive Air Suspension"
+      },
+      {
+        "feature": "Keyless Entry & Start"
+      },
+      {
+        "feature": "Launch Control"
+      }
+    ],
+    "description": "This exceptional BMW X5 delivers thrilling performance combined with remarkable comfort. From its aggressive stance to its refined interior, every detail has been perfectly engineered.\r\n\r\nOur certified pre-owned vehicles undergo a rigorous multi-point inspection process. We guarantee the authenticity of the mileage and provide a comprehensive vehicle history report for your peace of mind."
+  }
+]
