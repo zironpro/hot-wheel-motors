@@ -1,26 +1,36 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ShieldCheck, Ban, Landmark, RefreshCcw, Headset, ArrowRight, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export function WhyUsSection() {
-  const features = [
+const iconMap: Record<string, any> = {
+  ShieldCheck,
+  Ban,
+  Landmark,
+  Headset,
+  RefreshCcw,
+  Tag,
+};
+
+export function WhyUsSection({ data }: { data?: { features?: any[], promo?: any } }) {
+  const features = data?.features && data.features.length > 0 ? data.features : [
     {
-      icon: ShieldCheck,
+      icon: "ShieldCheck",
       title: "Verified Cars",
       description: "All cars are\ninspected & verified",
     },
     {
-      icon: Ban,
+      icon: "Ban",
       title: "No Hidden Fees",
       description: "Transparent pricing\nyou can trust",
     },
     {
-      icon: Landmark,
+      icon: "Landmark",
       title: "Flexible Finance",
       description: "Easy loan options\navailable",
     },
     {
-      icon: Headset,
+      icon: "Headset",
       title: "Dedicated Support",
       description: "We are here\nto help you",
     },
@@ -37,7 +47,10 @@ export function WhyUsSection() {
             className="flex flex-col xl:flex-row items-center justify-center gap-3 p-4 lg:p-6 border-b lg:border-b-0 lg:border-r border-primary/5 last:border-r-0 text-center group hover:bg-surface/80 transition-colors"
           >
             <div className="w-12 h-12 rounded-full border border-accent/30 flex items-center justify-center shrink-0 group-hover:border-accent transition-colors">
-              <feature.icon className="w-5 h-5 text-accent stroke-[1.5]" />
+              {(() => {
+                const IconComponent = iconMap[feature.icon] || ShieldCheck;
+                return <IconComponent className="w-5 h-5 text-accent stroke-[1.5]" />;
+              })()}
             </div>
             <span className="text-primary text-sm md:text-base font-light">{feature.title}</span>
           </div>
@@ -49,7 +62,7 @@ export function WhyUsSection() {
           {/* Full Background Image */}
           <div className="absolute inset-0 w-full h-full z-0">
             <Image
-              src="/images/hero-3.png" 
+              src={data?.promo?.image?.url || "/images/hero-3.png"} 
               alt="Promo Car"
               fill
               className="hidden md:block object-cover object-center"
@@ -61,18 +74,21 @@ export function WhyUsSection() {
           {/* Content */}
           <div className="relative z-10 flex flex-col justify-center items-start w-full lg:w-1/2 py-12 lg:py-16 px-6 md:px-12">
             <div className="flex items-center gap-6 mb-4">
-              <h2 className="text-3xl md:text-5xl font-heading font-normal text-white leading-tight drop-shadow-lg">
-                Looking to sell your car?
+              <h2 className="text-3xl md:text-5xl font-heading font-normal text-white leading-tight drop-shadow-lg whitespace-pre-line">
+                {data?.promo?.heading || "Looking to sell your car?"}
               </h2>
             </div>
-            <p className="text-gray-300 text-base md:text-lg mb-8 max-w-md drop-shadow-md">
-              Get the best price for your car in just a few simple steps.
+            <p className="text-gray-300 text-base md:text-lg mb-8 max-w-md drop-shadow-md whitespace-pre-line">
+              {data?.promo?.subheading || "Get the best price for your car in just a few simple steps."}
             </p>
             <Button 
+              asChild
               className="rounded-lg px-8 h-12 md:h-14 text-sm md:text-base uppercase group shadow-lg"
             >
-              Sell Your Car Today
-              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              <Link href={data?.promo?.buttonLink || "/sell"}>
+                {data?.promo?.buttonText || "Sell Your Car Today"}
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </Button>
           </div>
         </div>

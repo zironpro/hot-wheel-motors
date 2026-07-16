@@ -10,16 +10,16 @@ import { NewsletterSection } from "./sections/newsletter";
 
 import { CarData, BrandData, ReviewData } from "@/lib/cars";
 
-export function HomePage({ initialCars, initialBrands, initialReviews }: { initialCars: CarData[], initialBrands: BrandData[], initialReviews: ReviewData[] }) {
+export function HomePage({ initialCars, initialBrands, initialReviews, homeData }: { initialCars: CarData[], initialBrands: BrandData[], initialReviews: ReviewData[], homeData?: any }) {
   return (
     <div className="flex flex-col w-full">
-      <HeroSection />
+      <HeroSection data={homeData?.heroSlides} />
       <SearchSection />
       {/* <BrandsSection cars={initialCars} brands={initialBrands} /> */}
       <FeaturedCarsSection cars={initialCars} />
-      <ShippingSection />
+      <ShippingSection data={homeData?.shippingSection} />
       <CategoriesSection cars={initialCars} brands={initialBrands} />
-      <WhyUsSection />
+      <WhyUsSection data={{ features: homeData?.whyUsFeatures, promo: homeData?.promoBanner }} />
       <TestimonialsSection reviews={initialReviews} />
       <NewsletterSection />
     </div>

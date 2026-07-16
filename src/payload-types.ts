@@ -97,11 +97,13 @@ export interface Config {
     'about-page': AboutPage;
     'services-page': ServicesPage;
     'site-settings': SiteSetting;
+    'home-page': HomePage;
   };
   globalsSelect: {
     'about-page': AboutPageSelect<false> | AboutPageSelect<true>;
     'services-page': ServicesPageSelect<false> | ServicesPageSelect<true>;
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+    'home-page': HomePageSelect<false> | HomePageSelect<true>;
   };
   locale: null;
   widgets: {
@@ -549,6 +551,47 @@ export interface SiteSetting {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page".
+ */
+export interface HomePage {
+  id: number;
+  heroSlides?:
+    | {
+        tagline?: string | null;
+        title?: string | null;
+        description?: string | null;
+        image: number | Media;
+        mobileImage?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  whyUsFeatures?:
+    | {
+        icon: 'ShieldCheck' | 'Ban' | 'Landmark' | 'Headset' | 'RefreshCcw' | 'Tag';
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  promoBanner?: {
+    image?: (number | null) | Media;
+    heading?: string | null;
+    subheading?: string | null;
+    buttonText?: string | null;
+    buttonLink?: string | null;
+  };
+  shippingSection?: {
+    image?: (number | null) | Media;
+    heading?: string | null;
+    subheading?: string | null;
+    buttonText?: string | null;
+    buttonLink?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "about-page_select".
  */
 export interface AboutPageSelect<T extends boolean = true> {
@@ -643,6 +686,51 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   openingHoursNote?: T;
   contactUsButtonText?: T;
   contactUsButtonLink?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page_select".
+ */
+export interface HomePageSelect<T extends boolean = true> {
+  heroSlides?:
+    | T
+    | {
+        tagline?: T;
+        title?: T;
+        description?: T;
+        image?: T;
+        mobileImage?: T;
+        id?: T;
+      };
+  whyUsFeatures?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  promoBanner?:
+    | T
+    | {
+        image?: T;
+        heading?: T;
+        subheading?: T;
+        buttonText?: T;
+        buttonLink?: T;
+      };
+  shippingSection?:
+    | T
+    | {
+        image?: T;
+        heading?: T;
+        subheading?: T;
+        buttonText?: T;
+        buttonLink?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

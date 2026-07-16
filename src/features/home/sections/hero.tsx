@@ -13,44 +13,20 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 
-const slides = [
-  {
-    tagline: "DUBAI'S PREMIER BOUTIQUE",
-    title: "Luxury Cars.\nDelivered Worldwide.",
-    description:
-      "Explore our curated collection of the finest pre-owned luxury vehicles.",
-    image: "/images/hero-aston.jpeg",
-    mobileImage: "/images/hero-phone-aston.png",
-  },
-  {
-    tagline: "EXCEPTIONAL PERFORMANCE",
-    title: "Exclusive SUVs.\nFor Every Journey.",
-    description:
-      "Discover luxury SUVs perfect for family, \noff-road, and city driving.",
-    image: "/images/hero-ranger.png",
-    mobileImage: "/images/hero-mobile-renger.png",
-  },
-  {
-    tagline: "UNCOMPROMISING LUXURY",
-    title: "Icons of Performance.",
-    description:
-      "Experience the thrill of exclusive, high performance sports cars.",
-    image: "/images/hero-porsche.jpeg",
-    mobileImage: "/images/hero-mobile-porsche.png",
-  },
-  {
-    tagline: "GLOBAL EXPORT",
-    title: "Seamless Global Export",
-    description:
-      "From sourcing to shipping,\nwe deliver your dream car worldwide.",
-    image: "/images/hero-bmw.png",
-    mobileImage: "/images/hero-mobile-bmw.png",
-  },
-];
+// Default slides moved to component as fallback
 
 const AUTOPLAY_DELAY = 5000;
 
-export function HeroSection() {
+export function HeroSection({ data }: { data?: any[] }) {
+  const slides = data && data.length > 0 ? data : [
+    {
+      tagline: "DUBAI'S PREMIER BOUTIQUE",
+      title: "Luxury Cars.\nDelivered Worldwide.",
+      description: "Explore our curated collection of the finest pre-owned luxury vehicles.",
+      image: { url: "/images/hero-aston.jpeg" },
+      mobileImage: { url: "/images/hero-phone-aston.png" },
+    }
+  ];
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -145,14 +121,14 @@ export function HeroSection() {
               {/* Full Background Image */}
               <div className="absolute inset-0 w-full h-full z-0">
                 <Image
-                  src={slide.image}
+                  src={slide.image?.url || "/images/hero-aston.jpeg"}
                   alt="Hero Background"
                   fill
                   className="hidden md:block object-cover object-center"
                   priority={index === 0}
                 />
                 <Image
-                  src={slide.mobileImage || slide.image}
+                  src={slide.mobileImage?.url || slide.image?.url || "/images/hero-phone-aston.png"}
                   alt="Hero Background Mobile"
                   fill
                   className="block md:hidden object-cover object-center"
