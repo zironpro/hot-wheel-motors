@@ -6,96 +6,618 @@
  * and re-run `payload generate:types` to regenerate this file.
  */
 
+/**
+ * Supported timezones in IANA format.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "supportedTimezones".
+ */
+export type SupportedTimezones =
+  | 'Pacific/Midway'
+  | 'Pacific/Niue'
+  | 'Pacific/Honolulu'
+  | 'Pacific/Rarotonga'
+  | 'America/Anchorage'
+  | 'Pacific/Gambier'
+  | 'America/Los_Angeles'
+  | 'America/Tijuana'
+  | 'America/Denver'
+  | 'America/Phoenix'
+  | 'America/Chicago'
+  | 'America/Guatemala'
+  | 'America/New_York'
+  | 'America/Bogota'
+  | 'America/Caracas'
+  | 'America/Santiago'
+  | 'America/Buenos_Aires'
+  | 'America/Sao_Paulo'
+  | 'Atlantic/South_Georgia'
+  | 'Atlantic/Azores'
+  | 'Atlantic/Cape_Verde'
+  | 'Europe/London'
+  | 'Europe/Berlin'
+  | 'Africa/Lagos'
+  | 'Europe/Athens'
+  | 'Africa/Cairo'
+  | 'Europe/Moscow'
+  | 'Asia/Riyadh'
+  | 'Asia/Dubai'
+  | 'Asia/Baku'
+  | 'Asia/Karachi'
+  | 'Asia/Tashkent'
+  | 'Asia/Calcutta'
+  | 'Asia/Dhaka'
+  | 'Asia/Almaty'
+  | 'Asia/Jakarta'
+  | 'Asia/Bangkok'
+  | 'Asia/Shanghai'
+  | 'Asia/Singapore'
+  | 'Asia/Tokyo'
+  | 'Asia/Seoul'
+  | 'Australia/Brisbane'
+  | 'Australia/Sydney'
+  | 'Pacific/Guam'
+  | 'Pacific/Noumea'
+  | 'Pacific/Auckland'
+  | 'Pacific/Fiji';
+
 export interface Config {
+  auth: {
+    users: UserAuthOperations;
+  };
+  blocks: {};
   collections: {
     users: User;
     cars: Car;
     media: Media;
     brands: Brand;
     reviews: Review;
+    'payload-kv': PayloadKv;
+    'payload-locked-documents': PayloadLockedDocument;
+    'payload-preferences': PayloadPreference;
+    'payload-migrations': PayloadMigration;
   };
+  collectionsJoins: {};
+  collectionsSelect: {
+    users: UsersSelect<false> | UsersSelect<true>;
+    cars: CarsSelect<false> | CarsSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
+    brands: BrandsSelect<false> | BrandsSelect<true>;
+    reviews: ReviewsSelect<false> | ReviewsSelect<true>;
+    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
+    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
+    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
+    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
+  };
+  db: {
+    defaultIDType: number;
+  };
+  fallbackLocale: null;
   globals: {
     'about-page': AboutPage;
     'services-page': ServicesPage;
   };
+  globalsSelect: {
+    'about-page': AboutPageSelect<false> | AboutPageSelect<true>;
+    'services-page': ServicesPageSelect<false> | ServicesPageSelect<true>;
+  };
+  locale: null;
+  widgets: {
+    collections: CollectionsWidget;
+  };
+  user: User;
+  jobs: {
+    tasks: unknown;
+    workflows: unknown;
+  };
 }
-
+export interface UserAuthOperations {
+  forgotPassword: {
+    email: string;
+    password: string;
+  };
+  login: {
+    email: string;
+    password: string;
+  };
+  registerFirstUser: {
+    email: string;
+    password: string;
+  };
+  unlock: {
+    email: string;
+    password: string;
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
 export interface User {
-  id: string;
+  id: number;
   updatedAt: string;
   createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
+  password?: string | null;
+  collection: 'users';
 }
-
-export interface Media {
-  id: string;
-  url?: string;
-  updatedAt: string;
-  createdAt: string;
-}
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cars".
+ */
 export interface Car {
-  id: string;
+  id: number;
+  make: string;
+  /**
+   * URL friendly string, e.g. "ferrari-f8-tributo"
+   */
+  slug: string;
+  model: string;
+  year: number;
+  currency: 'AED' | 'USD' | 'EUR' | 'GBP' | 'SAR' | 'QAR' | 'KWD' | 'OMR' | 'BHD';
+  price: number;
+  engine: string;
+  kmDriven: string;
+  color: string;
+  features?:
+    | {
+        feature?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  description?: string | null;
+  images?:
+    | {
+        image: number | Media;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "brands".
+ */
 export interface Brand {
-  id: string;
+  id: number;
+  name: string;
+  logo: number | Media;
   updatedAt: string;
   createdAt: string;
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reviews".
+ */
 export interface Review {
-  id: string;
+  id: number;
+  name: string;
+  role: string;
+  content: string;
+  rating: number;
   updatedAt: string;
   createdAt: string;
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-kv".
+ */
+export interface PayloadKv {
+  id: number;
+  key: string;
+  data:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-locked-documents".
+ */
+export interface PayloadLockedDocument {
+  id: number;
+  document?:
+    | ({
+        relationTo: 'users';
+        value: number | User;
+      } | null)
+    | ({
+        relationTo: 'cars';
+        value: number | Car;
+      } | null)
+    | ({
+        relationTo: 'media';
+        value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'brands';
+        value: number | Brand;
+      } | null)
+    | ({
+        relationTo: 'reviews';
+        value: number | Review;
+      } | null);
+  globalSlug?: string | null;
+  user: {
+    relationTo: 'users';
+    value: number | User;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-preferences".
+ */
+export interface PayloadPreference {
+  id: number;
+  user: {
+    relationTo: 'users';
+    value: number | User;
+  };
+  key?: string | null;
+  value?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-migrations".
+ */
+export interface PayloadMigration {
+  id: number;
+  name?: string | null;
+  batch?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users_select".
+ */
+export interface UsersSelect<T extends boolean = true> {
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cars_select".
+ */
+export interface CarsSelect<T extends boolean = true> {
+  make?: T;
+  slug?: T;
+  model?: T;
+  year?: T;
+  currency?: T;
+  price?: T;
+  engine?: T;
+  kmDriven?: T;
+  color?: T;
+  features?:
+    | T
+    | {
+        feature?: T;
+        id?: T;
+      };
+  description?: T;
+  images?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "brands_select".
+ */
+export interface BrandsSelect<T extends boolean = true> {
+  name?: T;
+  logo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reviews_select".
+ */
+export interface ReviewsSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  content?: T;
+  rating?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-kv_select".
+ */
+export interface PayloadKvSelect<T extends boolean = true> {
+  key?: T;
+  data?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-locked-documents_select".
+ */
+export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
+  document?: T;
+  globalSlug?: T;
+  user?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-preferences_select".
+ */
+export interface PayloadPreferencesSelect<T extends boolean = true> {
+  user?: T;
+  key?: T;
+  value?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-migrations_select".
+ */
+export interface PayloadMigrationsSelect<T extends boolean = true> {
+  name?: T;
+  batch?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-page".
+ */
 export interface AboutPage {
+  id: number;
   hero: {
     heading: string;
     subheading: string;
-    backgroundImageDesktop?: string | Media | null;
-    backgroundImageMobile?: string | Media | null;
+    backgroundImageDesktop?: (number | null) | Media;
+    backgroundImageMobile?: (number | null) | Media;
   };
-  features?: {
-    icon: string;
-    title: string;
-    description: string;
-    id?: string | null;
-  }[] | null;
+  features?:
+    | {
+        /**
+         * Name of the Lucide icon (e.g. Car, ShieldCheck, Globe)
+         */
+        icon: string;
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
   story: {
     heading: string;
     paragraph1: string;
     paragraph2: string;
-    image?: string | Media | null;
+    image?: (number | null) | Media;
   };
   whyChooseUs: {
     heading: string;
-    cards?: {
-      title: string;
-      description: string;
-      image?: string | Media | null;
-      id?: string | null;
-    }[] | null;
+    cards?:
+      | {
+          title: string;
+          description: string;
+          image?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
   };
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
-
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services-page".
+ */
 export interface ServicesPage {
+  id: number;
   hero: {
     heading: string;
     subheading: string;
-    backgroundImage?: string | Media | null;
+    backgroundImage?: (number | null) | Media;
   };
   servicesList: {
     heading: string;
     subheading: string;
-    services?: {
-      icon: string;
-      title: string;
-      description: string;
-      image?: string | Media | null;
-      id?: string | null;
-    }[] | null;
+    services?:
+      | {
+          /**
+           * Name of the Lucide icon (e.g. CarFront, Banknote, Globe2, ShieldCheck, Settings2, FileText)
+           */
+          icon: string;
+          title: string;
+          description: string;
+          image?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
   };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-page_select".
+ */
+export interface AboutPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        heading?: T;
+        subheading?: T;
+        backgroundImageDesktop?: T;
+        backgroundImageMobile?: T;
+      };
+  features?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  story?:
+    | T
+    | {
+        heading?: T;
+        paragraph1?: T;
+        paragraph2?: T;
+        image?: T;
+      };
+  whyChooseUs?:
+    | T
+    | {
+        heading?: T;
+        cards?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              image?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services-page_select".
+ */
+export interface ServicesPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        heading?: T;
+        subheading?: T;
+        backgroundImage?: T;
+      };
+  servicesList?:
+    | T
+    | {
+        heading?: T;
+        subheading?: T;
+        services?:
+          | T
+          | {
+              icon?: T;
+              title?: T;
+              description?: T;
+              image?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "collections_widget".
+ */
+export interface CollectionsWidget {
+  data?: {
+    [k: string]: unknown;
+  };
+  width: 'full';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "auth".
+ */
+export interface Auth {
+  [k: string]: unknown;
+}
+
+
+declare module 'payload' {
+  export interface GeneratedTypes extends Config {}
 }
