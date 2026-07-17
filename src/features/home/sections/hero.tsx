@@ -124,6 +124,7 @@ export function HeroSection({ data }: { data?: any[] }) {
                   src={slide.image?.url || "/images/hero-aston.jpeg"}
                   alt="Hero Background"
                   fill
+                  quality={100}
                   className="hidden md:block object-cover object-center"
                   priority={index === 0}
                 />
@@ -131,6 +132,7 @@ export function HeroSection({ data }: { data?: any[] }) {
                   src={slide.mobileImage?.url || slide.image?.url || "/images/hero-phone-aston.png"}
                   alt="Hero Background Mobile"
                   fill
+                  quality={100}
                   className="block md:hidden object-cover object-center"
                   priority={index === 0}
                 />
