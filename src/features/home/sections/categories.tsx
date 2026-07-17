@@ -134,7 +134,7 @@ export function CategoriesSection({ cars, brands }: { cars: CarData[], brands: B
                     <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between z-20">
                       <div className="flex flex-col">
                         <h3 className="text-white text-lg font-normal drop-shadow-md">{type.name}</h3>
-                        <p className="text-white/70 text-xs mt-0.5 drop-shadow-md">{activeTab === "body" ? "Body Type" : "Premium Brand"}</p>
+                        {/* <p className="text-white/70 text-xs mt-0.5 drop-shadow-md">{activeTab === "body" ? "Body Type" : "Premium Brand"}</p> */}
                       </div>
                       <div className="bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/10 text-white text-xs font-normal px-4 py-2 rounded-lg transition-colors">
                         Explore
