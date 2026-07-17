@@ -130,16 +130,11 @@ export function Footer({ settings }: { settings?: any }) {
 
         {/* Copyright */}
         <div className="border-t border-primary/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-muted text-xs">
+          <p className="text-muted text-xs text-center md:text-left">
             &copy; {currentYear} Hotwheel Motors. All rights reserved.
           </p>
-          <div className="flex items-center gap-6 text-xs text-muted">
-            <Link href={"/privacy-policy" as any} className="hover:text-primary transition-colors">
-              Privacy Policy
-            </Link>
-            <Link href={"/terms" as any} className="hover:text-primary transition-colors">
-              Terms of Service
-            </Link>
+          <div className="text-xs text-muted opacity-60 hover:opacity-100 transition-opacity">
+            Designed & Developed by <a href="https://zironpro.ae" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Ziron Pro</a>.
           </div>
         </div>
       </div>
