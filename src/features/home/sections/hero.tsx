@@ -125,6 +125,7 @@ export function HeroSection({ data }: { data?: any[] }) {
                   alt="Hero Background"
                   fill
                   quality={100}
+                  unoptimized
                   className="hidden md:block object-cover object-center"
                   priority={index === 0}
                 />
@@ -133,6 +134,7 @@ export function HeroSection({ data }: { data?: any[] }) {
                   alt="Hero Background Mobile"
                   fill
                   quality={100}
+                  unoptimized
                   className="block md:hidden object-cover object-center"
                   priority={index === 0}
                 />
