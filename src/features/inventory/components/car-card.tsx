@@ -46,7 +46,7 @@ export function CarCard({ car }: CarCardProps) {
         {/* Bottom Details */}
         <div className="mt-auto flex items-end justify-between">
           <p className="text-xl font-normal text-gray-300">{car.price}</p>
-          <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-white text-black transition-all duration-300 group-hover:bg-accent group-hover:text-white shadow-lg">
+          <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-lg bg-white text-black transition-all duration-300 group-hover:bg-accent group-hover:text-white shadow-lg">
             <ArrowRight className="w-5 h-5 md:w-6 md:h-6" strokeWidth={1.5} />
           </div>
         </div>

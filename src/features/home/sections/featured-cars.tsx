@@ -32,7 +32,7 @@ export function FeaturedCarsSection({ cars }: { cars: CarData[] }) {
             <Link
               key={car.id}
               href={`/cars/${car.slug}` as any}
-              className="flex flex-col w-full rounded-[24px] overflow-hidden cursor-pointer border border-white/5 bg-[#111111] hover:bg-[#1a1a1a] transition-all group shadow-2xl"
+              className="flex flex-col w-full rounded-lg overflow-hidden cursor-pointer border border-white/5 bg-[#111111] hover:bg-[#1a1a1a] transition-all group shadow-2xl"
             >
               {/* Top Background & Image Container */}
               <div className="relative w-full aspect-[4/3] bg-gradient-to-b from-white/5 to-[#111111] flex items-center justify-center">
@@ -52,7 +52,7 @@ export function FeaturedCarsSection({ cars }: { cars: CarData[] }) {
                 {/* Specs Pills */}
                 <div className="flex flex-wrap gap-2 mb-4 mt-2">
                   {car.specs.split(' | ').map((spec, i) => (
-                    <span key={i} className="bg-white/10 text-white/90 text-[10px] font-normal px-2.5 py-1 rounded-full flex items-center shadow-sm">
+                    <span key={i} className="bg-white/10 text-white/90 text-[10px] font-normal px-2.5 py-1 rounded-lg flex items-center shadow-sm">
                       <span className="w-1 h-1 rounded-full bg-white/50 mr-1.5" />
                       {spec}
                     </span>

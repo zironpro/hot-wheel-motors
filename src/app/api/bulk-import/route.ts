@@ -101,6 +101,7 @@ export async function POST(req: Request) {
             engine: record.engine || 'N/A',
             kmDriven: record.kmDriven || '0 km',
             color: record.color || 'Unknown',
+            available: record.available !== undefined ? (String(record.available).toLowerCase() === 'true' || String(record.available) === '1') : true,
             features,
             description: record.description || '',
             images,

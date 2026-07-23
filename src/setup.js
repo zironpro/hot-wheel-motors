@@ -3,13 +3,9 @@ const path = require('path');
 const target = '/data/payload.db';
 const template = path.join(process.cwd(), 'template.db');
 if (fs.existsSync('/data')) {
-  if (!fs.existsSync(target)) {
-    console.log('Copying database template to volume...');
-    fs.copyFileSync(template, target);
-  } else {
-    console.log('Database already exists in volume. Skipping copy.');
-  }
-
+  console.log('Overwriting production database volume with template.db...');
+  fs.copyFileSync(template, target);
+  console.log('Database successfully overwritten.');
 } else {
   console.log('No /data volume found. Skipping copy.');
 }

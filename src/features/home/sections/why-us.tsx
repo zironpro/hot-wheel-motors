@@ -40,13 +40,13 @@ export function WhyUsSection({ data }: { data?: { features?: any[], promo?: any 
     <section className="w-full pt-4 md:pt-8 lg:pt-10 pb-12 md:pb-16 lg:pb-20 bg-background">
       <div className="container flex flex-col">
         {/* Top Features Strip */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 w-full border border-primary/5 rounded-t-2xl overflow-hidden bg-surface">
+        <div className="grid grid-cols-2 lg:grid-cols-4 w-full border border-primary/5 rounded-t-lg overflow-hidden bg-surface">
         {features.map((feature, index) => (
           <div 
             key={index}
             className="flex flex-col xl:flex-row items-center justify-center gap-3 p-4 lg:p-6 border-b lg:border-b-0 lg:border-r border-primary/5 last:border-r-0 text-center group hover:bg-surface/80 transition-colors"
           >
-            <div className="w-12 h-12 rounded-full border border-accent/30 flex items-center justify-center shrink-0 group-hover:border-accent transition-colors">
+            <div className="w-12 h-12 rounded-lg border border-accent/30 flex items-center justify-center shrink-0 group-hover:border-accent transition-colors">
               {(() => {
                 const IconComponent = iconMap[feature.icon] || ShieldCheck;
                 return <IconComponent className="w-5 h-5 text-accent stroke-[1.5]" />;
@@ -58,7 +58,7 @@ export function WhyUsSection({ data }: { data?: { features?: any[], promo?: any 
       </div>
 
         {/* Bottom Promo Hero */}
-        <div className="relative w-full bg-carbon overflow-hidden flex flex-col lg:flex-row rounded-b-2xl border border-t-0 border-primary/5 min-h-[350px] lg:min-h-[400px]">
+        <div className="relative w-full bg-carbon overflow-hidden flex flex-col lg:flex-row rounded-b-lg border border-t-0 border-primary/5 min-h-[350px] lg:min-h-[400px]">
           {/* Full Background Image */}
           <div className="absolute inset-0 w-full h-full z-0">
             <Image

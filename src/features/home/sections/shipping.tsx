@@ -6,7 +6,7 @@ export function ShippingSection({ data }: { data?: any }) {
   return (
     <section className="w-full pt-4 md:pt-6 lg:pt-8 pb-4 md:pb-6 lg:pb-8 bg-background">
       <div className="container">
-        <Link href={(data?.buttonLink || "/services") as any} className="relative overflow-hidden flex flex-col md:flex-row items-center rounded-2xl border border-primary/5 group hover:border-primary/20 transition-colors min-h-[140px] md:min-h-[180px]">
+        <Link href={(data?.buttonLink || "/services") as any} className="relative overflow-hidden flex flex-col md:flex-row items-center rounded-lg border border-primary/5 group hover:border-primary/20 transition-colors min-h-[140px] md:min-h-[180px]">
           
           {/* Full Background Image */}
           <div className="absolute inset-0 z-0">
@@ -38,7 +38,7 @@ export function ShippingSection({ data }: { data?: any }) {
               <span className="text-xs font-light tracking-widest text-primary md:text-white uppercase transition-colors drop-shadow-md group-hover:text-primary">
                 {data?.buttonText || "LEARN MORE"}
               </span>
-              <div className="w-10 h-10 rounded-full border border-primary/20 md:border-white/30 flex items-center justify-center transition-colors text-primary md:text-white md:backdrop-blur-sm md:bg-black/20 group-hover:bg-primary group-hover:text-black group-hover:border-primary">
+              <div className="w-10 h-10 rounded-lg border border-primary/20 md:border-white/30 flex items-center justify-center transition-colors text-primary md:text-white md:backdrop-blur-sm md:bg-black/20 group-hover:bg-primary group-hover:text-black group-hover:border-primary">
                 <ArrowRight className="w-4 h-4" />
               </div>
             </div>

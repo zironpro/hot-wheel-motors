@@ -81,6 +81,15 @@ export const Cars: CollectionConfig = {
       required: true,
     },
     {
+      name: 'available',
+      type: 'checkbox',
+      defaultValue: true,
+      label: 'Available',
+      admin: {
+        description: 'Mark if this car is currently available',
+      },
+    },
+    {
       name: 'features',
       type: 'array',
       fields: [

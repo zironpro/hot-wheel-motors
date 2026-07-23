@@ -43,7 +43,7 @@ export const BulkUpload: React.FC = () => {
     <div style={{ marginBottom: '20px', padding: '15px', backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px' }}>
       <h3 style={{ margin: '0 0 10px 0', fontSize: '16px' }}>Bulk Import CSV</h3>
       <p style={{ margin: '0 0 10px 0', fontSize: '13px', opacity: 0.7 }}>
-        Upload a CSV file with columns: <code>make, model, slug, year, price, engine, kmDriven, color, vin, image_url, description, features</code>
+        Upload a CSV file with columns: <code>make, model, slug, year, price, engine, kmDriven, color, vin, available, image_url, description, features</code>
       </p>
       <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
         <label style={{ 

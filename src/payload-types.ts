@@ -180,6 +180,7 @@ export interface Car {
   engine: string;
   kmDriven: string;
   color: string;
+  available?: boolean | null;
   features?:
     | {
         feature?: string | null;

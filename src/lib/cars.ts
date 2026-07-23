@@ -17,6 +17,7 @@ export type CarData = {
   engine?: string;
   year?: number;
   vin?: string;
+  available?: boolean;
 };
 
 export type CarDataWithMdx = CarData & {
@@ -58,6 +59,11 @@ export async function getAllCars(): Promise<CarData[]> {
   try {
     const carsRes = await payload.find({
       collection: 'cars',
+      where: {
+        available: {
+          equals: true,
+        },
+      },
       limit: 100,
     })
 
@@ -82,6 +88,7 @@ export async function getAllCars(): Promise<CarData[]> {
         engine: car.engine,
         year: car.year,
         vin: car.vin,
+        available: car.available ?? true,
       }
     })
   } catch (error) {
@@ -98,6 +105,9 @@ export async function getCarBySlug(slug: string): Promise<CarDataWithMdx | undef
       where: {
         slug: {
           equals: slug,
+        },
+        available: {
+          equals: true,
         },
       },
       limit: 1,
@@ -128,6 +138,7 @@ export async function getCarBySlug(slug: string): Promise<CarDataWithMdx | undef
       engine: car.engine,
       year: car.year,
       vin: car.vin,
+      available: car.available ?? true,
     };
   } catch (e) {
     console.error("Error fetching car by id:", e);

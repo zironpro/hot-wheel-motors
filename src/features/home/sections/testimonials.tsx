@@ -71,7 +71,7 @@ export function TestimonialsSection({ reviews }: { reviews?: ReviewData[] }) {
           <CarouselContent className="-ml-4 md:-ml-6">
             {displayReviews.map((item, index) => (
               <CarouselItem key={index} className="pl-4 md:pl-6 basis-full md:basis-1/2 lg:basis-1/3">
-                <div className="flex flex-col h-full p-8 md:p-10 rounded-2xl bg-surface border border-primary/5 hover:border-accent/30 transition-colors group">
+                <div className="flex flex-col h-full p-8 md:p-10 rounded-lg bg-surface border border-primary/5 hover:border-accent/30 transition-colors group">
                   <div className="flex items-center gap-1 mb-6">
                     {Array.from({ length: item.rating || 5 }).map((_, star) => (
                       <Star key={star} className="w-4 h-4 fill-accent text-accent" />
@@ -89,8 +89,8 @@ export function TestimonialsSection({ reviews }: { reviews?: ReviewData[] }) {
             ))}
           </CarouselContent>
           <div className="hidden md:flex justify-center gap-4 mt-12">
-            <CarouselPrevious className="static translate-y-0 translate-x-0 mx-2 hover:bg-accent hover:text-black border-white/10" />
-            <CarouselNext className="static translate-y-0 translate-x-0 mx-2 hover:bg-accent hover:text-black border-white/10" />
+            <CarouselPrevious className="static translate-y-0 translate-x-0 mx-2 hover:bg-accent hover:text-black border-white/10 rounded-lg" />
+            <CarouselNext className="static translate-y-0 translate-x-0 mx-2 hover:bg-accent hover:text-black border-white/10 rounded-lg" />
           </div>
         </Carousel>
       </div>
