@@ -65,6 +65,8 @@ export function WhyUsSection({ data }: { data?: { features?: any[], promo?: any 
               src={data?.promo?.image?.url || "/images/hero-3.png"} 
               alt="Promo Car"
               fill
+              sizes="100vw"
+              quality={90}
               className="hidden md:block object-cover object-center"
             />
             {/* Gradient Overlay for Text Readability */}

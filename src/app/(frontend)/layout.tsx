@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { WhatsappButton } from "@/components/layout/whatsapp-button";
 import "./globals.css";
 
 export const dynamic = "force-dynamic";
@@ -52,6 +53,7 @@ export default async function RootLayout({
         <main className="flex-1">
           {children}
         </main>
+        <WhatsappButton settings={siteSettings} />
         <Footer settings={siteSettings} />
       </body>
     </html>

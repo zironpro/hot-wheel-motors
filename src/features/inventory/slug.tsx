@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Calendar, Gauge, Fuel, CheckCircle2, ArrowUpRight, ChevronLeft, ChevronRight, Hash } from "lucide-react";
+import { Calendar, Gauge, Fuel, CheckCircle2, ArrowUpRight, ChevronLeft, ChevronRight, Hash, Share2, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CarCard } from "./components/car-card";
 import { cn } from "@/lib/utils";
@@ -29,6 +29,36 @@ export function CarSlugPage({ car, relatedCars, mdxContent }: CarSlugPageProps) 
   const [activeImage, setActiveImage] = useState(galleryImages[0]);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const handleShare = async () => {
+    const shareData = {
+      title: `${car.name} | Hotwheel Motors`,
+      text: `Check out the ${car.name} at Hotwheel Motors`,
+      url: typeof window !== "undefined" ? window.location.href : "",
+    };
+
+    if (typeof navigator !== "undefined" && navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+      try {
+        await navigator.share(shareData);
+        return;
+      } catch (err) {
+        if ((err as Error).name === "AbortError") {
+          return;
+        }
+      }
+    }
+
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
+      } catch (err) {
+        console.error("Failed to copy link:", err);
+      }
+    }
+  };
 
   const currentIndex = galleryImages.indexOf(activeImage);
 
@@ -81,10 +111,27 @@ export function CarSlugPage({ car, relatedCars, mdxContent }: CarSlugPageProps) 
               ))}
             </div>
           </div>
-          <div className="flex flex-col items-start md:items-end w-full md:w-auto">
-            <p className="text-2xl md:text-3xl lg:text-4xl font-heading font-normal text-accent mb-4 md:mb-0">
+          <div className="flex flex-col items-start md:items-end w-full md:w-auto gap-3">
+            <p className="text-2xl md:text-3xl lg:text-4xl font-heading font-normal text-accent">
               {car.price}
             </p>
+            <button
+              onClick={handleShare}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-accent/40 text-white/90 hover:text-white transition-all duration-300 text-xs font-light tracking-wide shadow-sm"
+              aria-label="Share vehicle details"
+            >
+              {copied ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-400" />
+                  <span className="text-emerald-400 font-medium">Link Copied!</span>
+                </>
+              ) : (
+                <>
+                  <Share2 className="w-3.5 h-3.5 text-accent" />
+                  <span>Share Vehicle</span>
+                </>
+              )}
+            </button>
           </div>
         </div>
 
@@ -150,15 +197,33 @@ export function CarSlugPage({ car, relatedCars, mdxContent }: CarSlugPageProps) 
         </div>
 
         {/* Action Bar */}
-        <div className="w-full bg-surface border border-white/5 rounded-xl p-6 flex flex-col sm:flex-row justify-between items-center mb-16 shadow-lg bg-carbon">
-           <p className="text-white/80 font-light text-sm md:text-base mb-4 sm:mb-0">
+        <div className="w-full bg-surface border border-white/5 rounded-xl p-6 flex flex-col sm:flex-row justify-between items-center mb-16 shadow-lg bg-carbon gap-4">
+           <p className="text-white/80 font-light text-sm md:text-base mb-2 sm:mb-0">
              Interested in this beautiful vehicle? Reach out to our team today.
            </p>
-           <Button asChild className="w-full sm:w-auto px-8 rounded-lg h-12 text-sm bg-accent hover:bg-accent/90 text-black font-normal uppercase tracking-widest transition-colors">
-              <Link href={`/contact?message=${encodeURIComponent(`I am interested in inquiring about the ${car.name} ${car.subtitle ? car.subtitle.replace(' MODEL', '') : ''}. Please provide me with more information.`)}`}>
-                Enquire Now <ArrowUpRight className="ml-2 w-4 h-4" />
-              </Link>
-           </Button>
+           <div className="flex items-center gap-3 w-full sm:w-auto">
+             <button
+               onClick={handleShare}
+               className="flex-1 sm:flex-none px-5 rounded-lg h-12 text-sm bg-white/5 hover:bg-white/10 border border-white/10 hover:border-accent/40 text-white font-normal flex items-center justify-center gap-2 transition-all"
+             >
+               {copied ? (
+                 <>
+                   <Check className="w-4 h-4 text-emerald-400" />
+                   <span className="text-emerald-400 font-medium">Copied!</span>
+                 </>
+               ) : (
+                 <>
+                   <Share2 className="w-4 h-4 text-accent" />
+                   <span>Share</span>
+                 </>
+               )}
+             </button>
+             <Button asChild className="flex-1 sm:flex-none px-8 rounded-lg h-12 text-sm bg-accent hover:bg-accent/90 text-black font-normal uppercase tracking-widest transition-colors">
+                <Link href={`/contact?message=${encodeURIComponent(`I am interested in inquiring about the ${car.name} ${car.subtitle ? car.subtitle.replace(' MODEL', '') : ''}. Please provide me with more information.`)}`}>
+                  Enquire Now <ArrowUpRight className="ml-2 w-4 h-4" />
+                </Link>
+             </Button>
+           </div>
         </div>
 
         {/* Content Layout */}
