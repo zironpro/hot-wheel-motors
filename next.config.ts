@@ -34,10 +34,13 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   typedRoutes: true,
   experimental: {
+    // Restrict build workers to 1 CPU to prevent container Out-Of-Memory (exit code 137) on Railway/Docker
+    cpus: 1,
+    workerThreads: false,
     // Enable filesystem caching for `next dev`
     turbopackFileSystemCacheForDev: true,
-    // Enable filesystem caching for `next build`
-    turbopackFileSystemCacheForBuild: true,
+    // Disable filesystem cache during build in low-RAM container environments
+    turbopackFileSystemCacheForBuild: false,
   },
   typescript: {
     ignoreBuildErrors: true,
