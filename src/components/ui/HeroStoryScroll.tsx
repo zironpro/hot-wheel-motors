@@ -105,13 +105,13 @@ export const HeroStoryScroll = forwardRef<HTMLDivElement, HeroStoryScrollProps>(
     const [overlayOpacity, setOverlayOpacity] = useState<number>(1);
     const [overlayTranslateY, setOverlayTranslateY] = useState<number>(0);
 
-    // Image preloader custom hook (loads frame 1 immediately and caches background frames)
-    const { getImage, isReady, firstFrame } = useImageSequence({
+    // Image preloader custom hook (loads frame 1 immediately, keyframes across 1..240, then in-between frames)
+    const { getImage, isReady, loadedCount, firstFrame } = useImageSequence({
       frameCount,
       folderPath,
       filePrefix,
       extension,
-      initialPreloadCount: 20,
+      keyframeStep: 5,
     });
 
     /**
@@ -160,6 +160,13 @@ export const HeroStoryScroll = forwardRef<HTMLDivElement, HeroStoryScrollProps>(
         drawCanvasFrame(currentFrameRef.current);
       }
     }, [firstFrame, isReady]);
+
+    // Redraw active frame as in-between background frames arrive
+    useEffect(() => {
+      if (currentFrameRef.current) {
+        drawCanvasFrame(currentFrameRef.current);
+      }
+    }, [loadedCount]);
 
     // Handle responsive window resize
     useEffect(() => {
