@@ -36,9 +36,9 @@ export interface HeroStoryScrollProps {
   extension?: string;
   /** Total frame count (default: 240) */
   frameCount?: number;
-  /** Scroll distance in pixels during which the hero remains pinned (default: "4000px") */
+  /** Scroll distance in pixels during which the hero remains pinned (default: "2200px") */
   scrollDistance?: string;
-  /** GSAP scrub intensity (default: 0.5 for Apple smooth momentum) */
+  /** GSAP scrub intensity (default: 0.15 for fast response) */
   scrub?: number | boolean;
   /** Optional custom text steps overlaid over the animation sequence */
   storySteps?: StoryStep[];
@@ -79,8 +79,8 @@ export const HeroStoryScroll = forwardRef<HTMLDivElement, HeroStoryScrollProps>(
       filePrefix = "frame_",
       extension = "webp",
       frameCount = 240,
-      scrollDistance = "4000px",
-      scrub = 0.5,
+      scrollDistance = "2200px",
+      scrub = 0.15,
       storySteps = DEFAULT_STORY_STEPS,
       className = "",
     },
@@ -114,6 +114,22 @@ export const HeroStoryScroll = forwardRef<HTMLDivElement, HeroStoryScrollProps>(
       keyframeStep: 5,
     });
 
+    // Track component mount / unmount lifecycle & reset state for clean App Router navigation
+    useEffect(() => {
+      console.log("[HeroStoryScroll] Component mounted");
+
+      currentFrameRef.current = 1;
+      lastDrawnFrameRef.current = -1;
+
+      return () => {
+        console.log("[HeroStoryScroll] Component unmounted");
+        if (rafIdRef.current !== null) {
+          cancelAnimationFrame(rafIdRef.current);
+          rafIdRef.current = null;
+        }
+      };
+    }, []);
+
     /**
      * Draws the requested frame index onto HTML5 Canvas with aspect-ratio cover and retina DPI logic.
      */
@@ -127,12 +143,17 @@ export const HeroStoryScroll = forwardRef<HTMLDivElement, HeroStoryScrollProps>(
       const img = getImage(frameIndex) || firstFrame;
       if (!img) return;
 
-      const dpr = typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
+      const isFirstDraw = lastDrawnFrameRef.current === -1;
+      const dpr = typeof window !== "undefined" ? Math.min(window.devicePixelRatio || 1, 2) : 1;
       const cssWidth = window.innerWidth;
       const cssHeight = window.innerHeight;
 
       renderImageToCanvas(ctx, img, cssWidth, cssHeight, dpr);
       lastDrawnFrameRef.current = frameIndex;
+
+      if (isFirstDraw) {
+        console.log(`[HeroStoryScroll] First frame drawn: ${frameIndex}`);
+      }
     };
 
     /**
@@ -161,6 +182,16 @@ export const HeroStoryScroll = forwardRef<HTMLDivElement, HeroStoryScrollProps>(
       }
     }, [firstFrame, isReady]);
 
+    // Refresh ScrollTrigger and redraw frame when initial image sequence is fully preloaded
+    useEffect(() => {
+      if (isReady) {
+        console.log("[HeroStoryScroll] Initial preload complete");
+        console.log("[HeroStoryScroll] ScrollTrigger refresh triggered");
+        ScrollTrigger.refresh();
+        drawCanvasFrame(currentFrameRef.current);
+      }
+    }, [isReady]);
+
     // Redraw active frame as in-between background frames arrive
     useEffect(() => {
       if (currentFrameRef.current) {
@@ -168,16 +199,27 @@ export const HeroStoryScroll = forwardRef<HTMLDivElement, HeroStoryScrollProps>(
       }
     }, [loadedCount]);
 
-    // Handle responsive window resize
+    // Handle responsive window resize & bfcache pageshow restoration
     useEffect(() => {
       const handleResize = () => {
         drawCanvasFrame(currentFrameRef.current);
+        console.log("[HeroStoryScroll] ScrollTrigger refresh triggered");
         ScrollTrigger.refresh();
       };
 
+      const handlePageShow = (event: PageTransitionEvent) => {
+        if (event.persisted) {
+          console.log("[HeroStoryScroll] ScrollTrigger refresh triggered (bfcache pageshow)");
+          drawCanvasFrame(currentFrameRef.current);
+          ScrollTrigger.refresh();
+        }
+      };
+
       window.addEventListener("resize", handleResize);
+      window.addEventListener("pageshow", handlePageShow);
       return () => {
         window.removeEventListener("resize", handleResize);
+        window.removeEventListener("pageshow", handlePageShow);
         if (rafIdRef.current !== null) {
           cancelAnimationFrame(rafIdRef.current);
         }
@@ -189,9 +231,9 @@ export const HeroStoryScroll = forwardRef<HTMLDivElement, HeroStoryScrollProps>(
       if (!containerRef.current || !pinRef.current) return;
 
       const ctx = gsap.context(() => {
-        const numericDistance = parseInt(scrollDistance, 10) || 4000;
+        const numericDistance = parseInt(scrollDistance, 10) || 2200;
 
-        ScrollTrigger.create({
+        const st = ScrollTrigger.create({
           trigger: containerRef.current,
           pin: pinRef.current,
           start: "top top",
@@ -304,6 +346,17 @@ export const HeroStoryScroll = forwardRef<HTMLDivElement, HeroStoryScrollProps>(
             setOverlayTranslateY(computedTranslateY);
           },
         });
+
+        console.log("[HeroStoryScroll] ScrollTrigger created");
+
+        // Immediately evaluate initial scroll position and redraw frame
+        const initialProgress = st.progress || 0;
+        const initialFrame = Math.min(
+          frameCount,
+          Math.max(1, Math.floor(initialProgress * (frameCount - 1)) + 1)
+        );
+        currentFrameRef.current = initialFrame;
+        drawCanvasFrame(initialFrame);
       }, containerRef);
 
       return () => {

@@ -73,7 +73,7 @@ export function useImageSequence({
       const url = getFrameUrl(folderPath, filePrefix, index, extension, padLength);
       const promise = new Promise<HTMLImageElement>((resolve, reject) => {
         const img = new Image();
-        img.src = url;
+        img.decoding = "async";
 
         img.onload = () => {
           imageCacheRef.current.set(index, img);
@@ -86,14 +86,25 @@ export function useImageSequence({
           loadingPromisesRef.current.delete(index);
           // Retry once on error
           const retryImg = new Image();
-          retryImg.src = url;
+          retryImg.decoding = "async";
           retryImg.onload = () => {
             imageCacheRef.current.set(index, retryImg);
             setLoadedCount((prev) => prev + 1);
             resolve(retryImg);
           };
           retryImg.onerror = (err) => reject(err);
+          retryImg.src = url;
         };
+
+        img.src = url;
+
+        // If image is already cached in browser memory/disk, resolve immediately
+        if (img.complete && img.naturalWidth !== 0) {
+          imageCacheRef.current.set(index, img);
+          loadingPromisesRef.current.delete(index);
+          setLoadedCount((prev) => prev + 1);
+          resolve(img);
+        }
       });
 
       loadingPromisesRef.current.set(index, promise);
@@ -121,9 +132,7 @@ export function useImageSequence({
         console.warn("[useImageSequence] Initial frame 1 failed to load", err);
       }
 
-      // PHASE 2: Load Keyframes evenly distributed across the entire 1..240 timeline
-      // E.g., for 240 frames with keyframeStep=5, load 48 keyframes (1, 6, 11, 16... 236, 240).
-      // In HTTP/2 production CDNs, 48 keyframes download in < 400ms!
+      // PHASE 2: Load Keyframes concurrently in a single ultra-fast HTTP/2 burst
       const keyframeIndices: number[] = [1];
       for (let i = 1; i <= frameCount; i += keyframeStep) {
         if (i !== 1) keyframeIndices.push(i);
@@ -132,19 +141,14 @@ export function useImageSequence({
         keyframeIndices.push(frameCount);
       }
 
-      // Concurrently load all keyframes in parallel batches of 12 (HTTP/2 pipeline)
-      const batchSize = 12;
-      for (let i = 0; i < keyframeIndices.length; i += batchSize) {
-        if (!isMounted) break;
-        const chunk = keyframeIndices.slice(i, i + batchSize);
-        await Promise.allSettled(chunk.map((idx) => loadSingleFrame(idx)));
-      }
+      // Fetch all keyframes concurrently across HTTP/2 streams
+      await Promise.allSettled(keyframeIndices.map((idx) => loadSingleFrame(idx)));
 
       if (isMounted) {
         setIsReady(true);
       }
 
-      // PHASE 3: Fill in all remaining in-between frames concurrently in parallel batches
+      // PHASE 3: Fill in remaining in-between frames with high concurrency (batchSize 36)
       const remainingIndices: number[] = [];
       for (let i = 1; i <= frameCount; i++) {
         if (!imageCacheRef.current.has(i)) {
@@ -152,6 +156,7 @@ export function useImageSequence({
         }
       }
 
+      const batchSize = 36;
       for (let i = 0; i < remainingIndices.length; i += batchSize) {
         if (!isMounted) break;
         const chunk = remainingIndices.slice(i, i + batchSize);
