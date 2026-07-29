@@ -1,4 +1,5 @@
 import { HeroSection } from "./sections/hero";
+import { HeroStoryScroll } from "@/components/ui/HeroStoryScroll";
 import { SearchSection } from "./sections/search-section";
 import { BrandsSection } from "./sections/brands";
 import { CategoriesSection } from "./sections/categories";
@@ -13,7 +14,8 @@ import { CarData, BrandData, ReviewData } from "@/lib/cars";
 export function HomePage({ initialCars, initialBrands, initialReviews, homeData }: { initialCars: CarData[], initialBrands: BrandData[], initialReviews: ReviewData[], homeData?: any }) {
   return (
     <div className="flex flex-col w-full">
-      <HeroSection data={homeData?.heroSlides} />
+      <HeroStoryScroll />
+      {/* <HeroSection data={homeData?.heroSlides} /> */}
       <SearchSection />
       {/* <BrandsSection cars={initialCars} brands={initialBrands} /> */}
       <FeaturedCarsSection cars={initialCars} />
