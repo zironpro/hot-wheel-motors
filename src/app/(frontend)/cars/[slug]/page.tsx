@@ -16,5 +16,12 @@ export default async function CarDetailsRoute({ params }: { params: Promise<{ sl
 
   const mdxContent = <MDXRemote source={car.mdxSource} />;
 
-  return <CarSlugPage car={car as any} relatedCars={relatedCars as any} mdxContent={mdxContent} />;
+  return (
+    <CarSlugPage
+      car={car as any}
+      relatedCars={relatedCars as any}
+      mdxContent={mdxContent}
+      phoneNumber="+971 55 578 1902"
+    />
+  );
 }

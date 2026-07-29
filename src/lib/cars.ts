@@ -53,6 +53,25 @@ export async function getAllBrands(): Promise<BrandData[]> {
   }
 }
 
+export function formatCarPrice(rawPrice: number | string | undefined | null, currency = 'AED'): string {
+  if (rawPrice === undefined || rawPrice === null) return "Price On Request";
+  
+  if (typeof rawPrice === 'number') {
+    if (rawPrice <= 0) return "Price On Request";
+    return `${currency} ${rawPrice.toLocaleString()}`;
+  }
+  
+  const priceStr = String(rawPrice).trim();
+  if (!priceStr || priceStr === '0') return "Price On Request";
+  
+  const numericPrice = parseFloat(priceStr.replace(/[^0-9.]/g, ''));
+  if (isNaN(numericPrice) || numericPrice <= 0) {
+    return "Price On Request";
+  }
+  
+  return `${currency} ${numericPrice.toLocaleString()}`;
+}
+
 export async function getAllCars(): Promise<CarData[]> {
   const payload = await getPayload({ config: configPromise })
   
@@ -78,7 +97,7 @@ export async function getAllCars(): Promise<CarData[]> {
         subtitle: String(car.year),
         slug: car.slug || String(car.id),
         specs: `${car.color || 'N/A'} | ${car.year || 'N/A'} | ${car.engine || 'N/A'}`,
-        price: `${car.currency || 'AED'} ${car.price.toLocaleString()}`,
+        price: formatCarPrice(car.price, car.currency || 'AED'),
         image: firstImageUrl,
         gallery,
         features: car.features?.map((f: any) => f.feature).filter(Boolean) || [],
@@ -127,7 +146,7 @@ export async function getCarBySlug(slug: string): Promise<CarDataWithMdx | undef
       subtitle: String(car.year),
       slug: car.slug || String(car.id),
       specs: `${car.color || 'N/A'} | ${car.year || 'N/A'} | ${car.engine || 'N/A'}`,
-      price: `${car.currency || 'AED'} ${car.price.toLocaleString()}`,
+      price: formatCarPrice(car.price, car.currency || 'AED'),
       image: firstImageUrl,
       gallery,
       features: car.features?.map((f: any) => f.feature).filter(Boolean) || [],
