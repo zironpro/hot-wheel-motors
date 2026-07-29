@@ -144,14 +144,14 @@ export function HeroSection({ data }: { data?: any[] }) {
 
               {/* Text Content inside Container */}
               <div className="container relative z-10 flex flex-col justify-start md:justify-center h-full w-full pt-32 md:pt-24 lg:pt-28 pb-12">
-                <div className="flex flex-col items-start text-left w-full lg:w-1/2 space-y-4 md:space-y-6 lg:pr-8">
+                <div className="flex flex-col items-start text-left w-full max-w-md lg:max-w-[440px] xl:max-w-xl space-y-4 md:space-y-6">
                   {/* <span className="text-white/80 text-sm sm:text-base font-light uppercase tracking-widest drop-shadow-md">
                     {slide.tagline}
                   </span> */}
-                  <h1 className="text-3xl sm:text-4xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-heading font-normal leading-tight md:leading-[1.1] tracking-tight text-white drop-shadow-lg whitespace-pre-line">
+                  <h1 className="text-3xl sm:text-4xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-heading font-normal leading-tight md:leading-[1.1] tracking-tight text-white drop-shadow-lg">
                     {slide.title}
                   </h1>
-                  <p className="text-gray-300 text-sm sm:text-base max-w-md leading-relaxed drop-shadow-md whitespace-normal md:whitespace-pre-line">
+                  <p className="text-gray-300 text-sm sm:text-base max-w-sm md:max-w-md leading-relaxed drop-shadow-md whitespace-normal">
                     {slide.description}
                   </p>
                 </div>

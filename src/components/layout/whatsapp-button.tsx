@@ -28,25 +28,19 @@ export function WhatsappButton({ settings }: WhatsappButtonProps) {
   const whatsappUrl = `https://wa.me/${cleanPhone}`;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 group flex items-center">
-      {/* Tooltip / Hover Label */}
-      <span className="mr-3 px-3 py-1.5 bg-black/80 backdrop-blur-md text-white text-xs font-light tracking-wide rounded-lg border border-white/10 shadow-lg opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none whitespace-nowrap">
-        Chat with us
-      </span>
-
+    <div className="fixed bottom-6 right-6 z-50 flex items-center pointer-events-none">
       {/* Floating Squircle Silver Button */}
       <a
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
-        className="relative flex items-center justify-center w-14 h-14 rounded-lg bg-gradient-to-br from-zinc-100 via-slate-200 to-zinc-400 text-zinc-950 shadow-[0_10px_25px_-5px_rgba(0,0,0,0.5),0_0_15px_rgba(255,255,255,0.2)] border border-white/60 hover:scale-110 active:scale-95 hover:shadow-[0_15px_30px_-5px_rgba(0,0,0,0.6),0_0_25px_rgba(255,255,255,0.4)] transition-all duration-300 ease-out"
+        className="group relative flex items-center justify-center w-14 h-14 rounded-lg bg-gradient-to-br from-zinc-100 via-slate-200 to-zinc-400 text-zinc-950 shadow-[0_10px_25px_-5px_rgba(0,0,0,0.5),0_0_15px_rgba(255,255,255,0.2)] border border-white/60 hover:scale-110 active:scale-95 hover:shadow-[0_15px_30px_-5px_rgba(0,0,0,0.6),0_0_25px_rgba(255,255,255,0.4)] transition-all duration-300 ease-out pointer-events-auto"
       >
-        {/* Subtle Ambient Pulse Light */}
-        {/* <span className="absolute inset-0 rounded-lg bg-white/30 animate-ping opacity-20 pointer-events-none" /> */}
-
-        {/* Shiny Specular Highlight */}
-        {/* <span className="absolute top-0 left-0 right-0 h-1/2 rounded-t-lg bg-gradient-to-b from-white/60 to-transparent pointer-events-none" /> */}
+        {/* Tooltip / Hover Label */}
+        <span className="absolute right-full mr-3 px-3 py-1.5 bg-black/80 backdrop-blur-md text-white text-xs font-light tracking-wide rounded-lg border border-white/10 shadow-lg opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none whitespace-nowrap">
+          Chat with us
+        </span>
 
         {/* WhatsApp Icon */}
         <WhatsappIcon className="w-7 h-7 text-zinc-900 group-hover:scale-105 transition-transform duration-300 relative z-10" />

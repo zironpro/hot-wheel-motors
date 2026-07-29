@@ -131,12 +131,13 @@ export function CategoriesSection({ cars, brands }: { cars: CarData[], brands: B
                     <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/40 to-transparent z-10 pointer-events-none" />
                     
                     {/* Overlaid Text & Button */}
-                    <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between z-20">
-                      <div className="flex flex-col">
-                        <h3 className="text-white text-lg font-normal drop-shadow-md">{type.name}</h3>
-                        {/* <p className="text-white/70 text-xs mt-0.5 drop-shadow-md">{activeTab === "body" ? "Body Type" : "Premium Brand"}</p> */}
+                    <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 flex items-center justify-between gap-2 z-20">
+                      <div className="min-w-0 flex-1">
+                        <h3 className="text-white text-sm sm:text-base font-normal drop-shadow-md truncate capitalize whitespace-nowrap">
+                          {type.name}
+                        </h3>
                       </div>
-                      <div className="bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/10 text-white text-xs font-normal px-4 py-2 rounded-lg transition-colors">
+                      <div className="bg-white/10 group-hover:bg-accent group-hover:text-black backdrop-blur-md border border-white/10 text-white text-xs font-normal px-3 py-1.5 rounded-lg transition-all shrink-0 whitespace-nowrap">
                         Explore
                       </div>
                     </div>
