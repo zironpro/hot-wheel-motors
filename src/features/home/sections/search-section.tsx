@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 const POPULAR_BRANDS = [
   "Audi",
@@ -52,7 +53,7 @@ export function SearchSection() {
   return (
     <section className="py-12 bg-background relative z-20">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="max-w-4xl mx-auto">
+        <ScrollReveal variant="scale-up" className="max-w-4xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-heading font-normal text-white mb-8 text-center">
             Quick Search
           </h2>
@@ -121,7 +122,7 @@ export function SearchSection() {
               </button>
             </div>
           </form>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState, useImperativeHandle, forwardRef } from "react";
+import React, { useEffect, useRef, useState, useCallback, useImperativeHandle, forwardRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight } from "lucide-react";
@@ -80,7 +80,7 @@ export const HeroStoryScroll = forwardRef<HTMLDivElement, HeroStoryScrollProps>(
       extension = "webp",
       frameCount = 240,
       scrollDistance = "2200px",
-      scrub = 0.15,
+      scrub = 0.3,
       storySteps = DEFAULT_STORY_STEPS,
       className = "",
     },
@@ -97,7 +97,11 @@ export const HeroStoryScroll = forwardRef<HTMLDivElement, HeroStoryScrollProps>(
     // Render loop state references
     const currentFrameRef = useRef<number>(1);
     const lastDrawnFrameRef = useRef<number>(-1);
+    const targetFrameRef = useRef<number>(1);
+    const lerpFrameRef = useRef<number>(1);
+    const isLerpingRef = useRef<boolean>(false);
     const rafIdRef = useRef<number | null>(null);
+    const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
 
     // Active state for overlay content: "logo" at site load (p=0), "step" when scrolling into text steps
     const [activeMode, setActiveMode] = useState<"logo" | "step" | null>("logo");
@@ -111,7 +115,7 @@ export const HeroStoryScroll = forwardRef<HTMLDivElement, HeroStoryScrollProps>(
       folderPath,
       filePrefix,
       extension,
-      keyframeStep: 5,
+      keyframeStep: 4,
     });
 
     // Track component mount / unmount lifecycle & reset state for clean App Router navigation
@@ -119,7 +123,10 @@ export const HeroStoryScroll = forwardRef<HTMLDivElement, HeroStoryScrollProps>(
       console.log("[HeroStoryScroll] Component mounted");
 
       currentFrameRef.current = 1;
+      targetFrameRef.current = 1;
+      lerpFrameRef.current = 1;
       lastDrawnFrameRef.current = -1;
+      isLerpingRef.current = false;
 
       return () => {
         console.log("[HeroStoryScroll] Component unmounted");
@@ -157,40 +164,97 @@ export const HeroStoryScroll = forwardRef<HTMLDivElement, HeroStoryScrollProps>(
     };
 
     /**
-     * RequestAnimationFrame draw scheduler.
-     * Prevents redundant canvas context redraws unless frame index changes.
+     * Synchronizes current target frame and canvas directly to current scroll position.
+     * Guarantees accurate frame paint even on page reload mid-scroll.
      */
-    const scheduleDraw = (frameIndex: number) => {
-      currentFrameRef.current = frameIndex;
+    const syncToScrollPosition = useCallback(() => {
+      const st = scrollTriggerRef.current;
+      let progress = 0;
 
-      if (rafIdRef.current !== null) {
-        cancelAnimationFrame(rafIdRef.current);
+      if (st) {
+        st.update();
+        progress = st.progress;
+      } else if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        const numericDistance = parseInt(scrollDistance, 10) || 2200;
+        const scrolled = -rect.top;
+        progress = Math.min(1, Math.max(0, scrolled / numericDistance));
       }
 
-      rafIdRef.current = requestAnimationFrame(() => {
-        if (currentFrameRef.current !== lastDrawnFrameRef.current) {
-          drawCanvasFrame(currentFrameRef.current);
+      const targetFrame = Math.min(
+        frameCount,
+        Math.max(1, Math.floor(progress * (frameCount - 1)) + 1)
+      );
+
+      currentFrameRef.current = targetFrame;
+      targetFrameRef.current = targetFrame;
+      lerpFrameRef.current = targetFrame;
+      drawCanvasFrame(targetFrame);
+    }, [frameCount, scrollDistance]);
+
+    /**
+     * Continuous 60fps/120fps Lerp animation loop.
+     * Interpolates discrete PC mouse wheel notches into smooth momentum scrolling.
+     */
+    const startLerpLoop = () => {
+      if (isLerpingRef.current) return;
+      isLerpingRef.current = true;
+
+      const loop = () => {
+        const target = targetFrameRef.current;
+        const current = lerpFrameRef.current;
+        const diff = target - current;
+
+        // If target and lerp position are virtually identical, snap and conclude loop
+        if (Math.abs(diff) < 0.04) {
+          lerpFrameRef.current = target;
+          const rounded = Math.round(target);
+          if (rounded !== lastDrawnFrameRef.current) {
+            drawCanvasFrame(rounded);
+          }
+          isLerpingRef.current = false;
+          rafIdRef.current = null;
+          return;
         }
-        rafIdRef.current = null;
-      });
+
+        // Smooth Lerp factor (0.22 gives liquid 60fps/120fps motion without input lag)
+        lerpFrameRef.current += diff * 0.22;
+        const frameToDraw = Math.round(lerpFrameRef.current);
+
+        if (frameToDraw !== lastDrawnFrameRef.current) {
+          drawCanvasFrame(frameToDraw);
+        }
+
+        rafIdRef.current = requestAnimationFrame(loop);
+      };
+
+      rafIdRef.current = requestAnimationFrame(loop);
+    };
+
+    /**
+     * RequestAnimationFrame draw scheduler.
+     */
+    const scheduleDraw = (frameIndex: number) => {
+      targetFrameRef.current = frameIndex;
+      startLerpLoop();
     };
 
     // Initial canvas setup on mount & first frame ready
     useEffect(() => {
       if (firstFrame || isReady) {
-        drawCanvasFrame(currentFrameRef.current);
+        syncToScrollPosition();
       }
-    }, [firstFrame, isReady]);
+    }, [firstFrame, isReady, syncToScrollPosition]);
 
-    // Refresh ScrollTrigger and redraw frame when initial image sequence is fully preloaded
+    // Refresh ScrollTrigger and sync frame when initial image sequence is fully preloaded
     useEffect(() => {
       if (isReady) {
         console.log("[HeroStoryScroll] Initial preload complete");
         console.log("[HeroStoryScroll] ScrollTrigger refresh triggered");
         ScrollTrigger.refresh();
-        drawCanvasFrame(currentFrameRef.current);
+        syncToScrollPosition();
       }
-    }, [isReady]);
+    }, [isReady, syncToScrollPosition]);
 
     // Redraw active frame as in-between background frames arrive
     useEffect(() => {
@@ -202,16 +266,16 @@ export const HeroStoryScroll = forwardRef<HTMLDivElement, HeroStoryScrollProps>(
     // Handle responsive window resize & bfcache pageshow restoration
     useEffect(() => {
       const handleResize = () => {
-        drawCanvasFrame(currentFrameRef.current);
-        console.log("[HeroStoryScroll] ScrollTrigger refresh triggered");
+        console.log("[HeroStoryScroll] ScrollTrigger refresh triggered (resize)");
         ScrollTrigger.refresh();
+        syncToScrollPosition();
       };
 
       const handlePageShow = (event: PageTransitionEvent) => {
         if (event.persisted) {
           console.log("[HeroStoryScroll] ScrollTrigger refresh triggered (bfcache pageshow)");
-          drawCanvasFrame(currentFrameRef.current);
           ScrollTrigger.refresh();
+          syncToScrollPosition();
         }
       };
 
@@ -224,7 +288,7 @@ export const HeroStoryScroll = forwardRef<HTMLDivElement, HeroStoryScrollProps>(
           cancelAnimationFrame(rafIdRef.current);
         }
       };
-    }, [firstFrame]);
+    }, [syncToScrollPosition]);
 
     // GSAP ScrollTrigger Setup & Timeline Logic
     useEffect(() => {
@@ -251,89 +315,67 @@ export const HeroStoryScroll = forwardRef<HTMLDivElement, HeroStoryScrollProps>(
             scheduleDraw(targetFrame);
 
             // TIMELINE CALCULATIONS:
-            // p = 0.00 – 0.04: Brand Logo visible on initial site load, fades immediately on scroll down
-            // p = 0.04 – 0.32: Step 1 Text
-            // p = 0.34 – 0.65: Step 2 Text
-            // p = 0.66 – 0.95: Step 3 Text + Button
-            // p = 0.95 – 1.00: Fade content out for smooth transition into next section
-
             let currentMode: "logo" | "step" | null = null;
             let currentStepIdx: number | null = null;
             let computedOpacity = 0;
             let computedTranslateY = 30;
 
             if (p < 0.04) {
-              // MODE: INITIAL SITE LOAD BRAND LOGO
               currentMode = "logo";
               if (p <= 0.01) {
-                // Fully visible on initial site load at rest
                 computedOpacity = 1;
                 computedTranslateY = 0;
               } else {
-                // Fades out immediately as user begins scrolling down (0.01 -> 0.04)
                 const ratio = (p - 0.01) / 0.03;
                 computedOpacity = Math.max(0, 1 - ratio);
                 computedTranslateY = -20 * ratio;
               }
             } else if (p >= 0.04 && p < 0.34) {
-              // MODE: STEP 1 TEXT
               currentMode = "step";
               currentStepIdx = 0;
               if (p < 0.10) {
-                // Enter Fade In
                 const ratio = (p - 0.04) / 0.06;
                 computedOpacity = Math.min(1, Math.max(0, ratio));
                 computedTranslateY = 30 * (1 - computedOpacity);
               } else if (p < 0.24) {
-                // Hold
                 computedOpacity = 1;
                 computedTranslateY = 0;
               } else {
-                // Crossfade Exit to Step 2
                 const ratio = (p - 0.24) / 0.10;
                 computedOpacity = Math.max(0, 1 - ratio);
                 computedTranslateY = -20 * ratio;
               }
             } else if (p >= 0.30 && p < 0.66) {
-              // MODE: STEP 2 TEXT
               currentMode = "step";
               currentStepIdx = 1;
               if (p < 0.40) {
-                // Enter Fade In
                 const ratio = (p - 0.30) / 0.10;
                 computedOpacity = Math.min(1, Math.max(0, ratio));
                 computedTranslateY = 30 * (1 - computedOpacity);
               } else if (p < 0.56) {
-                // Hold
                 computedOpacity = 1;
                 computedTranslateY = 0;
               } else {
-                // Crossfade Exit to Step 3
                 const ratio = (p - 0.56) / 0.10;
                 computedOpacity = Math.max(0, 1 - ratio);
                 computedTranslateY = -20 * ratio;
               }
             } else if (p >= 0.64 && p <= 0.95) {
-              // MODE: STEP 3 TEXT
               currentMode = "step";
               currentStepIdx = 2;
               if (p < 0.72) {
-                // Enter Fade In
                 const ratio = (p - 0.64) / 0.08;
                 computedOpacity = Math.min(1, Math.max(0, ratio));
                 computedTranslateY = 30 * (1 - computedOpacity);
               } else if (p < 0.88) {
-                // Hold
                 computedOpacity = 1;
                 computedTranslateY = 0;
               } else {
-                // Exit before section end
                 const ratio = (p - 0.88) / 0.07;
                 computedOpacity = Math.max(0, 1 - ratio);
                 computedTranslateY = -20 * ratio;
               }
             } else {
-              // 0.95 – 1.00: Faded out completely
               currentMode = null;
               currentStepIdx = null;
               computedOpacity = 0;
@@ -347,22 +389,35 @@ export const HeroStoryScroll = forwardRef<HTMLDivElement, HeroStoryScrollProps>(
           },
         });
 
+        scrollTriggerRef.current = st;
         console.log("[HeroStoryScroll] ScrollTrigger created");
 
-        // Immediately evaluate initial scroll position and redraw frame
-        const initialProgress = st.progress || 0;
-        const initialFrame = Math.min(
-          frameCount,
-          Math.max(1, Math.floor(initialProgress * (frameCount - 1)) + 1)
-        );
-        currentFrameRef.current = initialFrame;
-        drawCanvasFrame(initialFrame);
+        // Immediately sync to current scroll position upon creation
+        ScrollTrigger.refresh();
+        syncToScrollPosition();
+
+        // Secondary sync ticks to handle browser / App Router scroll restoration delays
+        const timer1 = setTimeout(() => {
+          ScrollTrigger.refresh();
+          syncToScrollPosition();
+        }, 100);
+
+        const timer2 = setTimeout(() => {
+          ScrollTrigger.refresh();
+          syncToScrollPosition();
+        }, 300);
+
+        return () => {
+          clearTimeout(timer1);
+          clearTimeout(timer2);
+        };
       }, containerRef);
 
       return () => {
+        scrollTriggerRef.current = null;
         ctx.revert();
       };
-    }, [frameCount, scrollDistance, scrub, storySteps]);
+    }, [frameCount, scrollDistance, scrub, storySteps, syncToScrollPosition]);
 
     return (
       <div
@@ -387,7 +442,7 @@ export const HeroStoryScroll = forwardRef<HTMLDivElement, HeroStoryScrollProps>(
           {/* STANDALONE LOGO INTRO (At Starting: 0% – 16%) */}
           {activeMode === "logo" && (
             <div
-              className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none transition-all duration-300 ease-out"
+              className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none transition-[opacity,transform] duration-300 ease-out"
               style={{
                 opacity: overlayOpacity,
                 transform: `translateY(${overlayTranslateY}px)`,
@@ -409,7 +464,7 @@ export const HeroStoryScroll = forwardRef<HTMLDivElement, HeroStoryScrollProps>(
           {/* OVERLAY CONTENT: TEXT STEPS (Triggered after Logo Fades: 18% – 95%) */}
           {activeMode === "step" && activeStepIndex !== null && storySteps[activeStepIndex] && (
             <div
-              className={`absolute inset-x-0 z-20 px-6 sm:px-12 md:px-20 max-w-7xl mx-auto flex flex-col pointer-events-none transition-all duration-300 ease-out ${
+              className={`absolute inset-x-0 z-20 px-6 sm:px-12 md:px-20 max-w-7xl mx-auto flex flex-col pointer-events-none transition-[opacity,transform] duration-300 ease-out ${
                 storySteps[activeStepIndex].position === "top-left" || storySteps[activeStepIndex].align === "left" || storySteps[activeStepIndex].align === "left-top"
                   ? "top-20 sm:top-24 md:top-32 items-start text-left"
                   : storySteps[activeStepIndex].align === "right"
@@ -445,7 +500,7 @@ export const HeroStoryScroll = forwardRef<HTMLDivElement, HeroStoryScrollProps>(
                 <div className="mt-10 pointer-events-auto">
                   <a
                     href={storySteps[activeStepIndex].ctaHref || "/cars"}
-                    className="inline-flex items-center gap-3 px-8 py-4 text-xs sm:text-sm font-semibold tracking-[0.15em] uppercase text-white bg-black/40 border border-white/30 rounded-full hover:bg-white hover:text-black hover:border-white transition-all duration-300 transform hover:scale-105 backdrop-blur-md shadow-2xl group"
+                    className="inline-flex items-center gap-3 px-8 py-4 text-xs sm:text-sm font-semibold tracking-[0.15em] uppercase text-white bg-black/40 border border-white/30 rounded-full hover:bg-white hover:text-black hover:border-white transition-[background-color,color,border-color,transform,box-shadow] duration-300 transform hover:scale-105 backdrop-blur-md shadow-2xl group"
                   >
                     <span>{storySteps[activeStepIndex].ctaText}</span>
                     <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />

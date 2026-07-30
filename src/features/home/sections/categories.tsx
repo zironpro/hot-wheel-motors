@@ -14,6 +14,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { CarData, BrandData } from "@/lib/cars";
 
 const bodyTypes = [
@@ -77,116 +78,97 @@ export function CategoriesSection({ cars, brands }: { cars: CarData[], brands: B
   return (
     <section className="w-full pt-4 md:pt-6 lg:pt-8 pb-6 md:pb-8 lg:pb-10 bg-background">
       <div className="container">
-        <div className="flex items-center justify-between mb-8 md:mb-12 border-b border-primary/10 pb-4">
-          <div className="flex items-center gap-6 md:gap-10">
-            <button 
-              onClick={() => setActiveTab("brand")}
-              className={cn(
-                "text-sm sm:text-base font-light tracking-widest uppercase transition-all relative",
-                activeTab === "brand" ? "text-primary" : "text-muted hover:text-primary/80"
-              )}
-            >
-              BRANDS
-              {activeTab === "brand" && (
-                <span className="absolute -bottom-[17px] left-0 w-full h-[1px] bg-accent" />
-              )}
-            </button>
-          </div>
-          <Link href="/cars" className="text-sm sm:text-base font-light tracking-widest text-muted hover:text-primary transition-colors uppercase hidden sm:block">
-            VIEW ALL
-          </Link>
-        </div>
-
-        <Carousel
-          setApi={setApi}
-          opts={CAROUSEL_OPTS}
-          className="w-full relative"
-        >
-          <CarouselContent className="-ml-4 md:-ml-6">
-            {currentData.map((type) => (
-              <CarouselItem key={type.name} className="pl-4 md:pl-6 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5">
-                <Link
-                  href={type.href as any}
-                  className="flex flex-col bg-[#111111] hover:bg-[#1a1a1a] transition-all relative w-full rounded-lg overflow-hidden cursor-pointer group border border-white/5 shadow-lg"
-                >
-                  {/* Top Image Section */}
-                  <div className="relative h-[220px] w-full bg-gradient-to-br from-[#1e1e1e] to-[#0a0a0a] p-6 flex items-center justify-center">
-                    {/* The actual image or fallback */}
-                    <div className="relative w-full h-full transform group-hover:scale-110 transition-transform duration-700 ease-out z-0 flex items-center justify-center">
-                      {type.image ? (
-                        <Image
-                          src={type.image}
-                          alt={type.name}
-                          fill
-                          className="object-contain drop-shadow-2xl"
-                        />
-                      ) : (
-                        <span className="font-heading text-2xl tracking-widest uppercase text-muted/50 select-none whitespace-nowrap">
-                          {type.name}
-                        </span>
-                      )}
-                    </div>
-                    
-                    {/* Gradient Overlay for Text Readability */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/40 to-transparent z-10 pointer-events-none" />
-                    
-                    {/* Overlaid Text & Button */}
-                    <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 flex items-center justify-between gap-2 z-20">
-                      <div className="min-w-0 flex-1">
-                        <h3 className="text-white text-sm sm:text-base font-normal drop-shadow-md truncate capitalize whitespace-nowrap">
-                          {type.name}
-                        </h3>
-                      </div>
-                      <div className="bg-white/10 group-hover:bg-accent group-hover:text-black backdrop-blur-md border border-white/10 text-white text-xs font-normal px-3 py-1.5 rounded-lg transition-all shrink-0 whitespace-nowrap">
-                        Explore
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Bottom Info Section */}
-                  {/* <div className="flex flex-col flex-1 p-5 bg-[#111111]">
-                    Bottom Stats Row
-                    <div className="grid grid-cols-3 gap-2 mt-auto pt-2">
-                      <div className="flex flex-col">
-                        <span className="text-white font-normal text-sm">{type.count}</span>
-                        <span className="text-muted-foreground text-[9px] uppercase tracking-wider mt-0.5">Vehicles</span>
-                      </div>
-                      <div className="flex flex-col">
-                        <span className="text-white font-normal text-sm">All</span>
-                        <span className="text-muted-foreground text-[9px] uppercase tracking-wider mt-0.5">Models</span>
-                      </div>
-                      <div className="flex flex-col">
-                        <span className="text-white font-normal text-sm">100%</span>
-                        <span className="text-muted-foreground text-[9px] uppercase tracking-wider mt-0.5">Certified</span>
-                      </div>
-                    </div>
-                  </div> */}
-                </Link>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          
-          {/* Pagination Controls */}
-          {count > 1 && (
-            <div className="flex items-center justify-end gap-4 mt-8">
-              {/* <CarouselPrevious className="relative inset-0 translate-y-0 h-10 w-10 border-white/10 bg-transparent hover:bg-white/10 hover:text-white" /> */}
-              <div className="flex items-center gap-2">
-                {Array.from({ length: count }).map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => api?.scrollTo(i)}
-                    className={cn(
-                      "transition-all duration-300 rounded-full",
-                      current === i ? "w-6 h-2 bg-primary" : "w-2 h-2 bg-white/20 hover:bg-white/40"
-                    )}
-                    aria-label={`Go to slide ${i + 1}`}
-                  />
-                ))}
-              </div>
-              {/* <CarouselNext className="relative inset-0 translate-y-0 h-10 w-10 border-white/10 bg-transparent hover:bg-white/10 hover:text-white" /> */}
+        <ScrollReveal variant="fade-up">
+          <div className="flex items-center justify-between mb-8 md:mb-12 border-b border-primary/10 pb-4">
+            <div className="flex items-center gap-6 md:gap-10">
+              <button 
+                onClick={() => setActiveTab("brand")}
+                className={cn(
+                  "text-sm sm:text-base font-light tracking-widest uppercase transition-colors relative",
+                  activeTab === "brand" ? "text-primary" : "text-muted hover:text-primary/80"
+                )}
+              >
+                BRANDS
+                {activeTab === "brand" && (
+                  <span className="absolute -bottom-[17px] left-0 w-full h-[1px] bg-accent" />
+                )}
+              </button>
             </div>
-          )}
-        </Carousel>
+            <Link href="/cars" className="text-sm sm:text-base font-light tracking-widest text-muted hover:text-primary transition-colors uppercase hidden sm:block">
+              VIEW ALL
+            </Link>
+          </div>
+
+          <Carousel
+            setApi={setApi}
+            opts={CAROUSEL_OPTS}
+            className="w-full relative"
+          >
+            <CarouselContent className="-ml-4 md:-ml-6">
+              {currentData.map((type) => (
+                <CarouselItem key={type.name} className="pl-4 md:pl-6 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5">
+                  <Link
+                    href={type.href as any}
+                    className="flex flex-col bg-[#111111] hover:bg-[#1a1a1a] transition-[background-color,border-color,box-shadow] duration-300 relative w-full rounded-lg overflow-hidden cursor-pointer group border border-white/5 shadow-lg"
+                  >
+                    {/* Top Image Section */}
+                    <div className="relative h-[220px] w-full bg-gradient-to-br from-[#1e1e1e] to-[#0a0a0a] p-6 flex items-center justify-center">
+                      {/* The actual image or fallback */}
+                      <div className="relative w-full h-full transform group-hover:scale-110 transition-transform duration-700 ease-out z-0 flex items-center justify-center">
+                        {type.image ? (
+                          <Image
+                            src={type.image}
+                            alt={type.name}
+                            fill
+                            className="object-contain drop-shadow-2xl"
+                          />
+                        ) : (
+                          <span className="font-heading text-2xl tracking-widest uppercase text-muted/50 select-none whitespace-nowrap">
+                            {type.name}
+                          </span>
+                        )}
+                      </div>
+                      
+                      {/* Gradient Overlay for Text Readability */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/40 to-transparent z-10 pointer-events-none" />
+                      
+                      {/* Overlaid Text & Button */}
+                      <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 flex items-center justify-between gap-2 z-20">
+                        <div className="min-w-0 flex-1">
+                          <h3 className="text-white text-sm sm:text-base font-normal drop-shadow-md truncate capitalize whitespace-nowrap">
+                            {type.name}
+                          </h3>
+                        </div>
+                        <div className="bg-white/10 group-hover:bg-accent group-hover:text-black backdrop-blur-md border border-white/10 text-white text-xs font-normal px-3 py-1.5 rounded-lg transition-[background-color,color,border-color] duration-300 shrink-0 whitespace-nowrap">
+                          Explore
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            
+            {/* Pagination Controls */}
+            {count > 1 && (
+              <div className="flex items-center justify-end gap-4 mt-8">
+                <div className="flex items-center gap-2">
+                  {Array.from({ length: count }).map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => api?.scrollTo(i)}
+                      className={cn(
+                        "transition-[width,background-color] duration-300 rounded-full",
+                        current === i ? "w-6 h-2 bg-primary" : "w-2 h-2 bg-white/20 hover:bg-white/40"
+                      )}
+                      aria-label={`Go to slide ${i + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+          </Carousel>
+        </ScrollReveal>
       </div>
     </section>
   );

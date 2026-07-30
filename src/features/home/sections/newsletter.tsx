@@ -1,13 +1,13 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export function NewsletterSection() {
   return (
     <section className="w-full py-12 md:py-16 lg:py-20 bg-background">
       <div className="container">
-        <div className="relative w-full rounded-2xl overflow-hidden bg-carbon flex flex-col lg:flex-row items-center justify-between py-10 px-6 md:px-12 border border-primary/10 shadow-2xl gap-8 lg:gap-12">
-          
+        <ScrollReveal variant="scale-up" className="relative w-full rounded-2xl overflow-hidden bg-carbon flex flex-col lg:flex-row items-center justify-between py-10 px-6 md:px-12 border border-primary/10 shadow-2xl gap-8 lg:gap-12">
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left flex-1">
             <p className="text-2xl md:text-3xl font-heading font-normal text-white leading-tight mb-2">
               Get exclusive access to rare arrivals.
@@ -31,7 +31,7 @@ export function NewsletterSection() {
               Subscribe
             </Button>
           </form>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

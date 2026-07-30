@@ -43,22 +43,22 @@ export function useImageSequence({
   filePrefix = "frame_",
   extension = "webp",
   padLength = 4,
-  keyframeStep = 5,
+  keyframeStep = 4,
 }: UseImageSequenceOptions): UseImageSequenceReturn {
   // O(1) in-memory cache ref for loaded frames
   const imageCacheRef = useRef<Map<number, HTMLImageElement>>(new Map());
   // In-flight loading promises map
   const loadingPromisesRef = useRef<Map<number, Promise<HTMLImageElement>>>(new Map());
-  
+
   const [loadedCount, setLoadedCount] = useState<number>(0);
   const [isReady, setIsReady] = useState<boolean>(false);
   const [firstFrame, setFirstFrame] = useState<HTMLImageElement | null>(null);
 
   /**
-   * Loads a single image frame and caches it.
+   * Loads a single image frame, decodes it into GPU memory, and caches it.
    */
   const loadSingleFrame = useCallback(
-    (index: number): Promise<HTMLImageElement> => {
+    (index: number, priority: "high" | "low" | "auto" = "auto"): Promise<HTMLImageElement> => {
       // 1. Return cached if available
       if (imageCacheRef.current.has(index)) {
         return Promise.resolve(imageCacheRef.current.get(index)!);
@@ -69,17 +69,31 @@ export function useImageSequence({
         return loadingPromisesRef.current.get(index)!;
       }
 
-      // 3. Create HTTP request
+      // 3. Create HTTP request with priority hint & async decoding
       const url = getFrameUrl(folderPath, filePrefix, index, extension, padLength);
       const promise = new Promise<HTMLImageElement>((resolve, reject) => {
         const img = new Image();
         img.decoding = "async";
+        if ("fetchPriority" in img) {
+          (img as any).fetchPriority = priority;
+        }
 
-        img.onload = () => {
+        const handleReady = async () => {
+          try {
+            if (img.decode) {
+              await img.decode();
+            }
+          } catch {
+            // Ignore decode failures for partially loaded assets
+          }
           imageCacheRef.current.set(index, img);
           loadingPromisesRef.current.delete(index);
           setLoadedCount((prev) => prev + 1);
           resolve(img);
+        };
+
+        img.onload = () => {
+          handleReady();
         };
 
         img.onerror = () => {
@@ -87,6 +101,9 @@ export function useImageSequence({
           // Retry once on error
           const retryImg = new Image();
           retryImg.decoding = "async";
+          if ("fetchPriority" in retryImg) {
+            (retryImg as any).fetchPriority = priority;
+          }
           retryImg.onload = () => {
             imageCacheRef.current.set(index, retryImg);
             setLoadedCount((prev) => prev + 1);
@@ -100,10 +117,7 @@ export function useImageSequence({
 
         // If image is already cached in browser memory/disk, resolve immediately
         if (img.complete && img.naturalWidth !== 0) {
-          imageCacheRef.current.set(index, img);
-          loadingPromisesRef.current.delete(index);
-          setLoadedCount((prev) => prev + 1);
-          resolve(img);
+          handleReady();
         }
       });
 
@@ -111,6 +125,23 @@ export function useImageSequence({
       return promise;
     },
     [folderPath, filePrefix, extension, padLength]
+  );
+
+  /**
+   * Proactively preloads upcoming frames around current target index with HIGH priority.
+   */
+  const preloadAhead = useCallback(
+    (currentIndex: number, range: number = 6) => {
+      const minIndex = Math.max(1, currentIndex - 2);
+      const maxIndex = Math.min(frameCount, currentIndex + range);
+
+      for (let i = minIndex; i <= maxIndex; i++) {
+        if (!imageCacheRef.current.has(i) && !loadingPromisesRef.current.has(i)) {
+          loadSingleFrame(i, "high").catch(() => {});
+        }
+      }
+    },
+    [frameCount, loadSingleFrame]
   );
 
   useEffect(() => {
@@ -122,9 +153,9 @@ export function useImageSequence({
     loadingPromisesRef.current.clear();
 
     const startFastPreloading = async () => {
-      // PHASE 1: Load Frame 1 immediately for instant paint
+      // PHASE 1: Load Frame 1 immediately for instant paint (High Priority)
       try {
-        const img1 = await loadSingleFrame(1);
+        const img1 = await loadSingleFrame(1, "high");
         if (isMounted) {
           setFirstFrame(img1);
         }
@@ -132,7 +163,8 @@ export function useImageSequence({
         console.warn("[useImageSequence] Initial frame 1 failed to load", err);
       }
 
-      // PHASE 2: Load Keyframes concurrently in a single ultra-fast HTTP/2 burst
+      // PHASE 2: Load Keyframes concurrently across 1..frameCount (High Priority)
+      // With keyframeStep=4, 60 keyframes cover the entire sequence with zero visual delay.
       const keyframeIndices: number[] = [1];
       for (let i = 1; i <= frameCount; i += keyframeStep) {
         if (i !== 1) keyframeIndices.push(i);
@@ -142,13 +174,14 @@ export function useImageSequence({
       }
 
       // Fetch all keyframes concurrently across HTTP/2 streams
-      await Promise.allSettled(keyframeIndices.map((idx) => loadSingleFrame(idx)));
+      await Promise.allSettled(keyframeIndices.map((idx) => loadSingleFrame(idx, "high")));
 
       if (isMounted) {
         setIsReady(true);
       }
 
-      // PHASE 3: Fill in remaining in-between frames with high concurrency (batchSize 36)
+      // PHASE 3: Fill in remaining in-between frames with low priority in spaced idle batches
+      // This ensures background preloading NEVER steals network bandwidth or CPU threads from user scroll requests!
       const remainingIndices: number[] = [];
       for (let i = 1; i <= frameCount; i++) {
         if (!imageCacheRef.current.has(i)) {
@@ -156,11 +189,13 @@ export function useImageSequence({
         }
       }
 
-      const batchSize = 36;
+      const batchSize = 16;
       for (let i = 0; i < remainingIndices.length; i += batchSize) {
         if (!isMounted) break;
         const chunk = remainingIndices.slice(i, i + batchSize);
-        await Promise.allSettled(chunk.map((idx) => loadSingleFrame(idx)));
+        await Promise.allSettled(chunk.map((idx) => loadSingleFrame(idx, "low")));
+        // Yield execution to main thread between background batches
+        await new Promise((res) => setTimeout(res, 20));
       }
     };
 
@@ -184,13 +219,10 @@ export function useImageSequence({
         return cache.get(safeIndex);
       }
 
-      // 2. Request priority load for missing frame
-      if (!loadingPromisesRef.current.has(safeIndex)) {
-        loadSingleFrame(safeIndex).catch(() => {});
-      }
+      // 2. High-priority lookahead load for missing frame & surrounding scroll window
+      preloadAhead(safeIndex, 5);
 
       // 3. SMART FALLBACK: Find the nearest loaded frame in memory (search radius 1..frameCount)
-      // This guarantees the animation NEVER jumps back to Frame 1 or gets stuck!
       let bestMatch: HTMLImageElement | undefined = undefined;
       let minDistance = Infinity;
 
@@ -204,7 +236,7 @@ export function useImageSequence({
 
       return bestMatch || firstFrame || undefined;
     },
-    [frameCount, loadSingleFrame, firstFrame]
+    [frameCount, preloadAhead, firstFrame]
   );
 
   const progress = Math.round((loadedCount / frameCount) * 100);

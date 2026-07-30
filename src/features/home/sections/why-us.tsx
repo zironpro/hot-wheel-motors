@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ShieldCheck, Ban, Landmark, RefreshCcw, Headset, ArrowRight, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ScrollReveal, ScrollStagger, ScrollStaggerItem } from "@/components/ui/ScrollReveal";
 
 const iconMap: Record<string, any> = {
   ShieldCheck,
@@ -40,25 +41,26 @@ export function WhyUsSection({ data }: { data?: { features?: any[], promo?: any 
     <section className="w-full pt-4 md:pt-8 lg:pt-10 pb-12 md:pb-16 lg:pb-20 bg-background">
       <div className="container flex flex-col">
         {/* Top Features Strip */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 w-full border border-primary/5 rounded-t-lg overflow-hidden bg-surface">
-        {features.map((feature, index) => (
-          <div 
-            key={index}
-            className="flex flex-col xl:flex-row items-center justify-center gap-3 p-4 lg:p-6 border-b lg:border-b-0 lg:border-r border-primary/5 last:border-r-0 text-center group hover:bg-surface/80 transition-colors"
-          >
-            <div className="w-12 h-12 rounded-lg border border-accent/30 flex items-center justify-center shrink-0 group-hover:border-accent transition-colors">
-              {(() => {
-                const IconComponent = iconMap[feature.icon] || ShieldCheck;
-                return <IconComponent className="w-5 h-5 text-accent stroke-[1.5]" />;
-              })()}
-            </div>
-            <span className="text-primary text-sm md:text-base font-light">{feature.title}</span>
-          </div>
-        ))}
-      </div>
+        <ScrollStagger className="grid grid-cols-2 lg:grid-cols-4 w-full border border-primary/5 rounded-t-lg overflow-hidden bg-surface">
+          {features.map((feature, index) => (
+            <ScrollStaggerItem key={index} variant="fade-up">
+              <div 
+                className="flex flex-col xl:flex-row items-center justify-center gap-3 p-4 lg:p-6 border-b lg:border-b-0 lg:border-r border-primary/5 last:border-r-0 text-center group hover:bg-surface/80 transition-colors h-full"
+              >
+                <div className="w-12 h-12 rounded-lg border border-accent/30 flex items-center justify-center shrink-0 group-hover:border-accent transition-colors">
+                  {(() => {
+                    const IconComponent = iconMap[feature.icon] || ShieldCheck;
+                    return <IconComponent className="w-5 h-5 text-accent stroke-[1.5]" />;
+                  })()}
+                </div>
+                <span className="text-primary text-sm md:text-base font-light">{feature.title}</span>
+              </div>
+            </ScrollStaggerItem>
+          ))}
+        </ScrollStagger>
 
         {/* Bottom Promo Hero */}
-        <div className="relative w-full bg-carbon overflow-hidden flex flex-col lg:flex-row rounded-b-lg border border-t-0 border-primary/5 min-h-[350px] lg:min-h-[400px]">
+        <ScrollReveal variant="fade-up" delay={0.2} className="relative w-full bg-carbon overflow-hidden flex flex-col lg:flex-row rounded-b-lg border border-t-0 border-primary/5 min-h-[350px] lg:min-h-[400px]">
           {/* Full Background Image */}
           <div className="absolute inset-0 w-full h-full z-0">
             <Image
@@ -69,8 +71,6 @@ export function WhyUsSection({ data }: { data?: { features?: any[], promo?: any 
               quality={90}
               className="hidden md:block object-cover object-center"
             />
-            {/* Gradient Overlay for Text Readability */}
-            {/* <div className="absolute inset-0 bg-black/70 md:bg-gradient-to-r md:from-black/90 md:via-black/60 md:to-transparent" /> */}
           </div>
 
           {/* Content */}
@@ -93,7 +93,7 @@ export function WhyUsSection({ data }: { data?: { features?: any[], promo?: any 
               </Link>
             </Button>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );
