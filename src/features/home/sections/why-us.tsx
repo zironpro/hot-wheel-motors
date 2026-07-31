@@ -85,7 +85,7 @@ export function WhyUsSection({ data }: { data?: { features?: any[], promo?: any 
               asChild
               className="rounded-lg px-8 h-12 md:h-14 text-sm md:text-base uppercase group shadow-lg"
             >
-              <Link href={data?.promo?.buttonLink || "/sell"}>
+              <Link href={(!data?.promo?.buttonLink || data?.promo?.buttonLink === "/sell") ? "/contact?message=I%20am%20interested%20in%20selling%20my%20car" : data.promo.buttonLink}>
                 {data?.promo?.buttonText || "Sell Your Car Today"}
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>

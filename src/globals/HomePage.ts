@@ -52,7 +52,7 @@ export const HomePage: GlobalConfig = {
         { name: 'heading', type: 'text', defaultValue: 'Looking to sell your car?' },
         { name: 'subheading', type: 'textarea', defaultValue: 'Get the best price for your car in just a few simple steps.' },
         { name: 'buttonText', type: 'text', defaultValue: 'Sell Your Car Today' },
-        { name: 'buttonLink', type: 'text', defaultValue: '/sell' },
+        { name: 'buttonLink', type: 'text', defaultValue: '/contact?message=I%20am%20interested%20in%20selling%20my%20car' },
       ]
     },
     {
