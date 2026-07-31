@@ -18,22 +18,18 @@ export function WhyUsSection({ data }: { data?: { features?: any[], promo?: any 
     {
       icon: "ShieldCheck",
       title: "Verified Cars",
-      description: "All cars are\ninspected & verified",
     },
     {
       icon: "Ban",
       title: "No Hidden Fees",
-      description: "Transparent pricing\nyou can trust",
     },
     {
       icon: "Landmark",
       title: "Flexible Finance",
-      description: "Easy loan options\navailable",
     },
     {
       icon: "Headset",
       title: "Dedicated Support",
-      description: "We are here\nto help you",
     },
   ];
 
@@ -100,7 +96,7 @@ export function WhyUsSection({ data }: { data?: { features?: any[], promo?: any 
           <div className="hidden md:block absolute right-0 lg:-right-10 xl:-right-14 -bottom-8 lg:-bottom-14 xl:-bottom-16 w-full lg:w-[580px] xl:w-[680px] h-[240px] sm:h-[300px] lg:h-[400px] z-20 pointer-events-none flex items-end justify-center lg:justify-end">
             <div className="relative w-full h-full">
               <Image
-                src={data?.promo?.carImage?.url || data?.promo?.image?.url || "/images/banner-car.webp"}
+                src="/images/banner-car.webp"
                 alt="Promo Car"
                 fill
                 sizes="(max-width: 1024px) 100vw, 680px"
