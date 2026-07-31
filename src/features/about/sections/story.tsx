@@ -33,9 +33,9 @@ export function StorySection({ hero, features, story }: StorySectionProps) {
         {/* Constrained Hero Image */}
         <div className="relative w-full max-w-5xl mx-auto h-[500px] md:h-[600px] lg:h-[650px] overflow-hidden rounded-lg shadow-2xl">
           <picture>
-            <source media="(max-width: 767px)" srcSet={getMediaUrl(hero.backgroundImageMobile) || "/images/about-us-mobile.png"} />
+            <source media="(max-width: 767px)" srcSet={getMediaUrl(hero.backgroundImageMobile) || "/images/about-us-mobile.webp"} />
             <Image
-              src={getMediaUrl(hero.backgroundImageDesktop) || "/images/about-us.png"}
+              src={getMediaUrl(hero.backgroundImageDesktop) || "/images/about-us.webp"}
               alt="Luxury Showroom"
               fill
               priority
@@ -75,7 +75,7 @@ export function StorySection({ hero, features, story }: StorySectionProps) {
           {/* About Image */}
           <div className="w-full rounded-lg overflow-hidden shadow-2xl border border-zinc-800/50">
             <Image 
-              src={getMediaUrl(story.image) || "/images/about.png"} 
+              src={getMediaUrl(story.image) || "/images/about.webp"} 
               alt={story.heading} 
               width={1920}
               height={1080}

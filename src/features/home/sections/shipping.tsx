@@ -13,7 +13,7 @@ export function ShippingSection({ data }: { data?: any }) {
             {/* Full Background Image */}
             <div className="absolute inset-0 z-0">
               <Image
-                src={data?.image?.url || "/images/banner-1.png"}
+                src={data?.image?.url || "/images/banner-1.webp"}
                 alt="Worldwide Shipping"
                 fill
                 className="object-cover object-center"
