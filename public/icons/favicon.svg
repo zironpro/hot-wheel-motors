@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 300">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="Logo_Symbol_White">
+    <g id="Symbol">
+      <path class="cls-1" d="M225.56,166.67h-25.56v133.33h50v-108.89c0-13.5-10.94-24.44-24.44-24.44Z"/>
+      <polygon class="cls-1" points="600 100 509.53 256.7 419.06 100 369.06 100 484.53 300 534.53 300 650 100 600 100"/>
+      <path class="cls-1" d="M360.78,256.7l-68-117.77c-13.91-24.09-39.61-38.92-67.42-38.92H50V0H0v300h50v-150h175.37c14.74,0,28.35,7.86,35.72,20.62l74.7,129.38h50l39.75-68.85-25-43.3-39.75,68.85Z"/>
+    </g>
+  </g>
+</svg>

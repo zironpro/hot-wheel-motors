@@ -36,7 +36,11 @@ export const metadata: Metadata = {
   title: "Hotwheel Motors",
   description: "Hotwheel Motors",
   icons: {
-    icon: "/icons/favicon.png",
+    icon: [
+      { url: "/icons/favicon.svg", type: "image/svg+xml" },
+      { url: "/icons/favicon.png", type: "image/png" },
+    ],
+    shortcut: "/icons/favicon.svg",
     apple: "/icons/favicon.png",
   },
   verification: {
