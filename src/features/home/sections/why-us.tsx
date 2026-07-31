@@ -60,21 +60,23 @@ export function WhyUsSection({ data }: { data?: { features?: any[], promo?: any 
         </ScrollStagger>
 
         {/* Bottom Promo Hero */}
-        <ScrollReveal variant="fade-up" delay={0.2} className="relative w-full bg-carbon overflow-hidden flex flex-col lg:flex-row rounded-b-lg border border-t-0 border-primary/5 min-h-[350px] lg:min-h-[400px]">
-          {/* Full Background Image */}
-          <div className="absolute inset-0 w-full h-full z-0">
+        <ScrollReveal variant="fade-up" delay={0.2} className="relative w-full bg-carbon rounded-b-lg border border-t-0 border-primary/5 min-h-[380px] lg:min-h-[420px] flex flex-col lg:flex-row items-center justify-between">
+          {/* Card Background (clipped inside rounded card container) */}
+          <div className="absolute inset-0 w-full h-full rounded-b-lg overflow-hidden z-0 bg-carbon">
             <Image
-              src={data?.promo?.image?.url || "/images/hero-3.png"} 
-              alt="Promo Car"
+              src={data?.promo?.bgImage?.url || "/images/banner-bg.webp"} 
+              alt="Promo Background"
               fill
               sizes="100vw"
               quality={90}
               className="hidden md:block object-cover object-center"
             />
+            {/* Dark overlay for optimal text contrast on desktop */}
+            <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-black/90 via-black/65 to-black/30 lg:to-transparent z-1" />
           </div>
 
           {/* Content */}
-          <div className="relative z-10 flex flex-col justify-center items-start w-full lg:w-1/2 py-12 lg:py-16 px-6 md:px-12">
+          <div className="relative z-10 flex flex-col justify-center items-start w-full lg:w-1/2 py-10 lg:py-16 px-6 md:px-12">
             <div className="flex items-center gap-6 mb-4">
               <h2 className="text-3xl md:text-5xl font-heading font-normal text-white leading-tight drop-shadow-lg whitespace-pre-line">
                 {data?.promo?.heading || "Looking to sell your car?"}
@@ -92,6 +94,21 @@ export function WhyUsSection({ data }: { data?: { features?: any[], promo?: any 
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
+          </div>
+
+          {/* Car Image - Hidden on mobile, visible on desktop/tablet */}
+          <div className="hidden md:block absolute right-0 lg:-right-10 xl:-right-14 -bottom-8 lg:-bottom-14 xl:-bottom-16 w-full lg:w-[580px] xl:w-[680px] h-[240px] sm:h-[300px] lg:h-[400px] z-20 pointer-events-none flex items-end justify-center lg:justify-end">
+            <div className="relative w-full h-full">
+              <Image
+                src={data?.promo?.carImage?.url || data?.promo?.image?.url || "/images/banner-car.webp"}
+                alt="Promo Car"
+                fill
+                sizes="(max-width: 1024px) 100vw, 680px"
+                quality={95}
+                priority
+                className="object-contain object-bottom drop-shadow-[0_25px_35px_rgba(0,0,0,0.9)] -scale-x-100 scale-105 lg:scale-115 origin-bottom-right"
+              />
+            </div>
           </div>
         </ScrollReveal>
       </div>
