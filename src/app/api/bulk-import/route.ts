@@ -205,6 +205,7 @@ export async function POST(req: Request) {
 
                     try {
                       buffer = await sharp(buffer)
+                        .resize({ width: 1920, height: 1920, fit: 'inside', withoutEnlargement: true })
                         .webp({ quality: 80 })
                         .toBuffer();
                     } catch (sharpErr) {

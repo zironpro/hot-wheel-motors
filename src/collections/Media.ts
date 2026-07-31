@@ -16,6 +16,12 @@ export const Media: CollectionConfig = {
     staticDir: process.env.NODE_ENV === 'production' ? '/data/media' : 'media',
     adminThumbnail: 'thumbnail',
     mimeTypes: ['image/*'],
+    resizeOptions: {
+      width: 1920,
+      height: 1920,
+      fit: 'inside',
+      withoutEnlargement: true,
+    },
     formatOptions: {
       format: 'webp',
       options: {
