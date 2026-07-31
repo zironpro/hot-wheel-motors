@@ -3,7 +3,7 @@ import { getAllCars, getAllBrands, getAllReviews } from "@/lib/cars";
 import { getPayload } from "payload";
 import configPromise from "@/payload.config";
 
-export const dynamic = 'force-static';
+export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   const cars = await getAllCars();

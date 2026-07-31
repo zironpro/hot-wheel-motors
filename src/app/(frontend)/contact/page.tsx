@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "Get in touch with the concierge team at Hot Wheel Motors. We're here to assist you with finding your dream car or answering any inquiries.",
 };
 
-export const dynamic = 'force-static';
+export const dynamic = 'force-dynamic';
 
 export default async function Page() {
   const payload = await getPayload({ config: configPromise });
