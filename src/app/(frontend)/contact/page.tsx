@@ -5,7 +5,18 @@ import configPromise from "@/payload.config";
 
 export const metadata: Metadata = {
   title: "Contact Us | Hot Wheel Motors",
-  description: "Get in touch with the concierge team at Hot Wheel Motors. We're here to assist you with finding your dream car or answering any inquiries.",
+  description: "Get in touch with the concierge team at Hot Wheel Motors in Dubai. We are here to assist with luxury vehicle sourcing, financing, and worldwide export inquiries.",
+  keywords: [
+    "contact Hot Wheel Motors",
+    "luxury car showroom contact Dubai",
+    "buy luxury car Dubai contact",
+  ],
+  openGraph: {
+    title: "Contact Us | Hot Wheel Motors",
+    description: "Get in touch with the concierge team at Hot Wheel Motors in Dubai. We are here to assist with luxury vehicle sourcing, financing, and worldwide export inquiries.",
+    url: "https://hotwheelmotors.com/contact",
+    siteName: "Hot Wheel Motors",
+  },
 };
 
 export const dynamic = 'force-dynamic';

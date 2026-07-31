@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { WhatsappButton } from "@/components/layout/whatsapp-button";
@@ -34,6 +35,9 @@ const ansage = localFont({
 export const metadata: Metadata = {
   title: "Hotwheel Motors",
   description: "Hotwheel Motors",
+  verification: {
+    google: "5LlE7uDsiAif_j7Ynq890UdcBPcliiiugQCS86_GdxU",
+  },
 };
 
 export default async function RootLayout({
@@ -48,6 +52,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={`${ansage.variable} antialiased h-full`}>
+      <GoogleTagManager gtmId="GTM-WKFFZKT5" />
       <body className="min-h-full flex flex-col">
         <Navbar settings={siteSettings} />
         <main className="flex-1">
@@ -55,6 +60,7 @@ export default async function RootLayout({
         </main>
         <WhatsappButton settings={siteSettings} />
         <Footer settings={siteSettings} />
+        <GoogleAnalytics gaId="G-XD01VB44PR" />
       </body>
     </html>
   );

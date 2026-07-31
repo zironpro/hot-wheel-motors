@@ -1,12 +1,24 @@
 import { ServicesPage } from "@/features/services/page";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { getPayload } from "payload";
 import configPromise from "@payload-config";
 import type { ServicesPage as ServicesPageType } from "@/payload-types";
 
 export const metadata: Metadata = {
-  title: "Services | Hot Wheel Motors",
-  description: "Explore our premium automotive services including vehicle sourcing, tailored financing, worldwide export, and extended warranty options.",
+  title: "Luxury Car Services in Dubai: Financing, Export & Trade-In | Hot Wheel Motors",
+  description: "Bespoke automotive services in Dubai: car financing, global export, consignment, trade-in, registration & extended warranty. White-glove luxury service.",
+  keywords: [
+    "car financing Dubai",
+    "car export Dubai",
+    "car trade in Dubai",
+    "luxury car services Dubai",
+  ],
+  openGraph: {
+    title: "Luxury Car Services in Dubai: Financing, Export & Trade-In | Hot Wheel Motors",
+    description: "Bespoke automotive services in Dubai: car financing, global export, consignment, trade-in, registration & extended warranty. White-glove luxury service.",
+    url: "https://hotwheelmotors.com/services",
+    siteName: "Hot Wheel Motors",
+  },
 };
 
 export const dynamic = 'force-dynamic';
