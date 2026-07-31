@@ -81,18 +81,14 @@ export function CategoriesSection({ cars, brands }: { cars: CarData[], brands: B
         <ScrollReveal variant="fade-up">
           <div className="flex items-center justify-between mb-8 md:mb-12 border-b border-primary/10 pb-4">
             <div className="flex items-center gap-6 md:gap-10">
-              <button 
-                onClick={() => setActiveTab("brand")}
+              <h2 
                 className={cn(
-                  "text-sm sm:text-base font-light tracking-widest uppercase transition-colors relative",
-                  activeTab === "brand" ? "text-primary" : "text-muted hover:text-primary/80"
+                  "text-sm sm:text-base font-light tracking-widest uppercase transition-colors relative cursor-pointer text-primary"
                 )}
               >
                 BRANDS
-                {activeTab === "brand" && (
-                  <span className="absolute -bottom-[17px] left-0 w-full h-[1px] bg-accent" />
-                )}
-              </button>
+                <span className="absolute -bottom-[17px] left-0 w-full h-[1px] bg-accent" />
+              </h2>
             </div>
             <Link href="/cars" className="text-sm sm:text-base font-light tracking-widest text-muted hover:text-primary transition-colors uppercase hidden sm:block">
               VIEW ALL

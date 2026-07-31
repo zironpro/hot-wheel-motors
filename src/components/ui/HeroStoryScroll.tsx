@@ -483,10 +483,16 @@ export const HeroStoryScroll = forwardRef<HTMLDivElement, HeroStoryScrollProps>(
                 </span>
               )}
 
-              {/* Title */}
-              <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold uppercase tracking-wider text-white leading-tight drop-shadow-xl whitespace-pre-line max-w-3xl">
-                {storySteps[activeStepIndex].title}
-              </h2>
+              {/* Title - SEO Friendly Heading */}
+              {activeStepIndex === 0 ? (
+                <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold uppercase tracking-wider text-white leading-tight drop-shadow-xl whitespace-pre-line max-w-3xl">
+                  {storySteps[activeStepIndex].title}
+                </h1>
+              ) : (
+                <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold uppercase tracking-wider text-white leading-tight drop-shadow-xl whitespace-pre-line max-w-3xl">
+                  {storySteps[activeStepIndex].title}
+                </h2>
+              )}
 
               {/* Subtitle */}
               {storySteps[activeStepIndex].subtitle && (

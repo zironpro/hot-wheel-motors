@@ -9,9 +9,9 @@ export function NewsletterSection() {
       <div className="container">
         <ScrollReveal variant="scale-up" className="relative w-full rounded-2xl overflow-hidden bg-carbon flex flex-col lg:flex-row items-center justify-between py-10 px-6 md:px-12 border border-primary/10 shadow-2xl gap-8 lg:gap-12">
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left flex-1">
-            <p className="text-2xl md:text-3xl font-heading font-normal text-white leading-tight mb-2">
+            <h2 className="text-2xl md:text-3xl font-heading font-normal text-white leading-tight mb-2">
               Get exclusive access to rare arrivals.
-            </p>
+            </h2>
             <p className="text-muted text-sm max-w-lg">
               Subscribe to our newsletter for curated updates and VIP offers.
             </p>

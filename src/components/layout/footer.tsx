@@ -41,7 +41,7 @@ export function Footer({ settings }: { settings?: any }) {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-muted font-light text-sm mb-6">Quick Links</h4>
+            <h3 className="text-muted font-light text-sm mb-6">Quick Links</h3>
             <ul className="flex flex-col gap-4">
               <li>
                 <Link href={"/cars" as any} className="text-muted hover:text-primary transition-colors text-sm">
@@ -63,7 +63,7 @@ export function Footer({ settings }: { settings?: any }) {
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-muted font-light text-sm mb-6">Contact Us</h4>
+            <h3 className="text-muted font-light text-sm mb-6">Contact Us</h3>
             <ul className="flex flex-col gap-5">
               <li className="flex items-start gap-4">
                 <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
@@ -88,7 +88,7 @@ export function Footer({ settings }: { settings?: any }) {
 
           {/* Opening Hours */}
           <div>
-            <h4 className="text-muted font-light text-sm mb-6">Opening Hours</h4>
+            <h3 className="text-muted font-light text-sm mb-6">Opening Hours</h3>
             <ul className="flex flex-col gap-4 text-sm text-muted">
               {settings?.openingHours ? (
                 settings.openingHours.map((slot: any, idx: number) => (

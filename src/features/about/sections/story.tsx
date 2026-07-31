@@ -20,7 +20,7 @@ export function StorySection({ hero, features, story }: StorySectionProps) {
       {/* Intro Header */}
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
-          <h2 
+          <h1 
             className="text-4xl md:text-5xl lg:text-6xl font-heading font-light text-white leading-tight mb-8 whitespace-pre-line"
             dangerouslySetInnerHTML={{ __html: hero.heading }}
           />
@@ -50,7 +50,7 @@ export function StorySection({ hero, features, story }: StorySectionProps) {
             return (
               <div key={idx} className="flex flex-col items-center text-center p-6 bg-surface rounded-lg border border-white/5">
                 <Icon className="w-12 h-12 mb-4 text-white/80" />
-                <h4 className="text-sm font-light text-white tracking-wide mb-2">{feature.title}</h4>
+                <h3 className="text-sm font-light text-white tracking-wide mb-2">{feature.title}</h3>
                 <p className="text-xs text-muted-foreground font-light">{feature.description}</p>
               </div>
             );
@@ -61,9 +61,9 @@ export function StorySection({ hero, features, story }: StorySectionProps) {
         <div className="mt-16 md:mt-24 w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* About Text */}
           <div className="text-left space-y-6">
-            <h3 className="text-2xl md:text-3xl font-heading font-light text-white mb-4">
+            <h2 className="text-2xl md:text-3xl font-heading font-light text-white mb-4">
               {story.heading}
-            </h3>
+            </h2>
             <p className="text-zinc-300 md:text-lg leading-relaxed font-light">
               {story.paragraph1}
             </p>

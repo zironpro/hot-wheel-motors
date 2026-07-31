@@ -25,9 +25,9 @@ export function ShippingSection({ data }: { data?: any }) {
               <div className="flex items-center gap-6">
                 <Globe className="w-10 h-10 md:w-12 md:h-12 text-primary/80 stroke-[1]" />
                 <div className="flex flex-col">
-                  <h3 className="text-sm md:text-base font-light text-primary uppercase tracking-widest mb-1 drop-shadow-lg">
+                  <h2 className="text-sm md:text-base font-light text-primary uppercase tracking-widest mb-1 drop-shadow-lg">
                     {data?.heading || "WORLDWIDE SHIPPING & EXPORT ASSISTANCE"}
-                  </h3>
+                  </h2>
                   <p className="text-xs md:text-sm text-gray-200 drop-shadow-md whitespace-pre-line">
                     {data?.subheading || "Seamless international delivery from Dubai to your doorstep."}
                   </p>
