@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { getPayload } from 'payload';
 import configPromise from '@payload-config';
 import { parse } from 'csv-parse/sync';
@@ -288,6 +289,11 @@ export async function POST(req: Request) {
               });
             }
           });
+
+          try {
+            revalidatePath('/');
+            revalidatePath('/cars');
+          } catch (e) {}
 
           send({
             type: 'complete',

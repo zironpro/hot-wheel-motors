@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { revalidatePath } from 'next/cache'
 
 export const Cars: CollectionConfig = {
   slug: 'cars',
@@ -10,6 +11,34 @@ export const Cars: CollectionConfig = {
   },
   access: {
     read: () => true,
+  },
+  hooks: {
+    afterChange: [
+      ({ doc }) => {
+        try {
+          revalidatePath('/')
+          revalidatePath('/cars')
+          if (doc?.slug) {
+            revalidatePath(`/cars/${doc.slug}`)
+          }
+        } catch (e) {
+          console.error('[Revalidate Error] Cars collection:', e)
+        }
+      },
+    ],
+    afterDelete: [
+      ({ doc }) => {
+        try {
+          revalidatePath('/')
+          revalidatePath('/cars')
+          if (doc?.slug) {
+            revalidatePath(`/cars/${doc.slug}`)
+          }
+        } catch (e) {
+          console.error('[Revalidate Error] Cars collection:', e)
+        }
+      },
+    ],
   },
   fields: [
     {

@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { revalidatePath } from 'next/cache'
 
 export const Reviews: CollectionConfig = {
   slug: 'reviews',
@@ -7,6 +8,17 @@ export const Reviews: CollectionConfig = {
   },
   access: {
     read: () => true,
+  },
+  hooks: {
+    afterChange: [
+      () => {
+        try {
+          revalidatePath('/')
+        } catch (e) {
+          console.error('[Revalidate Error] Reviews collection:', e)
+        }
+      },
+    ],
   },
   fields: [
     {

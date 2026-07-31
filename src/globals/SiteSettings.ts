@@ -1,9 +1,21 @@
 import type { GlobalConfig } from 'payload'
+import { revalidatePath } from 'next/cache'
 
 export const SiteSettings: GlobalConfig = {
   slug: 'site-settings',
   access: {
     read: () => true,
+  },
+  hooks: {
+    afterChange: [
+      () => {
+        try {
+          revalidatePath('/', 'layout')
+        } catch (e) {
+          console.error('[Revalidate Error] SiteSettings global:', e)
+        }
+      },
+    ],
   },
   fields: [
     {

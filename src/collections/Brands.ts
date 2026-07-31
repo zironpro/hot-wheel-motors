@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { revalidatePath } from 'next/cache'
 
 export const Brands: CollectionConfig = {
   slug: 'brands',
@@ -7,6 +8,18 @@ export const Brands: CollectionConfig = {
   },
   access: {
     read: () => true,
+  },
+  hooks: {
+    afterChange: [
+      () => {
+        try {
+          revalidatePath('/')
+          revalidatePath('/cars')
+        } catch (e) {
+          console.error('[Revalidate Error] Brands collection:', e)
+        }
+      },
+    ],
   },
   fields: [
     {

@@ -3,6 +3,15 @@ import { getCarBySlug, getAllCars } from "@/lib/cars";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
 
+export const dynamic = 'force-static';
+
+export async function generateStaticParams() {
+  const cars = await getAllCars();
+  return cars.map((car) => ({
+    slug: car.slug,
+  }));
+}
+
 export default async function CarDetailsRoute({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const car = await getCarBySlug(slug);

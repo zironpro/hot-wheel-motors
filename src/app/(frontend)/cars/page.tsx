@@ -2,6 +2,8 @@ import { Suspense } from "react";
 import { InventoryPage } from "@/features/inventory/page";
 import { getAllCars } from "@/lib/cars";
 
+export const dynamic = 'force-static';
+
 export default async function Cars() {
   const cars = await getAllCars();
   return (

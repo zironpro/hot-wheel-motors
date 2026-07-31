@@ -1,9 +1,21 @@
 import type { GlobalConfig } from 'payload'
+import { revalidatePath } from 'next/cache'
 
 export const HomePage: GlobalConfig = {
   slug: 'home-page',
   access: {
     read: () => true,
+  },
+  hooks: {
+    afterChange: [
+      () => {
+        try {
+          revalidatePath('/')
+        } catch (e) {
+          console.error('[Revalidate Error] HomePage global:', e)
+        }
+      },
+    ],
   },
   fields: [
     {

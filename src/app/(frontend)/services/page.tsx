@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   description: "Explore our premium automotive services including vehicle sourcing, tailored financing, worldwide export, and extended warranty options.",
 };
 
+export const dynamic = 'force-static';
+
 export default async function Services() {
   const payload = await getPayload({ config: configPromise });
   const servicesPageData = await payload.findGlobal({
