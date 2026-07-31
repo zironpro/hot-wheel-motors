@@ -35,6 +35,10 @@ const ansage = localFont({
 export const metadata: Metadata = {
   title: "Hotwheel Motors",
   description: "Hotwheel Motors",
+  icons: {
+    icon: "/icons/favicon.png",
+    apple: "/icons/favicon.png",
+  },
   verification: {
     google: "5LlE7uDsiAif_j7Ynq890UdcBPcliiiugQCS86_GdxU",
   },
