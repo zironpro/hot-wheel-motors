@@ -152,7 +152,7 @@ export function ContactFormSection({ settings }: { settings?: any }) {
             )}
           </div>
           <p className="text-zinc-500 text-sm md:ml-2">
-            Prefer to hop on a call? <a href="#" className="text-white hover:text-primary transition-colors underline underline-offset-4 decoration-zinc-700 hover:decoration-primary">Book a call</a> instead.
+            Prefer to hop on a call? <a href={`tel:${phoneLink}`} className="text-white hover:text-primary transition-colors underline underline-offset-4 decoration-zinc-700 hover:decoration-primary">Book a call</a> instead.
           </p>
         </div>
         </div>
