@@ -14,8 +14,11 @@ export function ServicesHeroSection({ data }: ServicesHeroSectionProps) {
           loop
           muted
           playsInline
+          preload="auto"
+          poster="/video/video-poster.webp"
           className="w-full h-full object-cover object-center opacity-60 pointer-events-none"
         >
+          <source src="/video/video.mp4" type="video/mp4" />
           <source src="/video/video.webm" type="video/webm" />
         </video>
         {/* Dark Vignette Overlay for Text Legibility */}
