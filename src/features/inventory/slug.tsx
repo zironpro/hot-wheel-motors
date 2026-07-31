@@ -138,6 +138,7 @@ export function CarSlugPage({ car, relatedCars, mdxContent, phoneNumber }: CarSl
                 src={activeImage}
                 alt={car.name}
                 fill
+                sizes="(max-width: 1024px) 100vw, 60vw"
                 className="object-contain object-center transition-opacity duration-300"
                 priority
               />
@@ -180,6 +181,7 @@ export function CarSlugPage({ car, relatedCars, mdxContent, phoneNumber }: CarSl
                     src={img}
                     alt={`${car.name} thumbnail ${idx + 1}`}
                     fill
+                    sizes="160px"
                     className="object-cover"
                   />
                 </button>

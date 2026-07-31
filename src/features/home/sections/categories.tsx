@@ -120,6 +120,7 @@ export function CategoriesSection({ cars, brands }: { cars: CarData[], brands: B
                             src={type.image}
                             alt={type.name}
                             fill
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                             className="object-contain drop-shadow-2xl"
                           />
                         ) : (

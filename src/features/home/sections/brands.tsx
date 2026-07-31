@@ -46,6 +46,7 @@ export function BrandsSection({ cars, brands }: { cars: CarData[], brands: Brand
                       src={brand.image}
                       alt={brand.name}
                       fill
+                      sizes="160px"
                       className="object-contain"
                     />
                   ) : (

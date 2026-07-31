@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
-import { Search, SearchX } from "lucide-react";
+import { Search, SearchX, Loader2, ChevronDown } from "lucide-react";
 import { Car, CarCard } from "./car-card";
 
 interface Filters {
@@ -16,16 +16,26 @@ interface CarGridProps {
   filters: Filters;
 }
 
+const PAGE_SIZE = 9;
+
 export function CarGrid({ cars, filters }: CarGridProps) {
   const searchParams = useSearchParams();
   const [searchQuery, setSearchQuery] = useState(() => {
     return searchParams.get("q") || "";
   });
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const sentinelRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const q = searchParams.get("q");
     if (q) setSearchQuery(q);
   }, [searchParams]);
+
+  // Reset pagination on filter or search change
+  useEffect(() => {
+    setVisibleCount(PAGE_SIZE);
+  }, [searchQuery, filters]);
 
   const suvKeywords = ["x5", "x7", "q8", "escalade", "suburban", "silverado", "f-150", "f250", "cr-v", "wrangler", "cherokee", "urus", "gle", "gls", "g550", "g63", "g580", "levante", "cayenne", "range rover", "durango", "expedition"];
   const sportsKeywords = ["m8", "camaro", "corvette", "aventador", "targa", "carrera", "rs3", "m4", "m3"];
@@ -67,10 +77,50 @@ export function CarGrid({ cars, filters }: CarGridProps) {
     return matchesSearch && matchesMake && matchesPrice && matchesBody;
   });
 
+  const displayedInventory = filteredInventory.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredInventory.length;
+
+  const handleLoadMore = () => {
+    if (hasMore && !isLoadingMore) {
+      setIsLoadingMore(true);
+      setTimeout(() => {
+        setVisibleCount((prev) => Math.min(prev + PAGE_SIZE, filteredInventory.length));
+        setIsLoadingMore(false);
+      }, 250);
+    }
+  };
+
+  useEffect(() => {
+    if (!hasMore) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const first = entries[0];
+        if (first.isIntersecting && !isLoadingMore) {
+          handleLoadMore();
+        }
+      },
+      { threshold: 0.1, rootMargin: "300px" }
+    );
+
+    const currentSentinel = sentinelRef.current;
+    if (currentSentinel) {
+      observer.observe(currentSentinel);
+    }
+
+    return () => {
+      if (currentSentinel) {
+        observer.unobserve(currentSentinel);
+      }
+    };
+  }, [hasMore, isLoadingMore, filteredInventory.length, visibleCount]);
+
   return (
     <div className="w-full">
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-4">
-        <h2 className="text-xl md:text-2xl font-normal text-white">Showing {filteredInventory.length} Vehicles</h2>
+        <h2 className="text-xl md:text-2xl font-normal text-white">
+          Showing {displayedInventory.length} of {filteredInventory.length} Vehicles
+        </h2>
         <div className="flex items-center gap-4 w-full md:w-auto">
           <div className="relative w-full md:w-64">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
@@ -86,7 +136,7 @@ export function CarGrid({ cars, filters }: CarGridProps) {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
-        {filteredInventory.map((car) => (
+        {displayedInventory.map((car) => (
           <CarCard key={car.id} car={car} />
         ))}
         {filteredInventory.length === 0 && (
@@ -107,6 +157,26 @@ export function CarGrid({ cars, filters }: CarGridProps) {
           </div>
         )}
       </div>
+
+      {/* Infinite Scroll Sentinel & Load More Trigger */}
+      {hasMore && (
+        <div ref={sentinelRef} className="pt-10 pb-6 flex flex-col items-center justify-center gap-3">
+          {isLoadingMore ? (
+            <div className="flex items-center gap-2 text-accent text-sm font-medium animate-pulse">
+              <Loader2 className="w-5 h-5 animate-spin" />
+              <span>Loading more vehicles...</span>
+            </div>
+          ) : (
+            <button
+              onClick={handleLoadMore}
+              className="px-6 py-2.5 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 text-white text-sm font-medium flex items-center gap-2 transition-all group"
+            >
+              <span>Load More Vehicles ({filteredInventory.length - visibleCount} remaining)</span>
+              <ChevronDown className="w-4 h-4 text-accent transition-transform group-hover:translate-y-0.5" />
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 }

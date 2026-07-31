@@ -167,6 +167,7 @@ export function Navbar({ settings }: { settings?: any }) {
               alt="Logo"
               width={75}
               height={38}
+              priority
               className="object-contain"
             />
           </Link>
