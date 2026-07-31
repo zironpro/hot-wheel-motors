@@ -12,10 +12,10 @@ const getMediaUrl = (media: any) => {
 };
 
 const DEFAULT_ABOUT_IMAGES = [
-  "/about page images/immaculate standards.webp",
-  "/about page images/personal service.webp",
-  "/about page images/transparent pricing.webp",
-  "/about page images/AFTER SALES CARE.webp",
+  "/about-page-images/immaculate-standards.webp",
+  "/about-page-images/transparent-pricing.webp",
+  "/about-page-images/personal-service.webp",
+  "/about-page-images/after-sales-care.webp",
 ];
 
 export function WhyChooseUsSection({ data }: WhyChooseUsSectionProps) {

@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import * as LucideIcons from "lucide-react";
 import Image from "next/image";
 import type { ServicesPage } from "@/payload-types";
@@ -13,21 +16,60 @@ const getMediaUrl = (media: any) => {
   return media.url || "";
 };
 
+const getServiceFallbackImage = (title?: string, index: number = 0) => {
+  const t = (title || "").toLowerCase();
+  if (t.includes("sourcing") || t.includes("vehicle")) return "/services-page-images/vehicle-sourcing.webp";
+  if (t.includes("consignment") || t.includes("trade")) return "/services-page-images/consignment-trade-in.webp";
+  if (t.includes("finance") || t.includes("planning") || t.includes("tailored") || t.includes("financing")) return "/services-page-images/finance-planning.webp";
+  if (t.includes("warranty")) return "/services-page-images/extended-warranty.webp";
+  if (t.includes("export") || t.includes("world")) return "/services-page-images/worldwide-export.webp";
+  if (t.includes("registration") || t.includes("insurance")) return "/services-page-images/registration-insurance.webp";
+  return DEFAULT_SERVICES[index % DEFAULT_SERVICES.length].image;
+};
+
+function ServiceCardImage({ src, fallbackSrc, alt }: { src: string; fallbackSrc: string; alt: string }) {
+  const [imgSrc, setImgSrc] = useState(src || fallbackSrc);
+
+  return (
+    <Image
+      src={imgSrc}
+      alt={alt}
+      fill
+      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      className="object-cover object-center"
+      onError={() => {
+        if (imgSrc !== fallbackSrc) {
+          setImgSrc(fallbackSrc);
+        }
+      }}
+    />
+  );
+}
+
 export function ServiceListSection({ data }: ServiceListSectionProps) {
   const displayServices =
     data?.services && data.services.length > 0
-      ? data.services.map((s, idx) => ({
-          title: s.title,
-          description: s.description,
-          icon: s.icon,
-          image: getMediaUrl(s.image) || DEFAULT_SERVICES[idx % DEFAULT_SERVICES.length].image,
-        }))
-      : DEFAULT_SERVICES.map((s) => ({
-          title: s.title,
-          description: s.description,
-          icon: s.iconName,
-          image: s.image,
-        }));
+      ? data.services.map((s, idx) => {
+          const fallback = getServiceFallbackImage(s.title, idx);
+          const rawUrl = getMediaUrl(s.image);
+          return {
+            title: s.title,
+            description: s.description,
+            icon: s.icon,
+            image: rawUrl || fallback,
+            fallbackImage: fallback,
+          };
+        })
+      : DEFAULT_SERVICES.map((s, idx) => {
+          const fallback = getServiceFallbackImage(s.title, idx);
+          return {
+            title: s.title,
+            description: s.description,
+            icon: s.iconName,
+            image: s.image,
+            fallbackImage: fallback,
+          };
+        });
 
   return (
     <section className="w-full py-16 md:py-24 lg:py-32 bg-background relative overflow-hidden">
@@ -58,19 +100,17 @@ export function ServiceListSection({ data }: ServiceListSectionProps) {
               >
                 {/* Full Width Card Image */}
                 <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
-                  <Image
+                  <ServiceCardImage
                     src={service.image}
+                    fallbackSrc={service.fallbackImage}
                     alt={service.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover object-center"
                   />
                 </div>
 
                 {/* Dark Gradient Overlay for Text Legibility */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent z-10 pointer-events-none transition-opacity duration-700 ease-out group-hover:opacity-95" />
 
-                {/* Heading & Text at Bottom of Card - Hardware Accelerated GPU Smooth Transition */}
+                {/* Heading & Text at Bottom of Card */}
                 <div className="relative z-20 flex flex-col justify-end w-full p-6 md:p-8 transform translate-y-12 group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform">
                   <h3 className="text-xl md:text-2xl text-white font-bold mb-2 tracking-wide flex items-center gap-3 drop-shadow-md">
                     <Icon className="w-5 h-5 text-white/90 shrink-0" />

@@ -109,41 +109,32 @@ export function CategoriesSection({ cars, brands }: { cars: CarData[], brands: B
                 <CarouselItem key={type.name} className="pl-4 md:pl-6 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5">
                   <Link
                     href={type.href as any}
-                    className="flex flex-col bg-[#111111] hover:bg-[#1a1a1a] transition-[background-color,border-color,box-shadow] duration-300 relative w-full rounded-lg overflow-hidden cursor-pointer group border border-white/5 shadow-lg"
+                    className="flex flex-col bg-[#111111] hover:bg-[#161616] transition-all duration-300 relative w-full rounded-xl overflow-hidden cursor-pointer group border border-white/10 shadow-lg hover:border-white/20 hover:shadow-2xl"
                   >
-                    {/* Top Image Section */}
-                    <div className="relative h-[220px] w-full bg-gradient-to-br from-[#1e1e1e] to-[#0a0a0a] p-6 flex items-center justify-center">
-                      {/* The actual image or fallback */}
-                      <div className="relative w-full h-full transform group-hover:scale-110 transition-transform duration-700 ease-out z-0 flex items-center justify-center">
+                    {/* Centered Brand Logo Image Container */}
+                    <div className="relative h-[150px] sm:h-[170px] w-full bg-gradient-to-b from-[#1c1c1c] to-[#111111] p-5 flex items-center justify-center">
+                      <div className="relative w-full h-[90px] sm:h-[100px] transform group-hover:scale-105 transition-transform duration-500 ease-out flex items-center justify-center">
                         {type.image ? (
                           <Image
                             src={type.image}
                             alt={type.name}
                             fill
-                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                            className="object-contain drop-shadow-2xl"
+                            sizes="(max-width: 640px) 150px, 200px"
+                            className="object-contain p-1 drop-shadow-md"
                           />
                         ) : (
-                          <span className="font-heading text-2xl tracking-widest uppercase text-muted/50 select-none whitespace-nowrap">
+                          <span className="font-heading text-xl sm:text-2xl tracking-widest uppercase text-white/60 select-none text-center">
                             {type.name}
                           </span>
                         )}
                       </div>
-                      
-                      {/* Gradient Overlay for Text Readability */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/40 to-transparent z-10 pointer-events-none" />
-                      
-                      {/* Overlaid Text & Button */}
-                      <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 flex items-center justify-between gap-2 z-20">
-                        <div className="min-w-0 flex-1">
-                          <h3 className="text-white text-sm sm:text-base font-normal drop-shadow-md truncate capitalize whitespace-nowrap">
-                            {type.name}
-                          </h3>
-                        </div>
-                        <div className="bg-white/10 group-hover:bg-accent group-hover:text-black backdrop-blur-md border border-white/10 text-white text-xs font-normal px-3 py-1.5 rounded-lg transition-[background-color,color,border-color] duration-300 shrink-0 whitespace-nowrap">
-                          Explore
-                        </div>
-                      </div>
+                    </div>
+
+                    {/* Brand Name Footer */}
+                    <div className="py-3.5 px-4 bg-[#111111] border-t border-white/5 flex items-center justify-center text-center">
+                      <h3 className="text-white text-sm sm:text-base font-normal tracking-wide capitalize group-hover:text-accent transition-colors whitespace-nowrap overflow-hidden text-ellipsis">
+                        {type.name}
+                      </h3>
                     </div>
                   </Link>
                 </CarouselItem>
