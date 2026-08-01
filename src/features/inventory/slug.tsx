@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -43,6 +43,60 @@ export function CarSlugPage({ car, relatedCars, mdxContent, phoneNumber }: CarSl
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const [copied, setCopied] = useState(false);
 
+  // Bottom Thumbnail Strip Drag & Scroll Logic
+  const thumbnailRef = useRef<HTMLDivElement>(null);
+  const [isMouseDown, setIsMouseDown] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!thumbnailRef.current) return;
+    setIsMouseDown(true);
+    setIsDragging(false);
+    setStartX(e.pageX - thumbnailRef.current.offsetLeft);
+    setScrollLeft(thumbnailRef.current.scrollLeft);
+  };
+
+  const handleMouseLeave = () => {
+    setIsMouseDown(false);
+    setIsDragging(false);
+  };
+
+  const handleMouseUp = () => {
+    setIsMouseDown(false);
+    setTimeout(() => setIsDragging(false), 50);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isMouseDown || !thumbnailRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - thumbnailRef.current.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    if (Math.abs(x - startX) > 5) {
+      setIsDragging(true);
+    }
+    thumbnailRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleThumbnailClick = (idx: number) => {
+    if (isDragging) return;
+    setActiveIndex(idx);
+  };
+
+  // Smoothly center the active thumbnail in view when activeIndex changes
+  useEffect(() => {
+    if (!thumbnailRef.current) return;
+    const activeEl = thumbnailRef.current.children[activeIndex] as HTMLElement;
+    if (activeEl) {
+      activeEl.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
+    }
+  }, [activeIndex]);
+
   const handleShare = async () => {
     const shareData = {
       title: `${car.name} | Hotwheel Motors`,
@@ -54,7 +108,7 @@ export function CarSlugPage({ car, relatedCars, mdxContent, phoneNumber }: CarSl
       try {
         await navigator.share(shareData);
         return;
-        } catch (err) {
+      } catch (err) {
         if ((err as Error).name === "AbortError") return;
       }
     }
@@ -167,13 +221,24 @@ export function CarSlugPage({ car, relatedCars, mdxContent, phoneNumber }: CarSl
             </div>
 
             {/* Thumbnail Strip directly underneath main viewer */}
-            <div className="flex gap-2.5 overflow-x-auto pb-2 w-full justify-start items-center hide-scrollbar">
+            <div 
+              ref={thumbnailRef}
+              onMouseDown={handleMouseDown}
+              onMouseLeave={handleMouseLeave}
+              onMouseUp={handleMouseUp}
+              onMouseMove={handleMouseMove}
+              className={cn(
+                "flex gap-2.5 overflow-x-auto pb-2 w-full justify-start items-center hide-scrollbar select-none touch-pan-x",
+                isMouseDown ? "cursor-grabbing" : "cursor-grab"
+              )}
+            >
               {galleryImages.map((img, idx) => (
                 <button
                   key={idx}
-                  onClick={() => setActiveIndex(idx)}
+                  onClick={() => handleThumbnailClick(idx)}
+                  draggable={false}
                   className={cn(
-                    "relative rounded-lg overflow-hidden transition-all flex-shrink-0 cursor-pointer h-16 sm:h-20 aspect-video bg-black/40",
+                    "relative rounded-lg overflow-hidden transition-all flex-shrink-0 cursor-pointer h-16 sm:h-20 aspect-video bg-black/40 select-none",
                     activeIndex === idx 
                       ? "ring-2 ring-accent opacity-100 shadow-[0_0_15px_rgba(212,175,55,0.25)]" 
                       : "border border-white/10 opacity-60 hover:opacity-100"
@@ -184,7 +249,8 @@ export function CarSlugPage({ car, relatedCars, mdxContent, phoneNumber }: CarSl
                     alt={`${car.name} thumbnail ${idx + 1}`}
                     fill
                     sizes="160px"
-                    className="object-cover"
+                    className="object-cover pointer-events-none"
+                    draggable={false}
                   />
                 </button>
               ))}
