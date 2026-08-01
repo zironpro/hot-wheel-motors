@@ -38,7 +38,7 @@ export function CarSlugPage({ car, relatedCars, mdxContent, phoneNumber }: CarSl
   // Dynamic gallery images directly from the car data
   const galleryImages = car.gallery && car.gallery.length > 0 ? car.gallery : [car.image];
 
-  const [activeImage, setActiveImage] = useState(galleryImages[0]);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const [copied, setCopied] = useState(false);
@@ -54,7 +54,7 @@ export function CarSlugPage({ car, relatedCars, mdxContent, phoneNumber }: CarSl
       try {
         await navigator.share(shareData);
         return;
-      } catch (err) {
+        } catch (err) {
         if ((err as Error).name === "AbortError") return;
       }
     }
@@ -70,16 +70,12 @@ export function CarSlugPage({ car, relatedCars, mdxContent, phoneNumber }: CarSl
     }
   };
 
-  const currentIndex = galleryImages.indexOf(activeImage);
-
   const handleNext = () => {
-    const nextIndex = (currentIndex + 1) % galleryImages.length;
-    setActiveImage(galleryImages[nextIndex]);
+    setActiveIndex((prevIndex) => (prevIndex + 1) % galleryImages.length);
   };
 
   const handlePrev = () => {
-    const prevIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-    setActiveImage(galleryImages[prevIndex]);
+    setActiveIndex((prevIndex) => (prevIndex - 1 + galleryImages.length) % galleryImages.length);
   };
 
   const onTouchStart = (e: React.TouchEvent) => {
@@ -134,28 +130,34 @@ export function CarSlugPage({ car, relatedCars, mdxContent, phoneNumber }: CarSl
               onTouchMove={onTouchMove}
               onTouchEnd={onTouchEndHandler}
             >
-              <Image
-                src={activeImage}
-                alt={car.name}
-                fill
-                sizes="(max-width: 1024px) 100vw, 60vw"
-                className="object-contain object-center transition-opacity duration-300"
-                priority
-              />
+              {galleryImages.map((img, idx) => (
+                <Image
+                  key={`${img}-${idx}`}
+                  src={img}
+                  alt={`${car.name} - view ${idx + 1}`}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                  className={cn(
+                    "object-contain object-center transition-opacity duration-300 pointer-events-none",
+                    idx === activeIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+                  )}
+                  priority={idx === 0}
+                />
+              ))}
 
               {/* Slider Controls */}
               {galleryImages.length > 1 && (
                 <>
                   <button 
                     onClick={handlePrev}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/60 hover:bg-accent text-white hover:text-black rounded-full flex items-center justify-center backdrop-blur-md transition-all opacity-0 group-hover:opacity-100 border border-white/10 z-10"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/60 hover:bg-accent text-white hover:text-black rounded-full flex items-center justify-center backdrop-blur-md transition-all opacity-0 group-hover:opacity-100 border border-white/10 z-20"
                     aria-label="Previous image"
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </button>
                   <button 
                     onClick={handleNext}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/60 hover:bg-accent text-white hover:text-black rounded-full flex items-center justify-center backdrop-blur-md transition-all opacity-0 group-hover:opacity-100 border border-white/10 z-10"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/60 hover:bg-accent text-white hover:text-black rounded-full flex items-center justify-center backdrop-blur-md transition-all opacity-0 group-hover:opacity-100 border border-white/10 z-20"
                     aria-label="Next image"
                   >
                     <ChevronRight className="w-5 h-5" />
@@ -169,10 +171,10 @@ export function CarSlugPage({ car, relatedCars, mdxContent, phoneNumber }: CarSl
               {galleryImages.map((img, idx) => (
                 <button
                   key={idx}
-                  onClick={() => setActiveImage(img)}
+                  onClick={() => setActiveIndex(idx)}
                   className={cn(
                     "relative rounded-lg overflow-hidden transition-all flex-shrink-0 cursor-pointer h-16 sm:h-20 aspect-video bg-black/40",
-                    activeImage === img 
+                    activeIndex === idx 
                       ? "ring-2 ring-accent opacity-100 shadow-[0_0_15px_rgba(212,175,55,0.25)]" 
                       : "border border-white/10 opacity-60 hover:opacity-100"
                   )}
