@@ -94,7 +94,7 @@ export function FeaturedCarsSection({ cars }: { cars: CarData[] }) {
                       alt={car.name}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                      className="object-contain drop-shadow-2xl transition-transform duration-700 ease-out group-hover:scale-110 z-10"
+                      className="object-contain drop-shadow-2xl z-10"
                     />
                   </div>
 
