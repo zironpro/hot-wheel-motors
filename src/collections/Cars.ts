@@ -4,7 +4,7 @@ import { revalidatePath } from 'next/cache'
 export const Cars: CollectionConfig = {
   slug: 'cars',
   admin: {
-    useAsTitle: 'make',
+    useAsTitle: 'title',
     components: {
       beforeListTable: ['@/components/BulkUpload#BulkUpload'],
     },
@@ -13,6 +13,30 @@ export const Cars: CollectionConfig = {
     read: () => true,
   },
   hooks: {
+    beforeChange: [
+      ({ data, req }) => {
+        // Automatically generate the title from make, model, and year
+        if (data) {
+          const make = data.make || '';
+          const model = data.model || '';
+          const year = data.year || '';
+          data.title = `${make} ${model} ${year}`.trim();
+        }
+        return data;
+      }
+    ],
+    afterRead: [
+      ({ doc }) => {
+        // Dynamically provide the title for existing documents that haven't been updated yet
+        if (doc && !doc.title) {
+          const make = doc.make || '';
+          const model = doc.model || '';
+          const year = doc.year || '';
+          doc.title = `${make} ${model} ${year}`.trim();
+        }
+        return doc;
+      }
+    ],
     afterChange: [
       ({ doc }) => {
         try {
@@ -41,6 +65,13 @@ export const Cars: CollectionConfig = {
     ],
   },
   fields: [
+    {
+      name: 'title',
+      type: 'text',
+      admin: {
+        hidden: true, // Hide in the edit view since it's auto-generated
+      },
+    },
     {
       name: 'make',
       type: 'text',
@@ -116,6 +147,15 @@ export const Cars: CollectionConfig = {
       label: 'Available',
       admin: {
         description: 'Mark if this car is currently available',
+      },
+    },
+    {
+      name: 'isFeatured',
+      type: 'checkbox',
+      defaultValue: false,
+      label: 'Featured Car',
+      admin: {
+        description: 'Check this to show the car in the Featured Cars section on the homepage',
       },
     },
     {

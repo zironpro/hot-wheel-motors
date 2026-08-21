@@ -16,19 +16,25 @@ export interface Filters {
   makes: string[];
   priceRanges: string[];
   bodyTypes: string[];
+  isFeatured?: boolean;
 }
 
 export function InventoryPage({ initialCars }: InventoryPageProps) {
-  const [filters, setFilters] = useState<Filters>({ makes: [], priceRanges: [], bodyTypes: [] });
+  const [filters, setFilters] = useState<Filters>({ makes: [], priceRanges: [], bodyTypes: [], isFeatured: false });
 
   useEffect(() => {
     // Only run on client
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
       const makeParam = params.get('make');
-      if (makeParam) {
-        setFilters(prev => ({ ...prev, makes: [makeParam.toLowerCase()] }));
-      }
+      const featuredParam = params.get('featured');
+      
+      setFilters(prev => {
+        let newFilters = { ...prev };
+        if (makeParam) newFilters.makes = [makeParam.toLowerCase()];
+        if (featuredParam === 'true') newFilters.isFeatured = true;
+        return newFilters;
+      });
     }
   }, []);
 

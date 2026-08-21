@@ -18,6 +18,7 @@ export type CarData = {
   year?: number;
   vin?: string;
   available?: boolean;
+  isFeatured?: boolean;
 };
 
 export type CarDataWithMdx = CarData & {
@@ -108,6 +109,7 @@ export async function getAllCars(): Promise<CarData[]> {
         year: car.year,
         vin: car.vin,
         available: car.available ?? true,
+        isFeatured: car.isFeatured || false,
       }
     })
   } catch (error) {

@@ -52,7 +52,7 @@ export default buildConfig({
       url: process.env.DATABASE_URI || 'file:./payload.db',
       authToken: process.env.DATABASE_AUTH_TOKEN,
     },
-    push: true,
+    push: process.env.NODE_ENV !== 'production',
   }),
   sharp: sharp as any,
   plugins: [],

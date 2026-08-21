@@ -12,13 +12,19 @@ import { NewsletterSection } from "./sections/newsletter";
 import { CarData, BrandData, ReviewData } from "@/lib/cars";
 
 export function HomePage({ initialCars, initialBrands, initialReviews, homeData }: { initialCars: CarData[], initialBrands: BrandData[], initialReviews: ReviewData[], homeData?: any }) {
+  // Filter for featured cars, fallback to first 4 if none are featured
+  let featuredCarsList = initialCars.filter(c => c.isFeatured);
+  if (featuredCarsList.length === 0) {
+    featuredCarsList = initialCars.slice(0, 4);
+  }
+
   return (
     <div className="flex flex-col w-full">
       <HeroStoryScroll />
       {/* <HeroSection data={homeData?.heroSlides} /> */}
       <SearchSection />
       {/* <BrandsSection cars={initialCars} brands={initialBrands} /> */}
-      <FeaturedCarsSection cars={initialCars} />
+      <FeaturedCarsSection cars={featuredCarsList} />
       <ShippingSection data={homeData?.shippingSection} />
       <CategoriesSection cars={initialCars} brands={initialBrands} />
       <WhyUsSection data={{ features: homeData?.whyUsFeatures, promo: homeData?.promoBanner }} />

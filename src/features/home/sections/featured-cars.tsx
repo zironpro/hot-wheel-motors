@@ -6,8 +6,8 @@ import { CarData } from "@/lib/cars";
 import { ScrollReveal, ScrollStagger, ScrollStaggerItem } from "@/components/ui/ScrollReveal";
 
 export function FeaturedCarsSection({ cars }: { cars: CarData[] }) {
-  // Take 4 random cars or just the first 4 for featured
-  const featuredCars = cars.slice(0, 4).map(c => {
+  // Map cars for featured section, extracting short description
+  const featuredCars = cars.map(c => {
     // Extract a short description from the markdown body
     const firstParagraph = c.description ? c.description.split('\n').find(line => line.trim().length > 10) : "";
     return {
@@ -23,7 +23,7 @@ export function FeaturedCarsSection({ cars }: { cars: CarData[] }) {
           <h2 className="text-sm sm:text-base font-light text-muted uppercase tracking-widest">
             FEATURED COLLECTIONS
           </h2>
-          <Link href={"/cars" as any} className="text-sm sm:text-base font-light tracking-widest text-muted hover:text-primary transition-colors uppercase">
+          <Link href={"/cars?featured=true" as any} className="text-sm sm:text-base font-light tracking-widest text-muted hover:text-primary transition-colors uppercase">
             VIEW ALL
           </Link>
         </ScrollReveal>

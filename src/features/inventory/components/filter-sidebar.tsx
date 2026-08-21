@@ -11,10 +11,11 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { CarData } from "@/lib/cars";
 
-interface Filters {
+export interface Filters {
   makes: string[];
   priceRanges: string[];
   bodyTypes: string[];
+  isFeatured?: boolean;
 }
 
 interface FilterSidebarProps {
@@ -99,8 +100,12 @@ export function FilterSidebar({ cars, filters, setFilters }: FilterSidebarProps)
     setFilters({ ...filters, bodyTypes: newBodies });
   };
 
+  const handleFeaturedChange = (checked: boolean) => {
+    setFilters({ ...filters, isFeatured: checked });
+  };
+
   const clearFilters = () => {
-    setFilters({ makes: [], priceRanges: [], bodyTypes: [] });
+    setFilters({ makes: [], priceRanges: [], bodyTypes: [], isFeatured: false });
   };
 
   return (
@@ -113,7 +118,33 @@ export function FilterSidebar({ cars, filters, setFilters }: FilterSidebarProps)
       </div>
 
       <div className="flex-1 overflow-y-auto pr-2 hide-scrollbar">
-        <Accordion type="multiple" defaultValue={["make", "price", "body"]} className="w-full">
+        <Accordion type="multiple" defaultValue={["collection", "make", "price", "body"]} className="w-full">
+          <AccordionItem value="collection" className="border-white/10">
+            <AccordionTrigger className="text-white hover:no-underline hover:text-accent transition-colors">
+              Collections
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className="space-y-5 pt-4 pb-2">
+                <div className="flex items-center justify-between group">
+                  <div className="flex items-center space-x-4">
+                    <Checkbox 
+                      id="filter-featured" 
+                      checked={!!filters.isFeatured}
+                      onCheckedChange={(c) => handleFeaturedChange(c as boolean)}
+                      className="border-white/20 data-[state=checked]:bg-accent data-[state=checked]:text-black" 
+                    />
+                    <Label
+                      htmlFor="filter-featured"
+                      className="text-sm font-normal leading-normal peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-muted-foreground group-hover:text-white cursor-pointer transition-colors"
+                    >
+                      Featured Cars
+                    </Label>
+                  </div>
+                </div>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+
           <AccordionItem value="make" className="border-white/10">
             <AccordionTrigger className="text-white hover:no-underline hover:text-accent transition-colors">
               Make

@@ -9,6 +9,7 @@ interface Filters {
   makes: string[];
   priceRanges: string[];
   bodyTypes: string[];
+  isFeatured?: boolean;
 }
 
 interface CarGridProps {
@@ -74,7 +75,10 @@ export function CarGrid({ cars, filters }: CarGridProps) {
     const carBodyType = getBodyType(car.name);
     const matchesBody = filters.bodyTypes.length === 0 || filters.bodyTypes.includes(carBodyType);
 
-    return matchesSearch && matchesMake && matchesPrice && matchesBody;
+    // Featured filter
+    const matchesFeatured = !filters.isFeatured || (car as any).isFeatured === true;
+
+    return matchesSearch && matchesMake && matchesPrice && matchesBody && matchesFeatured;
   });
 
   const displayedInventory = filteredInventory.slice(0, visibleCount);
